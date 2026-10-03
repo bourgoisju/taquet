@@ -73,6 +73,17 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .book p{margin:0;font-size:.97rem}
 .book .links{margin-top:.6rem;font-size:.88rem;display:flex;gap:1rem;flex-wrap:wrap}
 
+
+.cover.photo{padding:0;overflow:hidden;background:var(--line);display:block;aspect-ratio:auto}
+.cover.photo img{width:100%;height:auto;display:block}
+.kids{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,160px),1fr));gap:2rem 1.4rem}
+.kid{display:grid;gap:.6rem;align-content:start}
+.kid a.pic{display:grid;place-items:center;aspect-ratio:1/1;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
+.kid a.pic img{max-height:100%;width:auto;object-fit:contain;border-radius:3px;box-shadow:0 8px 18px -10px rgba(0,0,0,.45)}
+.kid h3{font-size:1.1rem}
+.kid .meta{margin:0}
+.age{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.04em;color:var(--plum);border:1.5px solid var(--plum);border-radius:999px;padding:.1rem .55rem}
+
 /* parcours */
 .cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(2rem,5vw,4.5rem)}
 .bio p{margin:0 0 1rem;max-width:58ch}
@@ -123,7 +134,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
   <div class="wrap">
     <a class="brand" href="#top">A. Taquet-Assoignons</a>
     <ul>
-      <li><a href="#livres">Livres</a></li>
+      <li><a href="#livres">Essais</a></li>
+      <li><a href="#jeunesse">Jeunesse</a></li>
       <li><a href="#parcours">Parcours</a></li>
       <li><a href="#approche">Approche</a></li>
       <li><a href="#acheter">Où trouver les livres</a></li>
@@ -137,7 +149,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
       <p class="eyebrow">Psychologue clinicienne · Autrice</p>
       <h1>Annick <span>Taquet-Assoignons</span></h1>
       <p class="role">Prendre soin des autres, sans s'oublier soi-même.</p>
-      <p class="lede">Formée en Belgique, installée sur la Côte d'Azur depuis 2005, elle écrit pour les soignants, les proches aidants et celles et ceux qui avancent vers la soixantaine. Ses livres mêlent analyse psychologique, témoignages et exercices concrets.</p>
+      <p class="lede">Formée en Belgique, installée sur la Côte d'Azur depuis 2005, elle écrit pour les soignants, les proches aidants, celles et ceux qui avancent vers la soixantaine, et aussi pour les enfants. Ses livres mêlent analyse psychologique, témoignages et exercices concrets.</p>
       <div class="cta">
         <a class="btn primary" href="#livres">Découvrir ses livres</a>
         <a class="btn" href="https://www.facebook.com/people/Annick-Taquet-Assoignons/100064306082022/" target="_blank" rel="noopener">Suivre sur Facebook</a>
@@ -156,13 +168,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">Bibliographie · 2018 – 2025</p>
-        <h2>Ses livres</h2>
-        <p>Cinq ouvrages, du plus récent au plus ancien, publiés chez Seli Arslan, Le Souffle d'Or et les Éditions Maïa.</p>
+        <h2>Essais et guides</h2>
+        <p>Cinq ouvrages pour les adultes, du plus récent au plus ancien, publiés chez Seli Arslan, Le Souffle d'Or et les Éditions Maïa.</p>
       </div>
       <div class="books">
 
         <article class="book">
-          <div class="cover" style="background:var(--c5)"><small>Seli Arslan</small><b>Soigner ses proches</b><small>A. Taquet-Assoignons</small></div>
+          <a class="cover photo" href="https://www.amazon.fr/dp/2842763130" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/71uZz0a8APL._AC_UL320_.jpg" alt="Couverture de « Soigner ses proches »" loading="lazy"></a>
           <div>
             <h3>Soigner ses proches</h3>
             <p class="meta">Seli Arslan · août 2025 · 160 p. · 22 €</p>
@@ -172,7 +184,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
         </article>
 
         <article class="book">
-          <div class="cover" style="background:var(--c4)"><small>Le Souffle d'Or</small><b>Prendre soin de mes parents qui vieillissent</b><small>A. Taquet-Assoignons</small></div>
+          <a class="cover photo" href="https://www.amazon.fr/dp/B0D7QYWHRW" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/61OzE7xDbWL._AC_UL320_.jpg" alt="Couverture de « Prendre soin de mes parents qui vieillissent »" loading="lazy"></a>
           <div>
             <h3>Prendre soin de mes parents qui vieillissent</h3>
             <p class="meta">Le Souffle d'Or · septembre 2024 · 208 p. · 14 € (ebook 9,99 €)</p>
@@ -182,7 +194,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
         </article>
 
         <article class="book">
-          <div class="cover" style="background:var(--c3)"><small>Le Souffle d'Or</small><b>Je prends soin des autres sans m'épuiser</b><small>A. Taquet-Assoignons</small></div>
+          <a class="cover photo" href="https://www.amazon.fr/dp/2840588374" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/714qQ9tjB+L._AC_UL320_.jpg" alt="Couverture de « Je prends soin des autres sans m'épuiser »" loading="lazy"></a>
           <div>
             <h3>Je prends soin des autres sans m'épuiser</h3>
             <p class="meta">Le Souffle d'Or · coll. Chrysalide · octobre 2022 · 152 p. · 14 €</p>
@@ -192,7 +204,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
         </article>
 
         <article class="book">
-          <div class="cover" style="background:var(--c2)"><small>Éditions Maïa</small><b>J'ai mal… je vieillis ?</b><small>A. Taquet-Assoignons</small></div>
+          <a class="cover photo" href="https://www.amazon.fr/dp/237916648X" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/61FLwaVasiL._AC_UL320_.jpg" alt="Couverture de « J'ai mal… je vieillis ? »" loading="lazy"></a>
           <div>
             <h3>J'ai mal… je vieillis ?</h3>
             <p class="meta">Éditions Maïa · 2021 · 18 €</p>
@@ -202,7 +214,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
         </article>
 
         <article class="book">
-          <div class="cover" style="background:var(--c1)"><small>Seli Arslan</small><b>Le soignant malade</b><small>A. Taquet-Assoignons</small></div>
+          <a class="cover photo" href="https://www.amazon.fr/dp/284276238X" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/6181-gNYiiL._AC_UL320_.jpg" alt="Couverture de « Le soignant malade »" loading="lazy"></a>
           <div>
             <h3>Le soignant malade</h3>
             <p class="meta">Seli Arslan · mars 2018 · 128 p. · 19 €</p>
@@ -211,6 +223,54 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
           </div>
         </article>
 
+      </div>
+    </div>
+  </section>
+
+  <section id="jeunesse">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Albums pour enfants · de 2 à 8 ans</p>
+        <h2>Livres jeunesse</h2>
+        <p>Des histoires courtes pour aider les plus petits à mettre des mots sur ce qu'ils vivent : la colère, l'arrivée d'un petit frère, la maladie d'un parent.</p>
+      </div>
+      <div class="kids">
+        <article class="kid">
+          <a class="pic" href="https://www.amazon.fr/dp/B0HBCW1V2J" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/619nxY1ECqL._AC_UL320_.jpg" alt="Couverture de « Plume et le miracle de la pluie »" loading="lazy"></a>
+          <span class="age">3 à 8 ans</span>
+          <h3>Plume et le miracle de la pluie</h3>
+          <p class="meta">Broché · 9 € · <a href="https://www.amazon.fr/dp/B0HBCW1V2J" target="_blank" rel="noopener">Sur Amazon</a></p>
+        </article>
+        <article class="kid">
+          <a class="pic" href="https://www.amazon.fr/dp/B0HBCX53VS" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/61zW140jtnL._AC_UL320_.jpg" alt="Couverture de « Dragounet, le semeur de joie »" loading="lazy"></a>
+          <span class="age">2 à 6 ans</span>
+          <h3>Dragounet, le semeur de joie</h3>
+          <p class="meta">Broché · 9 € · <a href="https://www.amazon.fr/dp/B0HBCX53VS" target="_blank" rel="noopener">Sur Amazon</a></p>
+        </article>
+        <article class="kid">
+          <a class="pic" href="https://www.amazon.fr/dp/B0HJ6FLZQP" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/614fWv33OCL._AC_UL320_.jpg" alt="Couverture de « La famille Crabe se jette à l'eau »" loading="lazy"></a>
+          <span class="age">3 à 8 ans</span>
+          <h3>La famille Crabe se jette à l'eau</h3>
+          <p class="meta">Broché · 9 € · <a href="https://www.amazon.fr/dp/B0HJ6FLZQP" target="_blank" rel="noopener">Sur Amazon</a></p>
+        </article>
+        <article class="kid">
+          <a class="pic" href="https://www.amazon.fr/dp/B0DCHQX856" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/61s6I9C7AkL._AC_UL320_.jpg" alt="Couverture de « Juju a un petit frère ! C'est super ?… Bof. »" loading="lazy"></a>
+          <span class="age">dès 4 ans</span>
+          <h3>Juju a un petit frère ! C'est super ?… Bof.</h3>
+          <p class="meta">Broché · 8 € · <a href="https://www.amazon.fr/dp/B0DCHQX856" target="_blank" rel="noopener">Sur Amazon</a></p>
+        </article>
+        <article class="kid">
+          <a class="pic" href="https://www.amazon.fr/dp/B0CTQPZ9HD" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/61-3lu6wfuL._AC_UL320_.jpg" alt="Couverture de « Tu es en colère. Tu n'es plus mon ami ? »" loading="lazy"></a>
+          <span class="age">dès 4 ans</span>
+          <h3>Tu es en colère. Tu n'es plus mon ami ?</h3>
+          <p class="meta">Broché · 8 € · <a href="https://www.amazon.fr/dp/B0CTQPZ9HD" target="_blank" rel="noopener">Sur Amazon</a></p>
+        </article>
+        <article class="kid">
+          <a class="pic" href="https://www.amazon.fr/dp/B0CTL9XKZK" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/51teM-ja9kL._AC_UL320_.jpg" alt="Couverture de « Ma maman est malade. C'est de ma faute ? »" loading="lazy"></a>
+          <span class="age">dès 4 ans</span>
+          <h3>Ma maman est malade. C'est de ma faute ?</h3>
+          <p class="meta">Broché · 8 € · <a href="https://www.amazon.fr/dp/B0CTL9XKZK" target="_blank" rel="noopener">Sur Amazon</a></p>
+        </article>
       </div>
     </div>
   </section>
