@@ -15,14 +15,14 @@
   --pine:#2f5a50; --plum:#7b4a68; --ochre:#b58a3c;
   --display:"Gloock",Georgia,"Times New Roman",serif;
   --body:"Karla",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --c1:#2f5a50; --c2:#7b4a68; --c3:#3e5878; --c4:#a06a3a; --c5:#5b6b3d; --cover-ink:#fbfaf6;
+  --kids-bg:#f3e9ef; --c1:#2f5a50; --c2:#7b4a68; --c3:#3e5878; --c4:#a06a3a; --c5:#5b6b3d; --cover-ink:#fbfaf6;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --paper:#141c1a; --surface:#1b2523; --ink:#e4ebe7; --muted:#9fb0a8; --line:#2e3c38;
-  --pine:#86bfae; --plum:#d29bbd; --ochre:#d8b36a; color-scheme:dark}}
+  --pine:#86bfae; --plum:#d29bbd; --ochre:#d8b36a; --kids-bg:#2a1f27; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#141c1a; --surface:#1b2523; --ink:#e4ebe7; --muted:#9fb0a8; --line:#2e3c38;
-  --pine:#86bfae; --plum:#d29bbd; --ochre:#d8b36a; color-scheme:dark}
+  --pine:#86bfae; --plum:#d29bbd; --ochre:#d8b36a; --kids-bg:#2a1f27; color-scheme:dark}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
@@ -75,12 +75,15 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 
 .cover.photo{padding:0;overflow:hidden;background:var(--line);display:block;aspect-ratio:auto}
 .cover.photo img{width:100%;height:auto;display:block}
-.kids{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,160px),1fr));gap:2rem 1.4rem}
+.kids-band{background:var(--kids-bg);border-top:0}
+.kids-band .eyebrow{color:var(--plum)}
+.kids{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:2.2rem 1.6rem}
 .kid{display:grid;gap:.6rem;align-content:start;min-width:0}
-.kid a.pic{display:grid;place-items:center;aspect-ratio:1/1;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
+.kid a.pic{display:grid;place-items:center;aspect-ratio:1/1;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;transition:transform .2s}
+.kid a.pic:hover{transform:translateY(-4px) rotate(-1deg)}
 .kid a.pic{min-width:0;overflow:hidden}
 .kid a.pic img{width:100%;height:100%;object-fit:contain;border-radius:3px}
-.kid h3{font-size:1.1rem}
+.kid h3{font-size:1.2rem}
 .kid .meta{margin:0}
 .age{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.04em;color:var(--plum);border:1.5px solid var(--plum);border-radius:999px;padding:.1rem .55rem}
 
@@ -134,8 +137,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
   <div class="wrap">
     <a class="brand" href="#top">A. Taquet-Assoignons</a>
     <ul>
+      <li><a href="#jeunesse">Livres enfants</a></li>
       <li><a href="#livres">Essais</a></li>
-      <li><a href="#jeunesse">Jeunesse</a></li>
       <li><a href="#parcours">Parcours</a></li>
       <li><a href="#approche">Approche</a></li>
       <li><a href="#acheter">Où trouver les livres</a></li>
@@ -146,13 +149,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 <main id="top">
   <header class="wrap hero">
     <div>
-      <p class="eyebrow">Psychologue clinicienne · Autrice</p>
+      <p class="eyebrow">Psychologue clinicienne · Autrice jeunesse et essais</p>
       <h1>Annick <span>Taquet-Assoignons</span></h1>
-      <p class="role">Prendre soin des autres, sans s'oublier soi-même.</p>
-      <p class="lede">Formée en Belgique, installée sur la Côte d'Azur depuis 2005, elle écrit pour les soignants, les proches aidants, celles et ceux qui avancent vers la soixantaine, et aussi pour les enfants. Ses livres mêlent analyse psychologique, témoignages et exercices concrets.</p>
+      <p class="role">Des histoires pour aider les enfants à grandir, et des livres pour celles et ceux qui prennent soin des autres.</p>
+      <p class="lede">Formée en Belgique, installée sur la Côte d'Azur depuis 2005, elle écrit des albums illustrés pour les 2 à 8 ans, ainsi que des essais pour les soignants, les proches aidants et celles et ceux qui avancent vers la soixantaine.</p>
       <div class="cta">
-        <a class="btn primary" href="#livres">Découvrir ses livres</a>
-        <a class="btn" href="https://www.facebook.com/people/Annick-Taquet-Assoignons/100064306082022/" target="_blank" rel="noopener">Suivre sur Facebook</a>
+        <a class="btn primary" href="#jeunesse">Livres pour enfants</a>
+        <a class="btn" href="#livres">Essais et guides</a>
       </div>
     </div>
     <div class="shelf" aria-hidden="true">
@@ -163,6 +166,54 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
       <div class="spine" style="background:var(--c5);height:82%">Soigner ses proches</div>
     </div>
   </header>
+
+  <section id="jeunesse" class="kids-band">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Albums illustrés · de 2 à 8 ans</p>
+        <h2>Livres pour enfants</h2>
+        <p>Six albums pour aider les plus petits à mettre des mots sur ce qu'ils vivent : la colère, l'arrivée d'un petit frère, la maladie d'un parent, mais aussi la joie et l'imaginaire. Écrits par une psychologue, à lire ensemble à la maison ou en classe.</p>
+      </div>
+      <div class="kids">
+        <article class="kid">
+          <a class="pic" href="https://www.amazon.fr/dp/B0HBCW1V2J" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/619nxY1ECqL._AC_UL320_.jpg" alt="Couverture de « Plume et le miracle de la pluie »" loading="lazy"></a>
+          <span class="age">3 à 8 ans</span>
+          <h3>Plume et le miracle de la pluie</h3>
+          <p class="meta">Broché · 9 € · <a href="https://www.amazon.fr/dp/B0HBCW1V2J" target="_blank" rel="noopener">Sur Amazon</a></p>
+        </article>
+        <article class="kid">
+          <a class="pic" href="https://www.amazon.fr/dp/B0HBCX53VS" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/61zW140jtnL._AC_UL320_.jpg" alt="Couverture de « Dragounet, le semeur de joie »" loading="lazy"></a>
+          <span class="age">2 à 6 ans</span>
+          <h3>Dragounet, le semeur de joie</h3>
+          <p class="meta">Broché · 9 € · <a href="https://www.amazon.fr/dp/B0HBCX53VS" target="_blank" rel="noopener">Sur Amazon</a></p>
+        </article>
+        <article class="kid">
+          <a class="pic" href="https://www.amazon.fr/dp/B0HJ6FLZQP" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/614fWv33OCL._AC_UL320_.jpg" alt="Couverture de « La famille Crabe se jette à l'eau »" loading="lazy"></a>
+          <span class="age">3 à 8 ans</span>
+          <h3>La famille Crabe se jette à l'eau</h3>
+          <p class="meta">Broché · 9 € · <a href="https://www.amazon.fr/dp/B0HJ6FLZQP" target="_blank" rel="noopener">Sur Amazon</a></p>
+        </article>
+        <article class="kid">
+          <a class="pic" href="https://www.amazon.fr/dp/B0DCHQX856" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/61s6I9C7AkL._AC_UL320_.jpg" alt="Couverture de « Juju a un petit frère ! C'est super ?… Bof. »" loading="lazy"></a>
+          <span class="age">dès 4 ans</span>
+          <h3>Juju a un petit frère ! C'est super ?… Bof.</h3>
+          <p class="meta">Broché · 8 € · <a href="https://www.amazon.fr/dp/B0DCHQX856" target="_blank" rel="noopener">Sur Amazon</a></p>
+        </article>
+        <article class="kid">
+          <a class="pic" href="https://www.amazon.fr/dp/B0CTQPZ9HD" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/61-3lu6wfuL._AC_UL320_.jpg" alt="Couverture de « Tu es en colère. Tu n'es plus mon ami ? »" loading="lazy"></a>
+          <span class="age">dès 4 ans</span>
+          <h3>Tu es en colère. Tu n'es plus mon ami ?</h3>
+          <p class="meta">Broché · 8 € · <a href="https://www.amazon.fr/dp/B0CTQPZ9HD" target="_blank" rel="noopener">Sur Amazon</a></p>
+        </article>
+        <article class="kid">
+          <a class="pic" href="https://www.amazon.fr/dp/B0CTL9XKZK" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/51teM-ja9kL._AC_UL320_.jpg" alt="Couverture de « Ma maman est malade. C'est de ma faute ? »" loading="lazy"></a>
+          <span class="age">dès 4 ans</span>
+          <h3>Ma maman est malade. C'est de ma faute ?</h3>
+          <p class="meta">Broché · 8 € · <a href="https://www.amazon.fr/dp/B0CTL9XKZK" target="_blank" rel="noopener">Sur Amazon</a></p>
+        </article>
+      </div>
+    </div>
+  </section>
 
   <section id="livres">
     <div class="wrap">
@@ -223,54 +274,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
           </div>
         </article>
 
-      </div>
-    </div>
-  </section>
-
-  <section id="jeunesse">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow">Albums pour enfants · de 2 à 8 ans</p>
-        <h2>Livres jeunesse</h2>
-        <p>Des histoires courtes pour aider les plus petits à mettre des mots sur ce qu'ils vivent : la colère, l'arrivée d'un petit frère, la maladie d'un parent.</p>
-      </div>
-      <div class="kids">
-        <article class="kid">
-          <a class="pic" href="https://www.amazon.fr/dp/B0HBCW1V2J" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/619nxY1ECqL._AC_UL320_.jpg" alt="Couverture de « Plume et le miracle de la pluie »" loading="lazy"></a>
-          <span class="age">3 à 8 ans</span>
-          <h3>Plume et le miracle de la pluie</h3>
-          <p class="meta">Broché · 9 € · <a href="https://www.amazon.fr/dp/B0HBCW1V2J" target="_blank" rel="noopener">Sur Amazon</a></p>
-        </article>
-        <article class="kid">
-          <a class="pic" href="https://www.amazon.fr/dp/B0HBCX53VS" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/61zW140jtnL._AC_UL320_.jpg" alt="Couverture de « Dragounet, le semeur de joie »" loading="lazy"></a>
-          <span class="age">2 à 6 ans</span>
-          <h3>Dragounet, le semeur de joie</h3>
-          <p class="meta">Broché · 9 € · <a href="https://www.amazon.fr/dp/B0HBCX53VS" target="_blank" rel="noopener">Sur Amazon</a></p>
-        </article>
-        <article class="kid">
-          <a class="pic" href="https://www.amazon.fr/dp/B0HJ6FLZQP" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/614fWv33OCL._AC_UL320_.jpg" alt="Couverture de « La famille Crabe se jette à l'eau »" loading="lazy"></a>
-          <span class="age">3 à 8 ans</span>
-          <h3>La famille Crabe se jette à l'eau</h3>
-          <p class="meta">Broché · 9 € · <a href="https://www.amazon.fr/dp/B0HJ6FLZQP" target="_blank" rel="noopener">Sur Amazon</a></p>
-        </article>
-        <article class="kid">
-          <a class="pic" href="https://www.amazon.fr/dp/B0DCHQX856" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/61s6I9C7AkL._AC_UL320_.jpg" alt="Couverture de « Juju a un petit frère ! C'est super ?… Bof. »" loading="lazy"></a>
-          <span class="age">dès 4 ans</span>
-          <h3>Juju a un petit frère ! C'est super ?… Bof.</h3>
-          <p class="meta">Broché · 8 € · <a href="https://www.amazon.fr/dp/B0DCHQX856" target="_blank" rel="noopener">Sur Amazon</a></p>
-        </article>
-        <article class="kid">
-          <a class="pic" href="https://www.amazon.fr/dp/B0CTQPZ9HD" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/61-3lu6wfuL._AC_UL320_.jpg" alt="Couverture de « Tu es en colère. Tu n'es plus mon ami ? »" loading="lazy"></a>
-          <span class="age">dès 4 ans</span>
-          <h3>Tu es en colère. Tu n'es plus mon ami ?</h3>
-          <p class="meta">Broché · 8 € · <a href="https://www.amazon.fr/dp/B0CTQPZ9HD" target="_blank" rel="noopener">Sur Amazon</a></p>
-        </article>
-        <article class="kid">
-          <a class="pic" href="https://www.amazon.fr/dp/B0CTL9XKZK" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/51teM-ja9kL._AC_UL320_.jpg" alt="Couverture de « Ma maman est malade. C'est de ma faute ? »" loading="lazy"></a>
-          <span class="age">dès 4 ans</span>
-          <h3>Ma maman est malade. C'est de ma faute ?</h3>
-          <p class="meta">Broché · 8 € · <a href="https://www.amazon.fr/dp/B0CTL9XKZK" target="_blank" rel="noopener">Sur Amazon</a></p>
-        </article>
       </div>
     </div>
   </section>
