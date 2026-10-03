@@ -77,9 +77,10 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .cover.photo{padding:0;overflow:hidden;background:var(--line);display:block;aspect-ratio:auto}
 .cover.photo img{width:100%;height:auto;display:block}
 .kids{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,160px),1fr));gap:2rem 1.4rem}
-.kid{display:grid;gap:.6rem;align-content:start}
+.kid{display:grid;gap:.6rem;align-content:start;min-width:0}
 .kid a.pic{display:grid;place-items:center;aspect-ratio:1/1;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
-.kid a.pic img{max-height:100%;width:auto;object-fit:contain;border-radius:3px;box-shadow:0 8px 18px -10px rgba(0,0,0,.45)}
+.kid a.pic{min-width:0;overflow:hidden}
+.kid a.pic img{width:100%;height:100%;object-fit:contain;border-radius:3px}
 .kid h3{font-size:1.1rem}
 .kid .meta{margin:0}
 .age{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.04em;color:var(--plum);border:1.5px solid var(--plum);border-radius:999px;padding:.1rem .55rem}
