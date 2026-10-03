@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Annick Taquet-Assoignons</title>
+<meta name="description" content="Annick Taquet-Assoignons, psychologue clinicienne et autrice. Livres sur les soignants, les proches aidants et l'avancée en âge.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap">
+<style>
+/* Layout: colonne de lecture étroite, bibliothèque de couvertures en grille, parcours en frise verticale */
+:root{
+  --paper:#eef1ee; --surface:#f8faf8; --ink:#1d302c; --muted:#56665f; --line:#cdd6d0;
+  --pine:#2f5a50; --plum:#7b4a68; --ochre:#b58a3c;
+  --display:"Gloock",Georgia,"Times New Roman",serif;
+  --body:"Karla",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --c1:#2f5a50; --c2:#7b4a68; --c3:#3e5878; --c4:#a06a3a; --c5:#5b6b3d; --cover-ink:#fbfaf6;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#141c1a; --surface:#1b2523; --ink:#e4ebe7; --muted:#9fb0a8; --line:#2e3c38;
+  --pine:#86bfae; --plum:#d29bbd; --ochre:#d8b36a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#141c1a; --surface:#1b2523; --ink:#e4ebe7; --muted:#9fb0a8; --line:#2e3c38;
+  --pine:#86bfae; --plum:#d29bbd; --ochre:#d8b36a; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.06rem;line-height:1.65}
+a{color:var(--pine);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--plum);outline-offset:3px;border-radius:2px}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.1;text-wrap:balance;margin:0}
+.eyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+
+/* nav */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:1rem 1.6rem;align-items:center;justify-content:space-between;flex-wrap:wrap;padding-block:.8rem}
+nav .brand{font-family:var(--display);font-size:1.15rem;color:var(--ink);text-decoration:none}
+nav ul{display:flex;gap:1.2rem;list-style:none;margin:0;padding:0;flex-wrap:wrap;font-size:.92rem}
+nav ul a{color:var(--muted);text-decoration:none}
+nav ul a:hover{color:var(--ink)}
+
+/* hero */
+.hero{padding-block:clamp(3rem,9vw,6.5rem) clamp(2.5rem,6vw,4.5rem);display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(2rem,5vw,4rem);align-items:end}
+.hero h1{font-size:clamp(2.7rem,7.4vw,5.6rem);letter-spacing:-.01em}
+.hero h1 span{display:block;color:var(--pine)}
+.hero .role{margin:1.4rem 0 0;font-size:1.2rem;max-width:34ch}
+.hero .lede{color:var(--muted);max-width:44ch;margin:1rem 0 0}
+.cta{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.8rem}
+.btn{display:inline-block;padding:.7rem 1.2rem;border-radius:999px;font-weight:700;font-size:.95rem;text-decoration:none;border:1.5px solid var(--ink);color:var(--ink)}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn:hover{transform:translateY(-1px)}
+.btn{transition:transform .15s}
+.shelf{display:flex;align-items:flex-end;gap:6px;height:230px;justify-content:flex-end;border-bottom:3px solid var(--ink);padding-inline:6px}
+.spine{width:44px;border-radius:3px 3px 0 0;color:var(--cover-ink);font-family:var(--display);font-size:.82rem;writing-mode:vertical-rl;transform:rotate(180deg);display:flex;align-items:center;justify-content:flex-start;padding:12px 0;letter-spacing:.02em;white-space:nowrap;overflow:hidden}
+.spine.tilt{transform:rotate(180deg) translateX(-6px) rotate(-6deg);transform-origin:bottom}
+
+/* sections */
+section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr);gap:.5rem;margin-bottom:2.2rem;max-width:62ch}
+.sec-head h2{font-size:clamp(2rem,4.4vw,3rem)}
+.sec-head p{color:var(--muted);margin:.3rem 0 0}
+
+/* books */
+.books{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:2.4rem 2rem}
+.book{display:grid;grid-template-columns:110px minmax(0,1fr);gap:1.2rem;align-items:start}
+.cover{aspect-ratio:2/3;max-width:100%;border-radius:2px 6px 6px 2px;color:var(--cover-ink);padding:12px 10px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:inset 6px 0 0 rgba(0,0,0,.18),0 10px 22px -12px rgba(0,0,0,.45)}
+.cover b{font-family:var(--display);font-weight:400;font-size:.95rem;line-height:1.15}
+.cover small{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.book h3{font-size:1.32rem}
+.meta{font-size:.84rem;color:var(--muted);margin:.35rem 0 .6rem;font-variant-numeric:tabular-nums}
+.book p{margin:0;font-size:.97rem}
+.book .links{margin-top:.6rem;font-size:.88rem;display:flex;gap:1rem;flex-wrap:wrap}
+
+/* parcours */
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(2rem,5vw,4.5rem)}
+.bio p{margin:0 0 1rem;max-width:58ch}
+.timeline{list-style:none;margin:0;padding:0;border-left:2px solid var(--line)}
+.timeline li{position:relative;padding:0 0 1.6rem 1.6rem}
+.timeline li::before{content:"";position:absolute;left:-7px;top:.45rem;width:12px;height:12px;border-radius:50%;background:var(--paper);border:2px solid var(--pine)}
+.timeline .when{font-weight:700;color:var(--pine);font-variant-numeric:tabular-nums;font-size:.9rem}
+.timeline .what{display:block}
+.timeline .where{color:var(--muted);font-size:.92rem}
+
+/* approche */
+.ideas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:1.5rem}
+.idea{padding:1.4rem 1.4rem 1.5rem;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.idea h3{font-size:1.25rem;margin-bottom:.5rem}
+.idea p{margin:0;font-size:.97rem;color:var(--muted)}
+.pie{width:64px;height:64px;border-radius:50%;margin-bottom:1rem;background:conic-gradient(var(--pine) 0 25%,var(--plum) 0 50%,var(--ochre) 0 75%,var(--line) 0)}
+.forest{display:flex;gap:4px;align-items:flex-end;height:64px;margin-bottom:1rem}
+.forest i{width:12px;background:var(--pine);clip-path:polygon(50% 0,100% 85%,60% 85%,60% 100%,40% 100%,40% 85%,0 85%)}
+.forest i.cut{height:14px!important;clip-path:none;background:var(--ochre);width:10px;border-radius:2px}
+.mirror{display:flex;gap:6px;margin-bottom:1rem;height:64px;align-items:center}
+.mirror span{width:30px;height:30px;border-radius:50%;border:2.5px solid var(--plum)}
+.mirror span+span{background:var(--plum);opacity:.55}
+
+/* où trouver */
+.where-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:1rem}
+.where-list a{display:block;padding:1rem 1.1rem;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink);background:var(--surface)}
+.where-list a:hover{border-color:var(--pine)}
+.where-list strong{display:block;font-size:1rem}
+.where-list span{font-size:.86rem;color:var(--muted)}
+.press{margin-top:2.5rem;padding:1.6rem;border-left:3px solid var(--plum);background:var(--surface);max-width:70ch}
+.press p{margin:.4rem 0 0}
+
+footer{border-top:1px solid var(--line);padding-block:2rem;color:var(--muted);font-size:.86rem}
+footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+
+@media (max-width:760px){
+  .hero{grid-template-columns:minmax(0,1fr)}
+  .shelf{height:170px;justify-content:flex-start}
+  .spine{width:36px;font-size:.72rem}
+  .cols{grid-template-columns:minmax(0,1fr)}
+  .book{grid-template-columns:92px minmax(0,1fr)}
+}
+</style>
+</head>
+<body>
+
+<nav aria-label="Navigation principale">
+  <div class="wrap">
+    <a class="brand" href="#top">A. Taquet-Assoignons</a>
+    <ul>
+      <li><a href="#livres">Livres</a></li>
+      <li><a href="#parcours">Parcours</a></li>
+      <li><a href="#approche">Approche</a></li>
+      <li><a href="#acheter">Où trouver les livres</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="top">
+  <header class="wrap hero">
+    <div>
+      <p class="eyebrow">Psychologue clinicienne · Autrice</p>
+      <h1>Annick <span>Taquet-Assoignons</span></h1>
+      <p class="role">Prendre soin des autres, sans s'oublier soi-même.</p>
+      <p class="lede">Formée en Belgique, installée sur la Côte d'Azur depuis 2005, elle écrit pour les soignants, les proches aidants et celles et ceux qui avancent vers la soixantaine. Ses livres mêlent analyse psychologique, témoignages et exercices concrets.</p>
+      <div class="cta">
+        <a class="btn primary" href="#livres">Découvrir ses livres</a>
+        <a class="btn" href="https://www.facebook.com/people/Annick-Taquet-Assoignons/100064306082022/" target="_blank" rel="noopener">Suivre sur Facebook</a>
+      </div>
+    </div>
+    <div class="shelf" aria-hidden="true">
+      <div class="spine" style="background:var(--c1);height:78%">Le soignant malade</div>
+      <div class="spine" style="background:var(--c2);height:70%">J'ai mal… je vieillis ?</div>
+      <div class="spine" style="background:var(--c3);height:88%">Je prends soin des autres</div>
+      <div class="spine" style="background:var(--c4);height:94%">Prendre soin de mes parents</div>
+      <div class="spine tilt" style="background:var(--c5);height:82%">Soigner ses proches</div>
+    </div>
+  </header>
+
+  <section id="livres">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Bibliographie · 2018 – 2025</p>
+        <h2>Ses livres</h2>
+        <p>Cinq ouvrages, du plus récent au plus ancien, publiés chez Seli Arslan, Le Souffle d'Or et les Éditions Maïa.</p>
+      </div>
+      <div class="books">
+
+        <article class="book">
+          <div class="cover" style="background:var(--c5)"><small>Seli Arslan</small><b>Soigner ses proches</b><small>A. Taquet-Assoignons</small></div>
+          <div>
+            <h3>Soigner ses proches</h3>
+            <p class="meta">Seli Arslan · août 2025 · 160 p. · 22 €</p>
+            <p>Comment répondre quand la famille et les amis sollicitent le soignant pour leurs soucis de santé ? Un guide pour les étudiants et les professionnels, qui aide à garder la bonne distance dans ces situations singulières.</p>
+            <div class="links"><a href="https://www.livres-medicaux.com/aide-soignant-pratique-professionnelle/63308-soigner-ses-proches-comment-repondre-aux-sollicitations-de-son-entourage-.html" target="_blank" rel="noopener">Voir le livre</a></div>
+          </div>
+        </article>
+
+        <article class="book">
+          <div class="cover" style="background:var(--c4)"><small>Le Souffle d'Or</small><b>Prendre soin de mes parents qui vieillissent</b><small>A. Taquet-Assoignons</small></div>
+          <div>
+            <h3>Prendre soin de mes parents qui vieillissent</h3>
+            <p class="meta">Le Souffle d'Or · septembre 2024 · 208 p. · 14 € (ebook 9,99 €)</p>
+            <p>Toutes les ressources pour le proche aidant : accueil de jour, répit, hébergement temporaire, mais aussi la culpabilité et la fatigue. Chaque chapitre se termine par une pause « Et vous, où en êtes-vous ? ».</p>
+            <div class="links"><a href="https://www.souffledor.fr/accueil/6865-parent-qui-vieillissent-9782840589242.html" target="_blank" rel="noopener">Chez l'éditeur</a><a href="https://www.amazon.fr/Prendre-soin-mes-parents-vieillissent/dp/2840589249" target="_blank" rel="noopener">Sur Amazon</a></div>
+          </div>
+        </article>
+
+        <article class="book">
+          <div class="cover" style="background:var(--c3)"><small>Le Souffle d'Or</small><b>Je prends soin des autres sans m'épuiser</b><small>A. Taquet-Assoignons</small></div>
+          <div>
+            <h3>Je prends soin des autres sans m'épuiser</h3>
+            <p class="meta">Le Souffle d'Or · coll. Chrysalide · octobre 2022 · 152 p. · 14 €</p>
+            <p>Pour les soignants, les proches aidants et les personnes naturellement tournées vers les autres. Le « syndrome du sauveur », la fatigue de compassion, et des exercices pour continuer à aider sans s'y perdre.</p>
+            <div class="links"><a href="https://www.souffledor.fr/livres-de-developpement-personnel/6380-je-prends-soin-des-autres-sans-m-epuiser-9782840588399.html" target="_blank" rel="noopener">Chez l'éditeur</a></div>
+          </div>
+        </article>
+
+        <article class="book">
+          <div class="cover" style="background:var(--c2)"><small>Éditions Maïa</small><b>J'ai mal… je vieillis ?</b><small>A. Taquet-Assoignons</small></div>
+          <div>
+            <h3>J'ai mal… je vieillis ?</h3>
+            <p class="meta">Éditions Maïa · 2021 · 18 €</p>
+            <p>Douleurs physiques, psychologiques, sociales et spirituelles à l'approche de la soixantaine. Un tour d'horizon nourri de témoignages, abordé avec douceur et optimisme.</p>
+            <div class="links"><a href="https://www.editions-maia.com/livre/jai-mal-je-vieillis/" target="_blank" rel="noopener">Chez l'éditeur</a></div>
+          </div>
+        </article>
+
+        <article class="book">
+          <div class="cover" style="background:var(--c1)"><small>Seli Arslan</small><b>Le soignant malade</b><small>A. Taquet-Assoignons</small></div>
+          <div>
+            <h3>Le soignant malade</h3>
+            <p class="meta">Seli Arslan · mars 2018 · 128 p. · 19 €</p>
+            <p>Quand le soignant tombe malade, ou un collègue. Des témoignages de professionnels de tous statuts, analysés sous l'angle de l'attachement, de la perte, de l'identité professionnelle et du retour au travail.</p>
+            <div class="links"><a href="https://www.furet.com/livres/le-soignant-malade-annick-taquet-assoignons-9782842762384.html" target="_blank" rel="noopener">Voir le livre</a></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="parcours">
+    <div class="wrap cols">
+      <div class="bio">
+        <div class="sec-head"><p class="eyebrow">Biographie</p><h2>Parcours</h2></div>
+        <p>Née en Belgique, Annick Taquet-Assoignons est psychologue clinicienne. Elle a consacré une grande partie de sa carrière à l'accompagnement en cancérologie, puis aux personnes âgées et aux équipes soignantes.</p>
+        <p>Elle exerce aujourd'hui en cabinet et enseigne la psychologie, notamment auprès des futurs infirmiers. Elle participe régulièrement à des salons et rencontres littéraires, en particulier en région PACA.</p>
+      </div>
+      <ol class="timeline">
+        <li><span class="when">Bruxelles</span><span class="what">Institut Jules Bordet</span><span class="where">Psychologue en cancérologie, membre fondatrice de la commission des bénévoles</span></li>
+        <li><span class="when">2005</span><span class="what">Réseau Oncazur, Nice</span><span class="where">Participe à la création du réseau de cancérologie</span></li>
+        <li><span class="when">Jusqu'en 2012</span><span class="what">Hôpitaux de la région</span><span class="where">Services d'oncologie et psychologie du personnel</span></li>
+        <li><span class="when">Jusqu'en 2021</span><span class="what">Maison de retraite</span><span class="where">Psychologue auprès des résidents et des équipes</span></li>
+        <li><span class="when">Aujourd'hui</span><span class="what">Cabinet et enseignement</span><span class="where">Consultations, formation, écriture</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="approche">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Ce qu'elle transmet</p>
+        <h2>Une approche concrète</h2>
+        <p>Dans ses livres comme dans ses interventions, elle propose des images simples et des exercices à faire chez soi.</p>
+      </div>
+      <div class="ideas">
+        <div class="idea">
+          <div class="forest" aria-hidden="true"><i style="height:60px"></i><i style="height:48px"></i><i class="cut"></i><i style="height:56px"></i><i class="cut"></i><i class="cut"></i><i style="height:40px"></i></div>
+          <h3>La forêt intérieure</h3>
+          <p>Chacun porte une forêt en soi. Aider, c'est parfois couper un arbre pour l'offrir. À force, la forêt se dégarnit : c'est l'épuisement.</p>
+        </div>
+        <div class="idea">
+          <div class="pie" aria-hidden="true"></div>
+          <h3>L'exercice du camembert</h3>
+          <p>Partager sa vie en quatre parts : soi, le travail, la famille, les relations. Puis regarder honnêtement la place que prend chacune.</p>
+        </div>
+        <div class="idea">
+          <div class="mirror" aria-hidden="true"><span></span><span></span></div>
+          <h3>Les bonnes questions</h3>
+          <p>Pourquoi ai-je besoin de reconnaissance ? Est-ce la peur d'être rejeté qui me pousse à aider ? Prendre soin de soi n'a rien d'égoïste.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="acheter">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Librairies et éditeurs</p>
+        <h2>Où trouver les livres</h2>
+        <p>Disponibles en librairie, chez les éditeurs et en ligne.</p>
+      </div>
+      <div class="where-list">
+        <a href="https://www.amazon.fr/Annick-Taquet-Assoignons/e/B0BDLT8W25" target="_blank" rel="noopener"><strong>Amazon</strong><span>Page auteur</span></a>
+        <a href="https://www.mollat.com/Recherche/Auteur/0-11986365/taquet-assoignons-annick" target="_blank" rel="noopener"><strong>Librairie Mollat</strong><span>Librairie indépendante, Bordeaux</span></a>
+        <a href="https://www.souffledor.fr/" target="_blank" rel="noopener"><strong>Le Souffle d'Or</strong><span>Éditeur, papier et ebook</span></a>
+        <a href="https://www.editions-maia.com/livre/jai-mal-je-vieillis/" target="_blank" rel="noopener"><strong>Éditions Maïa</strong><span>J'ai mal… je vieillis ?</span></a>
+        <a href="https://www.facebook.com/people/Annick-Taquet-Assoignons/100064306082022/" target="_blank" rel="noopener"><strong>Facebook</strong><span>Actualités et dédicaces</span></a>
+      </div>
+      <div class="press">
+        <p class="eyebrow">Dans la presse</p>
+        <p>En janvier 2023, la RTBF a consacré un article à ses conseils pour sortir du « syndrome du sauveur ». <a href="https://www.rtbf.be/article/sortir-du-syndrome-du-sauveur-les-conseils-pour-prendre-soin-des-autres-sans-sepuiser-11130920" target="_blank" rel="noopener">Lire l'article</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© Annick Taquet-Assoignons</span>
+    <span>Psychologue clinicienne · Autrice</span>
+  </div>
+</footer>
+</body>
+</html>
