@@ -62,6 +62,11 @@ nav ul a:hover{color:var(--ink)}
 .hero h1 span{display:block;color:var(--pine)}
 .hero .role{margin:1.4rem 0 0;font-size:1.2rem;max-width:34ch}
 .hero .lede{color:var(--muted);max-width:44ch;margin:1rem 0 0}
+.hero .pg-r{gap:0;justify-content:center}
+.title-page{display:grid;place-content:center;text-align:center;min-height:clamp(280px,34vw,440px)}
+.title-page h1{font-size:clamp(2.6rem,5vw,4.2rem);line-height:1.05}
+.title-page h1 span{margin-top:.15em}
+.title-page h1::after{content:"";display:block;width:56px;height:3px;background:var(--ribbon);margin:1.4rem auto 0;border-radius:2px}
 .cta{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.8rem}
 .btn{display:inline-block;padding:.7rem 1.2rem;border-radius:999px;font-weight:700;font-size:.95rem;text-decoration:none;border:1.5px solid var(--ink);color:var(--ink)}
 .btn.primary{background:var(--ink);color:var(--paper)}
@@ -148,6 +153,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
   .obook>.pg-r{border-radius:4px 4px 22px 22px/4px 4px 14px 14px;background-image:linear-gradient(0deg,transparent 88%,color-mix(in srgb,var(--page-shade) 70%,transparent)),repeating-linear-gradient(180deg,transparent 0 31px,color-mix(in srgb,var(--page-shade) 45%,transparent) 31px 32px)}
   .ribbon{display:none}
   .shelf{height:170px}
+  .title-page{min-height:0;padding-block:2.4rem}
   .spine{width:36px;font-size:.72rem}
   .cols{grid-template-columns:minmax(0,1fr)}
   .book{grid-template-columns:92px minmax(0,1fr)}
@@ -174,25 +180,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
    <div class="wrap">
     <div class="obook hero">
     <span class="ribbon" aria-hidden="true"></span>
-    <div class="pg pg-l">
-      <p class="eyebrow">Psychologue clinicienne · Autrice jeunesse et ouvrages</p>
+    <div class="pg pg-l title-page">
       <h1>Annick <span>Taquet-Assoignons</span></h1>
+    </div>
+    <div class="pg pg-r">
+      <p class="eyebrow">Psychologue clinicienne · Autrice jeunesse et ouvrages</p>
       <p class="role">Des histoires pour aider les enfants à grandir, et des livres pour celles et ceux qui prennent soin des autres.</p>
       <p class="lede">Formée en Belgique, installée sur la Côte d'Azur depuis 2005, elle écrit des albums illustrés pour les 2 à 8 ans, ainsi que des ouvrages pour les soignants, les proches aidants et celles et ceux qui avancent vers la soixantaine.</p>
       <div class="cta">
         <a class="btn primary" href="#jeunesse">Livres pour enfants</a>
         <a class="btn" href="#livres">Ouvrages et guides</a>
       </div>
-    </div>
-    <div class="pg pg-r">
-      <p class="quote">« Prendre soin des autres, sans s'oublier soi-même. »<small>Le fil de tous ses livres</small></p>
-    <div class="shelf" aria-hidden="true">
-      <div class="spine" style="background:var(--c1);height:78%">Le soignant malade</div>
-      <div class="spine" style="background:var(--c2);height:70%">J'ai mal… je vieillis ?</div>
-      <div class="spine" style="background:var(--c3);height:88%">Je prends soin des autres</div>
-      <div class="spine" style="background:var(--c4);height:94%">Prendre soin de mes parents</div>
-      <div class="spine" style="background:var(--c5);height:82%">Soigner ses proches</div>
-    </div>
     </div>
     </div>
    </div>
