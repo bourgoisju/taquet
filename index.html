@@ -11,18 +11,25 @@
 <style>
 /* Layout: colonne de lecture étroite, bibliothèque de couvertures en grille, parcours en frise verticale */
 :root{
-  --paper:#eef1ee; --surface:#f8faf8; --ink:#1d302c; --muted:#56665f; --line:#cdd6d0;
+  --paper:#eaf2f7; --surface:#ffffff; --ink:#1d302c; --muted:#56665f; --line:#cdd6d0;
   --pine:#2f5a50; --plum:#7b4a68; --ochre:#b58a3c;
   --display:"Gloock",Georgia,"Times New Roman",serif;
   --body:"Karla",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --kids-bg:#f3e9ef; --c1:#2f5a50; --c2:#7b4a68; --c3:#3e5878; --c4:#a06a3a; --c5:#5b6b3d; --cover-ink:#fbfaf6;
+  --kids-bg:#f6e6ee;
+  --sky:#cde3f1; --page:#fffdf6; --page-shade:#e6dcc6; --page-edge:#efe6d2; --book-cover:#7b4a68; --ribbon:#d1495b;
+  --tint-a:#fbf3dc; --tint-b:#e3f1e8; --tint-c:#ebecfa; --tint-d:#f8ebe2;
+  --c1:#2f5a50; --c2:#7b4a68; --c3:#3e5878; --c4:#a06a3a; --c5:#5b6b3d; --cover-ink:#fbfaf6;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --paper:#141c1a; --surface:#1b2523; --ink:#e4ebe7; --muted:#9fb0a8; --line:#2e3c38;
-  --pine:#86bfae; --plum:#d29bbd; --ochre:#d8b36a; --kids-bg:#2a1f27; color-scheme:dark}}
+  --pine:#86bfae; --plum:#d29bbd; --ochre:#d8b36a; --kids-bg:#2a1f27;
+  --sky:#17232b; --page:#222a28; --page-shade:#131817; --page-edge:#2c3633; --book-cover:#5a3550; --ribbon:#e0707e;
+  --tint-a:#221e14; --tint-b:#16231c; --tint-c:#1b1c2a; --tint-d:#261d18; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#141c1a; --surface:#1b2523; --ink:#e4ebe7; --muted:#9fb0a8; --line:#2e3c38;
-  --pine:#86bfae; --plum:#d29bbd; --ochre:#d8b36a; --kids-bg:#2a1f27; color-scheme:dark}
+  --pine:#86bfae; --plum:#d29bbd; --ochre:#d8b36a; --kids-bg:#2a1f27;
+  --sky:#17232b; --page:#222a28; --page-shade:#131817; --page-edge:#2c3633; --book-cover:#5a3550; --ribbon:#e0707e;
+  --tint-a:#221e14; --tint-b:#16231c; --tint-c:#1b1c2a; --tint-d:#261d18; color-scheme:dark}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
@@ -42,8 +49,16 @@ nav ul a{color:var(--muted);text-decoration:none}
 nav ul a:hover{color:var(--ink)}
 
 /* hero */
-.hero{padding-block:clamp(3rem,9vw,6.5rem) clamp(2.5rem,6vw,4.5rem);display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(2rem,5vw,4rem);align-items:end}
-.hero h1{font-size:clamp(2.7rem,7.4vw,5.6rem);letter-spacing:-.01em}
+.hero-wrap{background:linear-gradient(180deg,var(--sky),var(--paper));padding-block:clamp(2rem,5vw,3.5rem) clamp(3.5rem,7vw,5rem)}
+.obook{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);filter:drop-shadow(0 18px 24px rgba(40,30,20,.18))}
+.obook::before{content:"";position:absolute;inset:16px -14px -16px -14px;background:var(--book-cover);border-radius:16px;z-index:-1}
+.obook>.pg{background-color:var(--page);padding:clamp(1.6rem,4vw,3.2rem) clamp(1.4rem,3.6vw,3rem);background-image:repeating-linear-gradient(180deg,transparent 0 31px,color-mix(in srgb,var(--page-shade) 45%,transparent) 31px 32px)}
+.obook>.pg-l{border-radius:28px 4px 4px 14px/18px 4px 4px 10px;box-shadow:-4px 5px 0 var(--page-edge),-8px 10px 0 var(--page-shade);background-image:linear-gradient(90deg,transparent 82%,color-mix(in srgb,var(--page-shade) 70%,transparent)),repeating-linear-gradient(180deg,transparent 0 31px,color-mix(in srgb,var(--page-shade) 45%,transparent) 31px 32px)}
+.obook>.pg-r{border-radius:4px 28px 14px 4px/4px 18px 10px 4px;box-shadow:4px 5px 0 var(--page-edge),8px 10px 0 var(--page-shade);display:flex;flex-direction:column;justify-content:space-between;gap:2rem;background-image:linear-gradient(270deg,transparent 82%,color-mix(in srgb,var(--page-shade) 70%,transparent)),repeating-linear-gradient(180deg,transparent 0 31px,color-mix(in srgb,var(--page-shade) 45%,transparent) 31px 32px)}
+.ribbon{position:absolute;left:calc(50% + 22px);top:-6px;bottom:-46px;width:18px;background:var(--ribbon);clip-path:polygon(0 0,100% 0,100% 100%,50% calc(100% - 12px),0 100%);z-index:1}
+.quote{font-family:var(--display);font-size:clamp(1.35rem,2.4vw,1.8rem);line-height:1.25;color:var(--plum);margin:0;text-wrap:balance;max-width:20ch}
+.quote small{display:block;font-family:var(--body);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.8rem}
+.hero h1{font-size:clamp(2.3rem,4.4vw,3.6rem);letter-spacing:-.01em}
 .hero h1 span{display:block;color:var(--pine)}
 .hero .role{margin:1.4rem 0 0;font-size:1.2rem;max-width:34ch}
 .hero .lede{color:var(--muted);max-width:44ch;margin:1rem 0 0}
@@ -52,7 +67,7 @@ nav ul a:hover{color:var(--ink)}
 .btn.primary{background:var(--ink);color:var(--paper)}
 .btn:hover{transform:translateY(-1px)}
 .btn{transition:transform .15s}
-.shelf{display:flex;align-items:flex-end;gap:6px;height:230px;justify-content:flex-end;border-bottom:3px solid var(--ink);padding-inline:6px}
+.shelf{display:flex;align-items:flex-end;gap:6px;height:210px;justify-content:center;border-bottom:3px solid var(--ink);padding-inline:6px}
 .spine{width:44px;border-radius:3px 3px 0 0;color:var(--cover-ink);font-family:var(--display);font-size:.82rem;writing-mode:vertical-rl;transform:rotate(180deg);display:flex;align-items:center;justify-content:flex-start;padding:12px 0;letter-spacing:.02em;white-space:nowrap;overflow:hidden}
 
 /* sections */
@@ -86,6 +101,11 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .kid h3{font-size:1.2rem}
 .kid .meta{margin:0}
 .age{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.04em;color:var(--plum);border:1.5px solid var(--plum);border-radius:999px;padding:.1rem .55rem}
+
+#livres{background:var(--tint-a)}
+#parcours{background:var(--tint-b)}
+#approche{background:var(--tint-c)}
+#acheter{background:var(--tint-d)}
 
 /* parcours */
 .cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(2rem,5vw,4.5rem)}
@@ -123,8 +143,11 @@ footer{border-top:1px solid var(--line);padding-block:2rem;color:var(--muted);fo
 footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 
 @media (max-width:760px){
-  .hero{grid-template-columns:minmax(0,1fr)}
-  .shelf{height:170px;justify-content:flex-start}
+  .obook{grid-template-columns:minmax(0,1fr)}
+  .obook>.pg-l{border-radius:22px 22px 4px 4px/14px 14px 4px 4px;box-shadow:-4px 5px 0 var(--page-edge),-8px 10px 0 var(--page-shade);background-image:linear-gradient(180deg,transparent 88%,color-mix(in srgb,var(--page-shade) 70%,transparent)),repeating-linear-gradient(180deg,transparent 0 31px,color-mix(in srgb,var(--page-shade) 45%,transparent) 31px 32px)}
+  .obook>.pg-r{border-radius:4px 4px 22px 22px/4px 4px 14px 14px;background-image:linear-gradient(0deg,transparent 88%,color-mix(in srgb,var(--page-shade) 70%,transparent)),repeating-linear-gradient(180deg,transparent 0 31px,color-mix(in srgb,var(--page-shade) 45%,transparent) 31px 32px)}
+  .ribbon{display:none}
+  .shelf{height:170px}
   .spine{width:36px;font-size:.72rem}
   .cols{grid-template-columns:minmax(0,1fr)}
   .book{grid-template-columns:92px minmax(0,1fr)}
@@ -147,8 +170,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 </nav>
 
 <main id="top">
-  <header class="wrap hero">
-    <div>
+  <header class="hero-wrap">
+   <div class="wrap">
+    <div class="obook hero">
+    <span class="ribbon" aria-hidden="true"></span>
+    <div class="pg pg-l">
       <p class="eyebrow">Psychologue clinicienne · Autrice jeunesse et essais</p>
       <h1>Annick <span>Taquet-Assoignons</span></h1>
       <p class="role">Des histoires pour aider les enfants à grandir, et des livres pour celles et ceux qui prennent soin des autres.</p>
@@ -158,6 +184,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
         <a class="btn" href="#livres">Essais et guides</a>
       </div>
     </div>
+    <div class="pg pg-r">
+      <p class="quote">« Prendre soin des autres, sans s'oublier soi-même. »<small>Le fil de tous ses livres</small></p>
     <div class="shelf" aria-hidden="true">
       <div class="spine" style="background:var(--c1);height:78%">Le soignant malade</div>
       <div class="spine" style="background:var(--c2);height:70%">J'ai mal… je vieillis ?</div>
@@ -165,6 +193,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
       <div class="spine" style="background:var(--c4);height:94%">Prendre soin de mes parents</div>
       <div class="spine" style="background:var(--c5);height:82%">Soigner ses proches</div>
     </div>
+    </div>
+    </div>
+   </div>
   </header>
 
   <section id="jeunesse" class="kids-band">
