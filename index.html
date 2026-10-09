@@ -60,7 +60,12 @@ nav ul a[aria-current="location"]{color:var(--ink);text-decoration:underline 2px
 .obook>.pg-r{transform-origin:0 50%;backface-visibility:hidden;animation:pageOpen .95s cubic-bezier(.2,.7,.2,1) .15s backwards}
 .glare{position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:16px;background:radial-gradient(circle at var(--gx,28%) var(--gy,18%),rgba(255,246,222,.4),transparent 55%);mix-blend-mode:soft-light}
 .art{position:absolute;width:clamp(76px,11vw,136px);height:auto;overflow:visible}
-.cloud{top:clamp(16px,2.6vw,32px);left:clamp(16px,2.6vw,32px)}
+.cloud{top:clamp(16px,2.6vw,32px);left:clamp(16px,2.6vw,32px);width:clamp(92px,13.4vw,165px)}
+.sun{transform-box:fill-box;transform-origin:center;animation:sunUp .9s cubic-bezier(.2,.7,.2,1) .95s backwards}
+.sun circle{fill:color-mix(in srgb,var(--ochre) 70%,#ffd54a);filter:url(#aquarelle)}
+.rays{fill:none;stroke:color-mix(in srgb,var(--ochre) 80%,#ffd54a);stroke-width:2.4;stroke-linecap:round;transform-box:fill-box;transform-origin:center;animation:spin 40s linear infinite}
+@keyframes sunUp{from{opacity:0;transform:translateY(12px) scale(.6)}}
+@keyframes spin{to{transform:rotate(360deg)}}
 .pines{right:clamp(30px,4vw,54px);bottom:clamp(14px,2.4vw,28px)}
 .cl{fill:color-mix(in srgb,var(--sky) 65%,var(--c3));fill-opacity:.55;stroke:var(--c3);stroke-width:1.6;stroke-linejoin:round;stroke-dasharray:1;filter:url(#aquarelle);animation:draw 1.2s ease-out 1.05s backwards}
 .drop{fill:var(--c3);opacity:.75;transform-box:fill-box}
@@ -277,6 +282,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
   .obook>.pg-r{animation-name:rise}
   .art{width:62px}
   .pines{bottom:14px}
+  .cloud{width:76px}
   .mark{padding:.8rem .8rem 1.8rem}
   .spine{width:36px;font-size:.72rem}
   .cols{grid-template-columns:minmax(0,1fr)}
@@ -341,7 +347,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
     <span class="ribbon" aria-hidden="true"></span>
     <span class="glare" aria-hidden="true"></span>
     <div class="pg pg-l title-page">
-      <svg class="art cloud" viewBox="0 0 120 96" aria-hidden="true" focusable="false">
+      <svg class="art cloud" viewBox="0 0 146 96" aria-hidden="true" focusable="false">
+        <g class="sun"><path class="rays" d="M122 3v6M122 43v6M99 26h6M139 26h6M105.7 9.7l4.3 4.3M134 38l4.3 4.3M105.7 42.3l4.3-4.3M134 14l4.3-4.3"/><circle cx="122" cy="26" r="11"/></g>
         <path class="cl" pathLength="1" d="M30 56c-12 0-17-15-6-21 0-12 14-18 22-10 5-12 26-14 32-1 11-4 22 6 18 17 10 3 9 15-2 15z"/>
         <g class="drops"><path class="drop" d="M42 70c-3 6-3 9 0 9s3-3 0-9z"/>
         <path class="drop" d="M62 74c-3 6-3 9 0 9s3-3 0-9z"/>
