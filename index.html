@@ -15,19 +15,19 @@
   --pine:#2f5a50; --plum:#7b4a68; --ochre:#b58a3c;
   --display:"Gloock",Georgia,"Times New Roman",serif;
   --body:"Karla",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --kids-bg:#f6e6ee;
+  --kids-bg:#f6e6ee; --glow:#fff1d0;
   --sky:#cde3f1; --page:#fffdf6; --page-shade:#e6dcc6; --page-edge:#efe6d2; --book-cover:#7b4a68; --ribbon:#d1495b;
   --tint-a:#fbf3dc; --tint-b:#e3f1e8; --tint-c:#ebecfa; --tint-d:#f8ebe2;
   --c1:#2f5a50; --c2:#7b4a68; --c3:#3e5878; --c4:#a06a3a; --c5:#5b6b3d; --cover-ink:#fbfaf6;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --paper:#141c1a; --surface:#1b2523; --ink:#e4ebe7; --muted:#9fb0a8; --line:#2e3c38;
-  --pine:#86bfae; --plum:#d29bbd; --ochre:#d8b36a; --kids-bg:#2a1f27;
+  --pine:#86bfae; --plum:#d29bbd; --ochre:#d8b36a; --kids-bg:#2a1f27; --glow:#3a3222;
   --sky:#17232b; --page:#222a28; --page-shade:#131817; --page-edge:#2c3633; --book-cover:#5a3550; --ribbon:#e0707e;
   --tint-a:#221e14; --tint-b:#16231c; --tint-c:#1b1c2a; --tint-d:#261d18; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#141c1a; --surface:#1b2523; --ink:#e4ebe7; --muted:#9fb0a8; --line:#2e3c38;
-  --pine:#86bfae; --plum:#d29bbd; --ochre:#d8b36a; --kids-bg:#2a1f27;
+  --pine:#86bfae; --plum:#d29bbd; --ochre:#d8b36a; --kids-bg:#2a1f27; --glow:#3a3222;
   --sky:#17232b; --page:#222a28; --page-shade:#131817; --page-edge:#2c3633; --book-cover:#5a3550; --ribbon:#e0707e;
   --tint-a:#221e14; --tint-b:#16231c; --tint-c:#1b1c2a; --tint-d:#261d18; color-scheme:dark}
 *{box-sizing:border-box}
@@ -49,9 +49,68 @@ nav ul a{color:var(--muted);text-decoration:none}
 nav ul a:hover{color:var(--ink)}
 
 /* hero */
-.hero-wrap{background:linear-gradient(180deg,var(--sky),var(--paper));padding-block:clamp(2rem,5vw,3.5rem) clamp(3.5rem,7vw,5rem)}
-.obook{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);filter:drop-shadow(0 18px 24px rgba(40,30,20,.18))}
-.obook::before{content:"";position:absolute;inset:16px -14px -16px -14px;background:var(--book-cover);border-radius:16px;z-index:-1}
+.hero-wrap{overflow:clip;background:radial-gradient(ellipse 70% 60% at 12% 0%,var(--glow),transparent 70%),linear-gradient(180deg,var(--sky),var(--paper));padding-block:clamp(2rem,5vw,3.5rem) clamp(4.5rem,8vw,6rem)}
+.stage{perspective:1800px;transform:translateY(calc(var(--p,0) * 48px)) scale(calc(1 - var(--p,0) * .08));opacity:calc(1 - var(--p,0) * .75);transform-origin:50% 0}
+.obook{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);perspective:2200px;transform:rotateX(calc(4deg + var(--ty,0deg))) rotateY(var(--tx,0deg));transition:transform .6s cubic-bezier(.2,.7,.2,1);animation:bookIn 1s cubic-bezier(.2,.7,.2,1) backwards}
+.obook::before{content:"";position:absolute;inset:16px -14px -16px -14px;background:var(--book-cover);border-radius:16px;z-index:-1;box-shadow:0 46px 60px -34px rgba(40,30,20,.55),0 14px 22px -12px rgba(40,30,20,.25)}
+.obook>.pg{position:relative}
+.obook>.pg::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:.2;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .36 0 0 0 0 .28 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.obook>.pg-r{transform-origin:0 50%;backface-visibility:hidden;animation:pageOpen .95s cubic-bezier(.2,.7,.2,1) .15s backwards}
+.glare{position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:16px;background:radial-gradient(circle at var(--gx,28%) var(--gy,18%),rgba(255,246,222,.4),transparent 55%);mix-blend-mode:soft-light}
+.art{position:absolute;width:clamp(76px,11vw,136px);height:auto;overflow:visible}
+.cloud{top:clamp(16px,2.6vw,32px);left:clamp(16px,2.6vw,32px)}
+.pines{right:clamp(30px,4vw,54px);bottom:clamp(14px,2.4vw,28px)}
+.cl{fill:color-mix(in srgb,var(--sky) 65%,var(--c3));fill-opacity:.55;stroke:var(--c3);stroke-width:1.6;stroke-linejoin:round;stroke-dasharray:1;filter:url(#aquarelle);animation:draw 1.2s ease-out 1.05s backwards}
+.drop{fill:var(--c3);opacity:.75;transform-box:fill-box}
+.drops{animation:rise .6s ease-out 1.7s backwards}
+.pine{transform-box:fill-box;transform-origin:50% 100%;animation:grow .8s cubic-bezier(.2,.7,.2,1) 1.25s backwards}
+.pine:nth-child(2){animation-delay:1.38s}
+.pine:nth-child(3){animation-delay:1.5s}
+.pine path{fill:var(--pine)}
+.pine:nth-child(2) path{fill:color-mix(in srgb,var(--pine) 74%,var(--ink))}
+.pine:nth-child(3) path{fill:color-mix(in srgb,var(--pine) 78%,var(--paper))}
+.pine rect{fill:var(--ochre)}
+.ground{stroke:var(--pine);stroke-width:2.5;stroke-linecap:round}
+.hero-wrap:has(.kid-mark:hover,.kid-mark:focus-visible) .drop{animation:rain .9s ease-in infinite}
+.hero-wrap:has(.kid-mark:hover,.kid-mark:focus-visible) .drop:nth-of-type(2){animation-delay:.3s}
+.hero-wrap:has(.kid-mark:hover,.kid-mark:focus-visible) .drop:nth-of-type(3){animation-delay:.6s}
+.pine path{transform-box:fill-box;transform-origin:50% 100%}
+.hero-wrap:has(.adult-mark:hover,.adult-mark:focus-visible) .pine path{animation:sway 1.8s ease-in-out infinite}
+.hero-wrap:has(.adult-mark:hover,.adult-mark:focus-visible) .pine:nth-child(2) path{animation-delay:.2s}
+.hero-wrap:has(.adult-mark:hover,.adult-mark:focus-visible) .pine:nth-child(3) path{animation-delay:.4s}
+.title-page h1 .w{display:block;color:var(--ink);animation:rise .8s cubic-bezier(.2,.7,.2,1) .45s backwards}
+.title-page h1 .w+.w{color:var(--pine);animation-delay:.6s}
+.title-page h1::after{animation:widen .6s cubic-bezier(.2,.7,.2,1) .95s backwards}
+.ribbon{animation:ribbon .7s cubic-bezier(.2,.7,.2,1) .8s backwards}
+.claim{font-family:var(--display);font-size:clamp(2rem,3.7vw,3.2rem);line-height:1.04;margin:.9rem 0 0;letter-spacing:-.01em}
+.claim .ln{display:block}
+.claim .ln+.ln{color:var(--plum)}
+.ln{animation:rise .75s cubic-bezier(.2,.7,.2,1) var(--d,.9s) backwards}
+.pg-r>.eyebrow{--d:.8s}
+.claim .ln+.ln{--d:1.02s}
+.pg-r>.role{--d:1.15s}
+.pg-r>.proof{--d:1.25s}
+.marks{position:relative;z-index:4;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem;margin:1.8rem 0 calc(-1 * clamp(1.6rem,4vw,3.2rem) - 28px);filter:drop-shadow(0 8px 10px rgba(30,20,10,.2))}
+.mark{position:relative;isolation:isolate;display:block;padding:.9rem 1rem 1.9rem;color:var(--page);text-decoration:none;transition:transform .3s cubic-bezier(.2,.7,.2,1);animation:markOut .6s cubic-bezier(.2,.7,.2,1) 1.35s backwards}
+.mark::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--plum);clip-path:polygon(0 0,100% 0,100% 100%,50% calc(100% - 14px),0 100%);border-radius:2px}
+.adult-mark{animation-delay:1.45s}
+.adult-mark::before{background:var(--pine)}
+.mark:hover,.mark:focus-visible{transform:translateY(9px)}
+.mark small{display:block;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;opacity:.88}
+.mark strong{display:block;font-family:var(--display);font-weight:400;font-size:clamp(1.05rem,1.6vw,1.3rem);line-height:1.15;margin-top:.3rem}
+.mark strong::after{content:" →"}
+.curl{position:absolute;top:0;right:0;z-index:3;width:calc(30px + var(--lift,0px) + var(--p,0) * 150px);aspect-ratio:1;border-top-right-radius:28px 18px;background:linear-gradient(225deg,var(--book-cover) 0 49%,rgba(0,0,0,.16) 50%,var(--page-shade) 53%,var(--page) 78%,var(--page-edge));filter:drop-shadow(-3px 4px 4px rgba(0,0,0,.12));transition:width .35s cubic-bezier(.2,.7,.2,1)}
+.pg-r:hover .curl{--lift:16px}
+@keyframes bookIn{from{opacity:0;transform:rotateX(24deg) translateY(44px) scale(.94)}}
+@keyframes pageOpen{from{transform:rotateY(-155deg)}}
+@keyframes rise{from{opacity:0;transform:translateY(.5em)}}
+@keyframes widen{from{transform:scaleX(0)}}
+@keyframes ribbon{from{clip-path:polygon(0 0,100% 0,100% 0,50% 0,0 0)}}
+@keyframes draw{from{stroke-dashoffset:1;fill-opacity:0}}
+@keyframes rain{0%{transform:translateY(-8px);opacity:0}35%{opacity:.75}100%{transform:translateY(14px);opacity:0}}
+@keyframes grow{from{transform:scaleY(0)}}
+@keyframes sway{50%{transform:rotate(3.5deg)}}
+@keyframes markOut{from{opacity:0;transform:translateY(-28px)}}
 .obook>.pg{background-color:var(--page);padding:clamp(1.6rem,4vw,3.2rem) clamp(1.4rem,3.6vw,3rem);background-image:repeating-linear-gradient(180deg,transparent 0 31px,color-mix(in srgb,var(--page-shade) 45%,transparent) 31px 32px)}
 .obook>.pg-l{border-radius:28px 4px 4px 14px/18px 4px 4px 10px;box-shadow:-4px 5px 0 var(--page-edge),-8px 10px 0 var(--page-shade);background-image:linear-gradient(90deg,transparent 82%,color-mix(in srgb,var(--page-shade) 70%,transparent)),repeating-linear-gradient(180deg,transparent 0 31px,color-mix(in srgb,var(--page-shade) 45%,transparent) 31px 32px)}
 .obook>.pg-r{border-radius:4px 28px 14px 4px/4px 18px 10px 4px;box-shadow:4px 5px 0 var(--page-edge),8px 10px 0 var(--page-shade);display:flex;flex-direction:column;justify-content:space-between;gap:2rem;background-image:linear-gradient(270deg,transparent 82%,color-mix(in srgb,var(--page-shade) 70%,transparent)),repeating-linear-gradient(180deg,transparent 0 31px,color-mix(in srgb,var(--page-shade) 45%,transparent) 31px 32px)}
@@ -141,29 +200,6 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 /* aiguillage */
 [id]{scroll-margin-top:72px}
 .proof{margin:1.6rem 0 0;font-size:.86rem;letter-spacing:.06em;color:var(--muted);font-weight:500}
-.doors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2rem;margin-top:clamp(2.6rem,5vw,3.6rem)}
-.doors-title{grid-column:1/-1;text-align:center;margin:0}
-.door{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:1.2rem;padding:1.4rem 1.5rem 1.4rem 1.9rem;min-height:132px;background:var(--surface);border:1px solid var(--line);border-radius:6px 16px 16px 6px;text-decoration:none;color:var(--ink);transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s}
-.door::before{content:"";position:absolute;left:-1px;top:-1px;bottom:-1px;width:9px;border-radius:6px 0 0 6px;background:var(--plum)}
-.door.adult::before{background:var(--pine)}
-.door:hover,.door:focus-visible{transform:translateY(-6px);box-shadow:0 18px 30px -18px rgba(0,0,0,.4)}
-.door small{display:block;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--plum)}
-.door.adult small{color:var(--pine)}
-.door strong{display:block;font-family:var(--display);font-weight:400;font-size:clamp(1.3rem,2.2vw,1.6rem);line-height:1.15;margin-top:.35rem}
-.door .go{display:inline-block;margin-top:.7rem;font-size:.92rem;font-weight:700;color:var(--muted);transition:transform .25s,color .25s}
-.door:hover .go{transform:translateX(4px);color:var(--ink)}
-.fan{position:relative;width:118px;height:88px}
-.fan img{position:absolute;bottom:0;left:30px;width:58px;height:58px;object-fit:contain;background:#fff;border-radius:4px;box-shadow:0 6px 14px -6px rgba(0,0,0,.4);transition:transform .3s cubic-bezier(.2,.7,.2,1)}
-.fan img:nth-child(1){transform:translateX(-22px) rotate(-12deg)}
-.fan img:nth-child(2){z-index:1;transform:translateY(-8px)}
-.fan img:nth-child(3){transform:translateX(22px) rotate(12deg)}
-.door:hover .fan img:nth-child(1){transform:translateX(-34px) rotate(-18deg)}
-.door:hover .fan img:nth-child(2){transform:translateY(-14px)}
-.door:hover .fan img:nth-child(3){transform:translateX(34px) rotate(18deg)}
-.grove{display:flex;align-items:flex-end;gap:5px;width:118px;height:88px;justify-content:center;border-bottom:2px solid var(--pine)}
-.grove i{width:16px;background:var(--pine);clip-path:polygon(50% 0,100% 82%,60% 82%,60% 100%,40% 100%,40% 82%,0 82%)}
-.grove i.stub{height:12px;width:8px;clip-path:polygon(0 0,100% 0,100% 100%,0 100%);background:var(--ochre);transition:height .45s cubic-bezier(.2,.7,.2,1),width .2s,background .3s,clip-path .3s}
-.door:hover .grove i.stub{height:52px;width:16px;background:var(--pine);clip-path:polygon(50% 0,100% 82%,60% 82%,60% 100%,40% 100%,40% 82%,0 82%)}
 
 /* la forêt intérieure */
 #approche{background:var(--tint-c);padding-block:0}
@@ -231,18 +267,19 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
   .ribbon{display:none}
   .hero .pg-r{padding-left:clamp(1.4rem,3.6vw,3rem)}
   .shelf{height:170px}
-  .title-page{min-height:0;padding-block:2.4rem}
+  .obook>.title-page{min-height:0;padding-block:4.2rem 5.4rem}
+  .obook>.pg-r{animation-name:rise}
+  .art{width:62px}
+  .pines{bottom:14px}
+  .mark{padding:.8rem .8rem 1.8rem}
   .spine{width:36px;font-size:.72rem}
   .cols{grid-template-columns:minmax(0,1fr)}
-  .doors,.balance{grid-template-columns:minmax(0,1fr)}
+  .balance{grid-template-columns:minmax(0,1fr)}
   .kids{display:flex;gap:1.2rem;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(-1 * clamp(16px,4vw,40px));padding:.6rem clamp(16px,4vw,40px) 1.2rem;scroll-padding-inline:clamp(16px,4vw,40px);scrollbar-width:thin}
   .kid{flex:0 0 72%;scroll-snap-align:start}
   .filters{flex-wrap:nowrap;overflow-x:auto;margin-inline:calc(-1 * clamp(16px,4vw,40px));padding-inline:clamp(16px,4vw,40px);scrollbar-width:none}
   .filters button{flex:none}
   .filters .count{flex:none}
-  .door{grid-template-columns:minmax(0,1fr) 96px;padding-left:1.6rem}
-  .fan,.grove{width:96px;height:72px}
-  .fan img{width:48px;height:48px;left:24px}
   .sliders label{grid-template-columns:12px minmax(0,1fr) 3rem;row-gap:0}
   .sliders input{grid-column:1/-1;grid-row:2}
   .sliders output{grid-row:1;grid-column:3}
@@ -267,29 +304,39 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 
 <main id="top">
   <header class="hero-wrap">
-   <div class="wrap">
+   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+     <filter id="aquarelle"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="5"/></filter>
+   </svg>
+   <div class="wrap stage">
     <div class="obook hero">
     <span class="ribbon" aria-hidden="true"></span>
+    <span class="glare" aria-hidden="true"></span>
     <div class="pg pg-l title-page">
-      <h1>Annick <span>Taquet-Assoignons</span></h1>
+      <svg class="art cloud" viewBox="0 0 120 96" aria-hidden="true" focusable="false">
+        <path class="cl" pathLength="1" d="M30 56c-12 0-17-15-6-21 0-12 14-18 22-10 5-12 26-14 32-1 11-4 22 6 18 17 10 3 9 15-2 15z"/>
+        <g class="drops"><path class="drop" d="M42 70c-3 6-3 9 0 9s3-3 0-9z"/>
+        <path class="drop" d="M62 74c-3 6-3 9 0 9s3-3 0-9z"/>
+        <path class="drop" d="M82 70c-3 6-3 9 0 9s3-3 0-9z"/></g>
+      </svg>
+      <h1><span class="w">Annick</span> <span class="w">Taquet-Assoignons</span></h1>
+      <svg class="art pines" viewBox="0 0 120 96" aria-hidden="true" focusable="false">
+        <g class="pine"><path d="M30 18 50 76H10z"/><rect x="27" y="76" width="6" height="10"/></g>
+        <g class="pine"><path d="M64 4 88 76H40z"/><rect x="61" y="76" width="6" height="10"/></g>
+        <g class="pine"><path d="M96 30 112 76H80z"/><rect x="93" y="76" width="6" height="10"/></g>
+        <path class="ground" d="M2 86h116"/>
+      </svg>
     </div>
     <div class="pg pg-r">
-      <p class="eyebrow">Psychologue clinicienne · Autrice jeunesse et ouvrages</p>
-      <p class="role">Des histoires pour aider les enfants à grandir, et des livres pour celles et ceux qui prennent soin des autres.</p>
-      <p class="lede">Formée en Belgique, installée sur la Côte d'Azur depuis 2005, elle écrit des albums illustrés pour les 2 à 8 ans, ainsi que des ouvrages pour les soignants, les proches aidants et celles et ceux qui avancent vers la soixantaine.</p>
-      <p class="proof">11 livres · 3 éditeurs · Citée par la RTBF</p>
+      <p class="eyebrow ln">Psychologue clinicienne · Autrice</p>
+      <p class="claim"><span class="ln">Mettre des mots</span> <span class="ln">sur ce qui se vit.</span></p>
+      <p class="role ln">Des albums pour aider les enfants à grandir, et des livres pour celles et ceux qui prennent soin des autres.</p>
+      <p class="proof ln">11 livres · 3 éditeurs · Citée par la RTBF</p>
+      <div class="marks" role="group" aria-label="Par où commencer">
+        <a class="mark kid-mark" href="#jeunesse"><small>Albums · 2 à 8 ans</small><strong>Pour un enfant</strong></a>
+        <a class="mark adult-mark" href="#approche"><small>Soignants · Aidants</small><strong>Pour vous qui prenez soin des autres</strong></a>
+      </div>
+      <span class="curl" aria-hidden="true"></span>
     </div>
-    </div>
-    <div class="doors" role="group" aria-labelledby="doors-title">
-      <p class="eyebrow doors-title" id="doors-title">Par où commencer ?</p>
-      <a class="door" href="#jeunesse">
-        <span><small>Albums · 2 à 8 ans</small><strong>Pour un enfant</strong><span class="go">Six histoires pour mettre des mots sur ce qu'il vit →</span></span>
-        <span class="fan" aria-hidden="true"><img src="https://m.media-amazon.com/images/I/61-3lu6wfuL._AC_UL320_.jpg" alt=""><img src="https://m.media-amazon.com/images/I/619nxY1ECqL._AC_UL320_.jpg" alt=""><img src="https://m.media-amazon.com/images/I/61zW140jtnL._AC_UL320_.jpg" alt=""></span>
-      </a>
-      <a class="door adult" href="#approche">
-        <span><small>Soignants · Proches aidants</small><strong>Pour vous qui prenez soin des autres</strong><span class="go">Commencer par la forêt intérieure →</span></span>
-        <span class="grove" aria-hidden="true"><i style="height:62px"></i><i class="stub"></i><i style="height:74px"></i><i class="stub"></i><i style="height:56px"></i></span>
-      </a>
     </div>
    </div>
   </header>
@@ -516,6 +563,31 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 </footer>
 <script>
 (() => {
+  // En-tête : le livre suit la souris, puis recule et sa page se soulève au défilement
+  const hero = document.querySelector('.hero-wrap');
+  const book = hero.querySelector('.obook');
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      hero.addEventListener('pointermove', e => {
+        const r = book.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - .5;
+        const y = (e.clientY - r.top) / r.height - .5;
+        book.style.setProperty('--tx', (x * 6).toFixed(2) + 'deg');
+        book.style.setProperty('--ty', (-y * 4).toFixed(2) + 'deg');
+        book.style.setProperty('--gx', (50 - x * 70).toFixed(1) + '%');
+        book.style.setProperty('--gy', (30 - y * 60).toFixed(1) + '%');
+      });
+      hero.addEventListener('pointerleave', () => ['--tx', '--ty', '--gx', '--gy'].forEach(v => book.style.removeProperty(v)));
+    }
+    let heroQueued = false;
+    const heroScroll = () => {
+      heroQueued = false;
+      hero.style.setProperty('--p', Math.min(1, Math.max(0, scrollY / (hero.offsetHeight * .85))).toFixed(3));
+    };
+    addEventListener('scroll', () => { if (!heroQueued) { heroQueued = true; requestAnimationFrame(heroScroll); } }, { passive: true });
+    heroScroll();
+  }
+
   // Scène de la forêt : les arbres tombent puis repoussent au fil du défilement
   const sec = document.getElementById('approche');
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
