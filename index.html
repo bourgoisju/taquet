@@ -62,7 +62,7 @@ nav ul a:hover{color:var(--ink)}
 .hero h1 span{display:block;color:var(--pine)}
 .hero .role{margin:1.4rem 0 0;font-size:1.2rem;max-width:34ch}
 .hero .lede{color:var(--muted);max-width:44ch;margin:1rem 0 0}
-.hero .pg-r{gap:0;justify-content:center}
+.hero .pg-r{gap:0;justify-content:center;padding-left:clamp(3.2rem,5vw,4.2rem)}
 .title-page{display:grid;place-content:center;text-align:center;min-height:clamp(280px,34vw,440px)}
 .title-page h1{font-size:clamp(2.6rem,5vw,4.2rem);line-height:1.05}
 .title-page h1 span{margin-top:.15em}
@@ -122,18 +122,79 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .timeline .what{display:block}
 .timeline .where{color:var(--muted);font-size:.92rem}
 
-/* approche */
-.ideas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:1.5rem}
-.idea{padding:1.4rem 1.4rem 1.5rem;background:var(--surface);border:1px solid var(--line);border-radius:10px}
-.idea h3{font-size:1.25rem;margin-bottom:.5rem}
-.idea p{margin:0;font-size:.97rem;color:var(--muted)}
-.pie{width:64px;height:64px;border-radius:50%;margin-bottom:1rem;background:conic-gradient(var(--pine) 0 25%,var(--plum) 0 50%,var(--ochre) 0 75%,var(--line) 0)}
-.forest{display:flex;gap:4px;align-items:flex-end;height:64px;margin-bottom:1rem}
-.forest i{width:12px;background:var(--pine);clip-path:polygon(50% 0,100% 85%,60% 85%,60% 100%,40% 100%,40% 85%,0 85%)}
-.forest i.cut{height:14px!important;clip-path:none;background:var(--ochre);width:10px;border-radius:2px}
-.mirror{display:flex;gap:6px;margin-bottom:1rem;height:64px;align-items:center}
-.mirror span{width:30px;height:30px;border-radius:50%;border:2.5px solid var(--plum)}
-.mirror span+span{background:var(--plum);opacity:.55}
+/* aiguillage */
+[id]{scroll-margin-top:72px}
+.proof{margin:1.6rem 0 0;font-size:.86rem;letter-spacing:.06em;color:var(--muted);font-weight:500}
+.doors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2rem;margin-top:clamp(2.6rem,5vw,3.6rem)}
+.doors-title{grid-column:1/-1;text-align:center;margin:0}
+.door{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:1.2rem;padding:1.4rem 1.5rem 1.4rem 1.9rem;min-height:132px;background:var(--surface);border:1px solid var(--line);border-radius:6px 16px 16px 6px;text-decoration:none;color:var(--ink);transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s}
+.door::before{content:"";position:absolute;left:-1px;top:-1px;bottom:-1px;width:9px;border-radius:6px 0 0 6px;background:var(--plum)}
+.door.adult::before{background:var(--pine)}
+.door:hover,.door:focus-visible{transform:translateY(-6px);box-shadow:0 18px 30px -18px rgba(0,0,0,.4)}
+.door small{display:block;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--plum)}
+.door.adult small{color:var(--pine)}
+.door strong{display:block;font-family:var(--display);font-weight:400;font-size:clamp(1.3rem,2.2vw,1.6rem);line-height:1.15;margin-top:.35rem}
+.door .go{display:inline-block;margin-top:.7rem;font-size:.92rem;font-weight:700;color:var(--muted);transition:transform .25s,color .25s}
+.door:hover .go{transform:translateX(4px);color:var(--ink)}
+.fan{position:relative;width:118px;height:88px}
+.fan img{position:absolute;bottom:0;left:30px;width:58px;height:58px;object-fit:contain;background:#fff;border-radius:4px;box-shadow:0 6px 14px -6px rgba(0,0,0,.4);transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.fan img:nth-child(1){transform:translateX(-22px) rotate(-12deg)}
+.fan img:nth-child(2){z-index:1;transform:translateY(-8px)}
+.fan img:nth-child(3){transform:translateX(22px) rotate(12deg)}
+.door:hover .fan img:nth-child(1){transform:translateX(-34px) rotate(-18deg)}
+.door:hover .fan img:nth-child(2){transform:translateY(-14px)}
+.door:hover .fan img:nth-child(3){transform:translateX(34px) rotate(18deg)}
+.grove{display:flex;align-items:flex-end;gap:5px;width:118px;height:88px;justify-content:center;border-bottom:2px solid var(--pine)}
+.grove i{width:16px;background:var(--pine);clip-path:polygon(50% 0,100% 82%,60% 82%,60% 100%,40% 100%,40% 82%,0 82%)}
+.grove i.stub{height:12px;width:8px;clip-path:polygon(0 0,100% 0,100% 100%,0 100%);background:var(--ochre);transition:height .45s cubic-bezier(.2,.7,.2,1),width .2s,background .3s,clip-path .3s}
+.door:hover .grove i.stub{height:52px;width:16px;background:var(--pine);clip-path:polygon(50% 0,100% 82%,60% 82%,60% 100%,40% 100%,40% 82%,0 82%)}
+
+/* la forêt intérieure */
+#approche{background:var(--tint-c);padding-block:0}
+.scene{padding-block:clamp(3rem,7vw,5rem)}
+.scene-inner{display:grid;gap:2rem}
+.captions{display:grid;gap:.9rem}
+.cap{font-family:var(--display);font-size:clamp(1.6rem,3.6vw,2.7rem);line-height:1.15;margin:0;max-width:22ch;text-wrap:balance}
+.cap em{font-style:normal;color:var(--plum)}
+.woods{display:flex;align-items:flex-end;gap:clamp(3px,1vw,10px);height:clamp(150px,28vh,250px);border-bottom:3px solid var(--pine);padding-inline:4px}
+.tree{position:relative;flex:1 1 0;max-width:56px;height:var(--h)}
+.tree::after{content:"";position:absolute;left:41%;right:41%;bottom:0;height:13%;background:var(--ochre);border-radius:2px 2px 0 0}
+.tree i{position:absolute;inset:0 0 9% 0;background:var(--pine);clip-path:polygon(50% 0,100% 100%,0 100%);transform-origin:50% 100%;transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .5s}
+.tree:nth-child(3n) i{background:color-mix(in srgb,var(--pine) 72%,var(--ink))}
+.tree:nth-child(4n+1) i{background:color-mix(in srgb,var(--pine) 80%,var(--paper))}
+.tree.cut i{transform:scaleY(0);opacity:0}
+.scene-foot{display:none;justify-content:space-between;align-items:center;gap:1rem}
+.hint{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:0;transition:opacity .4s}
+.dots{display:flex;gap:8px;margin:0;padding:0;list-style:none}
+.dots li{width:8px;height:8px;border-radius:50%;background:var(--line);transition:background .3s,transform .3s}
+.dots li.on{background:var(--plum);transform:scale(1.25)}
+/* mode défilement : ajouté par le script, jamais avec prefers-reduced-motion */
+.scrolly .track{height:320vh}
+.scrolly .scene{position:sticky;top:56px;min-height:calc(100svh - 56px);display:grid;align-content:center;padding-block:2rem}
+.scrolly .scene>.wrap{width:100%}
+.scrolly .captions{grid-template-areas:"c";align-items:end;min-height:2.4em}
+.scrolly .cap{grid-area:c;opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s cubic-bezier(.2,.7,.2,1)}
+.scrolly .cap.on{opacity:1;transform:none}
+.scrolly .scene-foot{display:flex}
+
+/* camembert */
+.balance{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(2rem,5vw,4rem);align-items:center;padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
+.balance h2{font-size:clamp(1.8rem,3.6vw,2.5rem);margin:.4rem 0 .6rem}
+.balance-txt>p{color:var(--muted);margin:0 0 1.6rem;max-width:48ch}
+.sliders{display:grid;gap:.6rem}
+.sliders label{display:grid;grid-template-columns:12px 7.5rem minmax(0,1fr) 3.2rem;align-items:center;gap:.8rem;font-weight:500}
+.sw{width:12px;height:12px;border-radius:3px;background:var(--c)}
+.sliders input{width:100%;accent-color:var(--c);min-height:44px;margin:0}
+.sliders output{white-space:nowrap;text-align:right;font-variant-numeric:tabular-nums;color:var(--muted);font-size:.92rem}
+.balance-viz{margin:0;display:grid;justify-items:center;gap:1.2rem;text-align:center}
+.bigpie{width:min(260px,70vw);aspect-ratio:1;border-radius:50%;background:conic-gradient(var(--ribbon) 0 15.4%,var(--pine) 0 53.8%,var(--ochre) 0 84.6%,var(--c3) 0);box-shadow:0 18px 34px -20px rgba(0,0,0,.45)}
+.verdict{font-family:var(--display);font-size:1.25rem;line-height:1.3;max-width:28ch;margin:0;min-height:3.9em}
+.questions{padding-block:0 clamp(3rem,7vw,5rem)}
+.questions ul{list-style:none;margin:1rem 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1.2rem}
+.questions li{font-family:var(--display);font-size:1.2rem;line-height:1.3;padding:1.2rem 1.3rem;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--plum);border-radius:4px 10px 10px 4px}
+.questions .closing{margin:1.6rem 0 0;font-weight:700}
+.book:target{animation:flash 1.8s ease-out}
+@keyframes flash{0%,40%{background:color-mix(in srgb,var(--ochre) 24%,transparent)}100%{background:transparent}}
 
 /* où trouver */
 .where-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:1rem}
@@ -152,10 +213,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
   .obook>.pg-l{border-radius:22px 22px 4px 4px/14px 14px 4px 4px;box-shadow:-4px 5px 0 var(--page-edge),-8px 10px 0 var(--page-shade);background-image:linear-gradient(180deg,transparent 88%,color-mix(in srgb,var(--page-shade) 70%,transparent)),repeating-linear-gradient(180deg,transparent 0 31px,color-mix(in srgb,var(--page-shade) 45%,transparent) 31px 32px)}
   .obook>.pg-r{border-radius:4px 4px 22px 22px/4px 4px 14px 14px;background-image:linear-gradient(0deg,transparent 88%,color-mix(in srgb,var(--page-shade) 70%,transparent)),repeating-linear-gradient(180deg,transparent 0 31px,color-mix(in srgb,var(--page-shade) 45%,transparent) 31px 32px)}
   .ribbon{display:none}
+  .hero .pg-r{padding-left:clamp(1.4rem,3.6vw,3rem)}
   .shelf{height:170px}
   .title-page{min-height:0;padding-block:2.4rem}
   .spine{width:36px;font-size:.72rem}
   .cols{grid-template-columns:minmax(0,1fr)}
+  .doors,.balance{grid-template-columns:minmax(0,1fr)}
+  .door{grid-template-columns:minmax(0,1fr) 96px;padding-left:1.6rem}
+  .fan,.grove{width:96px;height:72px}
+  .fan img{width:48px;height:48px;left:24px}
+  .sliders label{grid-template-columns:12px minmax(0,1fr) 3rem;row-gap:0}
+  .sliders input{grid-column:1/-1;grid-row:2}
+  .sliders output{grid-row:1;grid-column:3}
   .book{grid-template-columns:92px minmax(0,1fr)}
 }
 </style>
@@ -167,9 +236,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
     <a class="brand" href="#top">A. Taquet-Assoignons</a>
     <ul>
       <li><a href="#jeunesse">Livres enfants</a></li>
+      <li><a href="#approche">Approche</a></li>
       <li><a href="#livres">Ouvrages</a></li>
       <li><a href="#parcours">Parcours</a></li>
-      <li><a href="#approche">Approche</a></li>
       <li><a href="#acheter">Où trouver les livres</a></li>
     </ul>
   </div>
@@ -187,11 +256,19 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
       <p class="eyebrow">Psychologue clinicienne · Autrice jeunesse et ouvrages</p>
       <p class="role">Des histoires pour aider les enfants à grandir, et des livres pour celles et ceux qui prennent soin des autres.</p>
       <p class="lede">Formée en Belgique, installée sur la Côte d'Azur depuis 2005, elle écrit des albums illustrés pour les 2 à 8 ans, ainsi que des ouvrages pour les soignants, les proches aidants et celles et ceux qui avancent vers la soixantaine.</p>
-      <div class="cta">
-        <a class="btn primary" href="#jeunesse">Livres pour enfants</a>
-        <a class="btn" href="#livres">Ouvrages et guides</a>
-      </div>
+      <p class="proof">11 livres · 3 éditeurs · Citée par la RTBF</p>
     </div>
+    </div>
+    <div class="doors" role="group" aria-labelledby="doors-title">
+      <p class="eyebrow doors-title" id="doors-title">Par où commencer ?</p>
+      <a class="door" href="#jeunesse">
+        <span><small>Albums · 2 à 8 ans</small><strong>Pour un enfant</strong><span class="go">Six histoires pour mettre des mots sur ce qu'il vit →</span></span>
+        <span class="fan" aria-hidden="true"><img src="https://m.media-amazon.com/images/I/61-3lu6wfuL._AC_UL320_.jpg" alt=""><img src="https://m.media-amazon.com/images/I/619nxY1ECqL._AC_UL320_.jpg" alt=""><img src="https://m.media-amazon.com/images/I/61zW140jtnL._AC_UL320_.jpg" alt=""></span>
+      </a>
+      <a class="door adult" href="#approche">
+        <span><small>Soignants · Proches aidants</small><strong>Pour vous qui prenez soin des autres</strong><span class="go">Commencer par la forêt intérieure →</span></span>
+        <span class="grove" aria-hidden="true"><i style="height:62px"></i><i class="stub"></i><i style="height:74px"></i><i class="stub"></i><i style="height:56px"></i></span>
+      </a>
     </div>
    </div>
   </header>
@@ -244,6 +321,56 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
     </div>
   </section>
 
+  <section id="approche" aria-labelledby="foret-titre">
+    <div class="track">
+      <div class="scene">
+        <div class="wrap scene-inner">
+          <p class="eyebrow" id="foret-titre">Ce qu'elle transmet · La forêt intérieure</p>
+          <div class="captions">
+            <p class="cap">Chacun porte une forêt en soi.</p>
+            <p class="cap">Aider, c'est parfois <em>couper un arbre</em> pour l'offrir.</p>
+            <p class="cap">À force, la forêt se dégarnit&nbsp;: <em>c'est l'épuisement.</em></p>
+            <p class="cap">Prendre soin de soi, c'est la laisser <em>repousser.</em></p>
+          </div>
+          <div class="woods" aria-hidden="true"><span class="tree" style="--h:72%"><i></i></span><span class="tree" style="--h:88%"><i></i></span><span class="tree" style="--h:64%"><i></i></span><span class="tree" style="--h:96%"><i></i></span><span class="tree" style="--h:80%"><i></i></span><span class="tree" style="--h:70%"><i></i></span><span class="tree" style="--h:92%"><i></i></span><span class="tree" style="--h:60%"><i></i></span><span class="tree" style="--h:84%"><i></i></span><span class="tree" style="--h:100%"><i></i></span><span class="tree" style="--h:74%"><i></i></span><span class="tree" style="--h:66%"><i></i></span><span class="tree" style="--h:90%"><i></i></span><span class="tree" style="--h:78%"><i></i></span><span class="tree" style="--h:62%"><i></i></span><span class="tree" style="--h:86%"><i></i></span></div>
+          <div class="scene-foot" aria-hidden="true">
+            <p class="hint">Faites défiler ↓</p>
+            <ol class="dots"><li></li><li></li><li></li><li></li></ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap balance">
+      <div class="balance-txt">
+        <p class="eyebrow">Un exercice de ses livres</p>
+        <h2>Le camembert de votre vie</h2>
+        <p>Partagez votre temps et votre énergie en quatre parts, puis regardez honnêtement la place que prend chacune. Rien n'est enregistré : c'est pour vous seulement.</p>
+        <div class="sliders">
+          <label style="--c:var(--ribbon)"><span class="sw"></span>Vous-même<input type="range" min="0" max="10" value="2"><output>15 %</output></label>
+          <label style="--c:var(--pine)"><span class="sw"></span>Le travail<input type="range" min="0" max="10" value="5"><output>38 %</output></label>
+          <label style="--c:var(--ochre)"><span class="sw"></span>La famille<input type="range" min="0" max="10" value="4"><output>31 %</output></label>
+          <label style="--c:var(--c3)"><span class="sw"></span>Les relations<input type="range" min="0" max="10" value="2"><output>15 %</output></label>
+        </div>
+      </div>
+      <figure class="balance-viz">
+        <div class="bigpie" role="img" aria-label="Répartition : vous-même 15 %, travail 38 %, famille 31 %, relations 15 %"></div>
+        <figcaption class="verdict" aria-live="polite">Un équilibre fragile : cette part vous suffit-elle vraiment ?</figcaption>
+        <a class="btn primary" href="#livre-epuisement">Je prends soin des autres sans m'épuiser →</a>
+      </figure>
+    </div>
+
+    <div class="wrap questions">
+      <p class="eyebrow">Les bonnes questions</p>
+      <ul>
+        <li>Pourquoi ai-je besoin de reconnaissance ?</li>
+        <li>Est-ce la peur d'être rejeté qui me pousse à aider ?</li>
+        <li>Que se passerait-il si je disais non, juste une fois ?</li>
+      </ul>
+      <p class="closing">Prendre soin de soi n'a rien d'égoïste.</p>
+    </div>
+  </section>
+
   <section id="livres">
     <div class="wrap">
       <div class="sec-head">
@@ -273,7 +400,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
           </div>
         </article>
 
-        <article class="book">
+        <article class="book" id="livre-epuisement">
           <a class="cover photo" href="https://www.amazon.fr/dp/2840588374" target="_blank" rel="noopener"><img src="https://m.media-amazon.com/images/I/714qQ9tjB+L._AC_UL320_.jpg" alt="Couverture de « Je prends soin des autres sans m'épuiser »" loading="lazy"></a>
           <div>
             <h3>Je prends soin des autres sans m'épuiser</h3>
@@ -324,33 +451,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
     </div>
   </section>
 
-  <section id="approche">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow">Ce qu'elle transmet</p>
-        <h2>Une approche concrète</h2>
-        <p>Dans ses livres comme dans ses interventions, elle propose des images simples et des exercices à faire chez soi.</p>
-      </div>
-      <div class="ideas">
-        <div class="idea">
-          <div class="forest" aria-hidden="true"><i style="height:60px"></i><i style="height:48px"></i><i class="cut"></i><i style="height:56px"></i><i class="cut"></i><i class="cut"></i><i style="height:40px"></i></div>
-          <h3>La forêt intérieure</h3>
-          <p>Chacun porte une forêt en soi. Aider, c'est parfois couper un arbre pour l'offrir. À force, la forêt se dégarnit : c'est l'épuisement.</p>
-        </div>
-        <div class="idea">
-          <div class="pie" aria-hidden="true"></div>
-          <h3>L'exercice du camembert</h3>
-          <p>Partager sa vie en quatre parts : soi, le travail, la famille, les relations. Puis regarder honnêtement la place que prend chacune.</p>
-        </div>
-        <div class="idea">
-          <div class="mirror" aria-hidden="true"><span></span><span></span></div>
-          <h3>Les bonnes questions</h3>
-          <p>Pourquoi ai-je besoin de reconnaissance ? Est-ce la peur d'être rejeté qui me pousse à aider ? Prendre soin de soi n'a rien d'égoïste.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section id="acheter">
     <div class="wrap">
       <div class="sec-head">
@@ -379,5 +479,71 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
     <span>Psychologue clinicienne · Autrice</span>
   </div>
 </footer>
+<script>
+(() => {
+  // Scène de la forêt : les arbres tombent puis repoussent au fil du défilement
+  const sec = document.getElementById('approche');
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    sec.classList.add('scrolly');
+    const track = sec.querySelector('.track');
+    const caps = sec.querySelectorAll('.cap');
+    const dots = sec.querySelectorAll('.dots li');
+    const hint = sec.querySelector('.hint');
+    const trees = sec.querySelectorAll('.tree');
+    const order = [5, 10, 2, 13, 7, 0, 11, 3, 15, 8];
+    const ramp = (p, a, b) => Math.max(0, Math.min(1, (p - a) / (b - a)));
+    let queued = false;
+    const update = () => {
+      queued = false;
+      const r = track.getBoundingClientRect();
+      const p = Math.max(0, Math.min(1, -r.top / (r.height - innerHeight)));
+      const step = p < .18 ? 0 : p < .42 ? 1 : p < .68 ? 2 : 3;
+      const cut = step === 0 ? 0
+        : step === 1 ? Math.round(3 * ramp(p, .18, .4))
+        : step === 2 ? 3 + Math.round(7 * ramp(p, .42, .62))
+        : Math.round(10 * (1 - ramp(p, .72, .9)));
+      trees.forEach((t, i) => t.classList.toggle('cut', order.indexOf(i) > -1 && order.indexOf(i) < cut));
+      caps.forEach((c, i) => c.classList.toggle('on', i === step));
+      dots.forEach((d, i) => d.classList.toggle('on', i === step));
+      hint.style.opacity = p > .04 ? 0 : 1;
+    };
+    addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+    addEventListener('resize', update);
+    update();
+  }
+
+  // Camembert interactif
+  const inputs = [...document.querySelectorAll('.sliders input')];
+  const pie = document.querySelector('.bigpie');
+  const verdict = document.querySelector('.verdict');
+  const colors = ['var(--ribbon)', 'var(--pine)', 'var(--ochre)', 'var(--c3)'];
+  const names = ['vous-même', 'travail', 'famille', 'relations'];
+  const draw = () => {
+    const v = inputs.map(i => +i.value);
+    const total = v.reduce((a, b) => a + b, 0);
+    if (!total) {
+      pie.style.background = 'var(--line)';
+      inputs.forEach(i => i.nextElementSibling.textContent = '0 %');
+      verdict.textContent = 'Déplacez les curseurs pour composer votre semaine.';
+      return;
+    }
+    const pct = v.map(x => Math.round(100 * x / total));
+    let acc = 0;
+    pie.style.background = 'conic-gradient(' + v.map((x, i) => {
+      const from = acc; acc += 100 * x / total;
+      return colors[i] + ' ' + from + '% ' + acc + '%';
+    }).join(',') + ')';
+    inputs.forEach((i, k) => i.nextElementSibling.textContent = pct[k] + ' %');
+    pie.setAttribute('aria-label', 'Répartition : ' + names.map((n, k) => n + ' ' + pct[k] + ' %').join(', '));
+    const me = 100 * v[0] / total;
+    verdict.textContent =
+      me < 15 ? "La part qui vous revient est la plus petite. C'est souvent là que la forêt commence à se dégarnir."
+      : me >= 30 || v[0] === Math.max(...v) ? "Vous vous gardez une vraie place. C'est ce qui permet d'aider longtemps."
+      : "Un équilibre fragile : cette part vous suffit-elle vraiment ?";
+  };
+  inputs.forEach(i => i.addEventListener('input', draw));
+  draw();
+})();
+</script>
 </body>
 </html>
