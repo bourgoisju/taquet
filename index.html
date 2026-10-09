@@ -154,7 +154,6 @@ nav ul a:hover{color:var(--ink)}
 @keyframes pageOpen{from{transform:rotateY(-155deg)}}
 @keyframes rise{from{opacity:0;transform:translateY(.5em)}}
 @keyframes widen{from{transform:scaleX(0)}}
-@keyframes ribbon{from{clip-path:polygon(0 0,100% 0,100% 0,50% 0,0 0)}}
 @keyframes draw{from{stroke-dashoffset:1;fill-opacity:0}}
 @keyframes rain{0%{transform:translateY(-8px);opacity:0}35%{opacity:.75}100%{transform:translateY(14px);opacity:0}}
 @keyframes grow{from{transform:scaleY(0)}}
@@ -164,7 +163,15 @@ nav ul a:hover{color:var(--ink)}
 /* pages imprimées : courbées vers la reliure, tranche de pages visible, ombre dans la pliure */
 .obook>.pg-l{border-radius:6px 46% 46% 6px/6px 13px 13px 6px;box-shadow:-1px 1px 0 var(--page-edge),-2px 2px 0 var(--page-shade),-3px 3px 0 var(--page-edge),-4px 4px 0 var(--page-shade),-5px 5px 0 var(--page-edge),-6px 6px 0 color-mix(in srgb,var(--page-shade) 75%,#000);background-image:linear-gradient(90deg,rgba(255,255,255,.45),transparent 5%),linear-gradient(90deg,transparent 60%,rgba(90,65,30,.06) 78%,rgba(70,48,20,.17) 92%,rgba(45,28,10,.34) 100%),radial-gradient(ellipse 80% 90% at 40% 50%,transparent 60%,rgba(120,90,50,.08))}
 .obook>.pg-r{border-radius:46% 6px 6px 46%/13px 6px 6px 13px;box-shadow:1px 1px 0 var(--page-edge),2px 2px 0 var(--page-shade),3px 3px 0 var(--page-edge),4px 4px 0 var(--page-shade),5px 5px 0 var(--page-edge),6px 6px 0 color-mix(in srgb,var(--page-shade) 75%,#000);display:flex;flex-direction:column;justify-content:space-between;gap:2rem;background-image:linear-gradient(270deg,rgba(255,255,255,.45),transparent 5%),linear-gradient(270deg,transparent 60%,rgba(90,65,30,.06) 78%,rgba(70,48,20,.17) 92%,rgba(45,28,10,.34) 100%),radial-gradient(ellipse 80% 90% at 60% 50%,transparent 60%,rgba(120,90,50,.08))}
-.ribbon{position:absolute;left:calc(50% + 22px);top:-12px;bottom:-50px;width:18px;background:linear-gradient(90deg,color-mix(in srgb,var(--ribbon) 70%,#000),var(--ribbon) 22%,color-mix(in srgb,var(--ribbon) 78%,#fff) 48%,var(--ribbon) 72%,color-mix(in srgb,var(--ribbon) 70%,#000));clip-path:polygon(0 0,100% 0,100% 100%,50% calc(100% - 12px),0 100%);z-index:3}
+/* signet en ruban de satin : tissage, lisières, pli sur la tranche, bout coupé en queue d'aronde effiloché */
+.ribbon{position:absolute;left:calc(50% + 22px);top:-12px;bottom:-50px;width:17px;z-index:3}
+.rb-body{position:absolute;inset:0 0 27px 0;background:linear-gradient(0deg,transparent 21px,rgba(0,0,0,.3) 24px,rgba(255,255,255,.2) 26px,transparent 30px),linear-gradient(180deg,rgba(0,0,0,.5),transparent 16px),repeating-linear-gradient(90deg,rgba(0,0,0,.11) 0 1px,transparent 1px 2px),repeating-linear-gradient(0deg,rgba(255,255,255,.06) 0 1px,transparent 1px 3px),linear-gradient(90deg,color-mix(in srgb,var(--ribbon) 60%,#000),color-mix(in srgb,var(--ribbon) 84%,#000) 10%,var(--ribbon) 26%,color-mix(in srgb,var(--ribbon) 68%,#fff) 46%,var(--ribbon) 64%,color-mix(in srgb,var(--ribbon) 84%,#000) 90%,color-mix(in srgb,var(--ribbon) 60%,#000));box-shadow:inset 1.5px 0 0 rgba(0,0,0,.2),inset -1.5px 0 0 rgba(0,0,0,.2)}
+.rb-tail{position:absolute;left:0;bottom:0;width:100%;height:28px;overflow:visible}
+.rb-tail .cloth{fill:url(#satin)}
+.rb-tail .fray{fill:none;stroke:color-mix(in srgb,var(--ribbon) 70%,#000);stroke-width:.45;stroke-linecap:round}
+.ribbon::after{inset:0 0 27px 0}
+/* tranchefile en haut du dos, sous laquelle le ruban s'échappe */
+.headband{position:absolute;top:-10px;left:50%;width:46px;height:9px;translate:-50% 0;z-index:4;pointer-events:none;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,rgba(255,255,255,.35),transparent 45%,rgba(0,0,0,.25)),repeating-linear-gradient(90deg,var(--ribbon) 0 2px,#efe4c8 2px 4px);box-shadow:0 1px 2px rgba(0,0,0,.4)}
 .quote{font-family:var(--display);font-size:clamp(1.35rem,2.4vw,1.8rem);line-height:1.25;color:var(--plum);margin:0;text-wrap:balance;max-width:20ch}
 .quote small{display:block;font-family:var(--body);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.8rem}
 .hero h1{font-size:clamp(2.3rem,4.4vw,3.6rem);letter-spacing:-.01em}
@@ -367,7 +374,7 @@ footer a:hover{color:var(--plum)}
   .obook>.pg-r{border-radius:46% 46% 6px 6px/12px 12px 6px 6px;box-shadow:1px 1px 0 var(--page-edge),2px 2px 0 var(--page-shade),3px 3px 0 var(--page-edge),4px 4px 0 var(--page-shade);background-image:linear-gradient(0deg,transparent 70%,rgba(70,48,20,.14) 92%,rgba(45,28,10,.3) 100%)}
   .obook::after{display:none}
   .obook::before{background-size:0 0,auto,auto,auto}
-  .ribbon,.ribbon-shadow{display:none}
+  .ribbon,.ribbon-shadow,.headband{display:none}
   .hero .pg-r{padding-left:clamp(1.4rem,3.6vw,3rem)}
   .shelf{height:170px}
   .obook>.title-page{min-height:0;padding-block:3.2rem 4.4rem}
@@ -448,7 +455,8 @@ footer a:hover{color:var(--plum)}
    <div class="wrap stage">
     <div class="obook hero">
     <span class="ribbon-shadow" aria-hidden="true"></span>
-    <span class="ribbon" aria-hidden="true"></span>
+    <span class="headband" aria-hidden="true"></span>
+    <span class="ribbon" aria-hidden="true"><span class="rb-body"></span><svg class="rb-tail" viewBox="0 0 17 28" preserveAspectRatio="none" focusable="false"><defs><linearGradient id="satin" x1="0" x2="1"><stop offset="0" style="stop-color:color-mix(in srgb,var(--ribbon) 60%,#000)"/><stop offset=".26" style="stop-color:var(--ribbon)"/><stop offset=".46" style="stop-color:color-mix(in srgb,var(--ribbon) 68%,#fff)"/><stop offset=".64" style="stop-color:var(--ribbon)"/><stop offset="1" style="stop-color:color-mix(in srgb,var(--ribbon) 60%,#000)"/></linearGradient></defs><path class="cloth" d="M0 0H17V26.5L8.5 16.5 0 26.5Z"/><path class="fray" d="M.5 26.3.2 27.8M1.3 25.4 1 27M16.5 26.3l.3 1.5M15.7 25.4l.3 1.6M4.6 21.2l-.7 1.2M12.4 21.2l.7 1.2M8.5 16.7v1.2"/></svg></span>
     <span class="glare" aria-hidden="true"></span>
     <div class="pg pg-l title-page">
       <svg class="art cloud" viewBox="0 0 146 96" aria-hidden="true" focusable="false">
