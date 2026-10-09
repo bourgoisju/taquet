@@ -230,6 +230,10 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 /* parcours */
 .cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(2rem,5vw,4.5rem)}
 .bio p{margin:0 0 1rem;max-width:58ch}
+.bio .insta{margin-top:1.4rem}
+.insta a{display:inline-flex;align-items:center;gap:.55rem;min-height:46px;padding:.55rem 1.2rem;border-radius:999px;border:1.5px solid var(--pine);color:var(--pine);font-weight:700;text-decoration:none;transition:background .2s,color .2s,transform .2s}
+.insta a:hover{background:var(--pine);color:var(--page);transform:translateY(-1px)}
+.insta svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .portrait{position:relative;width:min(280px,78%);margin:0 0 2.2rem;padding:12px 12px 0;background:#fffdf8;border-radius:3px;box-shadow:0 22px 34px -22px rgba(30,20,10,.5),0 2px 6px rgba(30,20,10,.08);rotate:-2.5deg;transition:rotate .4s cubic-bezier(.2,.7,.2,1),transform .4s cubic-bezier(.2,.7,.2,1)}
 .portrait:hover{rotate:0deg;transform:translateY(-4px)}
 .portrait::before{content:"";position:absolute;top:-12px;left:50%;width:92px;height:26px;translate:-50% 0;rotate:3deg;background:color-mix(in srgb,var(--ochre) 38%,transparent);box-shadow:0 1px 2px rgba(0,0,0,.08)}
@@ -642,6 +646,7 @@ footer a:hover{color:var(--plum)}
         <div class="sec-head"><p class="eyebrow">Biographie</p><h2>Parcours</h2></div>
         <p>Née en Belgique, Annick Taquet-Assoignons est psychologue clinicienne. Elle a consacré une grande partie de sa carrière à l'accompagnement en cancérologie, puis aux personnes âgées et aux équipes soignantes.</p>
         <p>Elle exerce aujourd'hui en cabinet et enseigne la psychologie, notamment auprès des futurs infirmiers. Elle participe régulièrement à des salons et rencontres littéraires, en particulier en région PACA.</p>
+        <p class="insta"><a href="https://www.instagram.com/annicktaquetassoignons/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17 7h.01"/></svg>Suivre Annick sur Instagram <span aria-hidden="true">→</span></a></p>
       </div>
       <ol class="timeline">
         <li><span class="when">Bruxelles</span><span class="what">Institut Jules Bordet</span><span class="where">Psychologue en cancérologie, membre fondatrice de la commission des bénévoles</span></li>
