@@ -17,19 +17,19 @@
   --body:"Karla",system-ui,-apple-system,"Segoe UI",sans-serif;
   --kids-bg:#f6e6ee; --glow:#fff1d0;
   --sky:#cde3f1; --page:#fffdf6; --page-shade:#e6dcc6; --page-edge:#efe6d2; --book-cover:#7b4a68; --ribbon:#d1495b;
-  --tint-a:#fbf3dc; --tint-b:#e3f1e8; --tint-c:#ebecfa; --tint-d:#f8ebe2;
+  --tint-a:#fbf3dc; --tint-b:#e3f1e8; --tint-c:#ebecfa; --tint-d:#f8ebe2; --forest-bg:#dcebe1;
   --c1:#2f5a50; --c2:#7b4a68; --c3:#3e5878; --c4:#a06a3a; --c5:#5b6b3d; --cover-ink:#fbfaf6;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --paper:#141c1a; --surface:#1b2523; --ink:#e4ebe7; --muted:#9fb0a8; --line:#2e3c38;
   --pine:#86bfae; --plum:#d29bbd; --ochre:#d8b36a; --kids-bg:#2a1f27; --glow:#3a3222;
   --sky:#17232b; --page:#222a28; --page-shade:#131817; --page-edge:#2c3633; --book-cover:#5a3550; --ribbon:#e0707e;
-  --tint-a:#221e14; --tint-b:#16231c; --tint-c:#1b1c2a; --tint-d:#261d18; color-scheme:dark}}
+  --tint-a:#221e14; --tint-b:#16231c; --tint-c:#1b1c2a; --tint-d:#261d18; --forest-bg:#14211b; color-scheme:dark}}
 :root[data-theme="dark"]{
   --paper:#141c1a; --surface:#1b2523; --ink:#e4ebe7; --muted:#9fb0a8; --line:#2e3c38;
   --pine:#86bfae; --plum:#d29bbd; --ochre:#d8b36a; --kids-bg:#2a1f27; --glow:#3a3222;
   --sky:#17232b; --page:#222a28; --page-shade:#131817; --page-edge:#2c3633; --book-cover:#5a3550; --ribbon:#e0707e;
-  --tint-a:#221e14; --tint-b:#16231c; --tint-c:#1b1c2a; --tint-d:#261d18; color-scheme:dark}
+  --tint-a:#221e14; --tint-b:#16231c; --tint-c:#1b1c2a; --tint-d:#261d18; --forest-bg:#14211b; color-scheme:dark}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
@@ -191,7 +191,7 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 
 .cover.photo{padding:0;overflow:hidden;background:var(--line);display:block;aspect-ratio:auto}
 .cover.photo img{width:100%;height:auto;display:block}
-.kids-band{background:var(--kids-bg);border-top:0}
+.kids-band{background:var(--kids-bg);border-top:0;padding-bottom:calc(clamp(3rem,7vw,5rem) + 64px)}
 .kids-band .eyebrow{color:var(--plum)}
 .kids{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:2.2rem 1.6rem}
 .kid{display:grid;gap:.6rem;align-content:start;min-width:0}
@@ -221,7 +221,7 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 
 #livres{background:var(--tint-a)}
 #parcours{background:var(--tint-b)}
-#approche{background:var(--tint-c)}
+#approche{background:var(--forest-bg)}
 #acheter{background:var(--tint-d)}
 
 /* parcours */
@@ -239,7 +239,11 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .proof{margin:1.6rem 0 0;font-size:.86rem;letter-spacing:.06em;color:var(--muted);font-weight:500}
 
 /* la forêt intérieure */
-#approche{background:var(--tint-c);padding-block:0}
+#approche{position:relative;background:var(--forest-bg);padding-block:0;border-top:0}
+/* lisière : deux rangées de sapins en silhouette qui mordent sur la section des enfants */
+#approche::before,#approche::after{content:"";position:absolute;left:0;right:0;pointer-events:none;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 48' preserveAspectRatio='none'%3E%3Cpath d='M0 48V34l10-14 10 14 6-6 12-20 12 22 8-8 12-20 12 24 8-8 12 16 8-10 12-18 12 24 8-10 12 16 10-22 12 20 8-8 12-16 12 22 8-10 12 12h12v14z'/%3E%3C/svg%3E") repeat-x left bottom/240px 100%;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 48' preserveAspectRatio='none'%3E%3Cpath d='M0 48V34l10-14 10 14 6-6 12-20 12 22 8-8 12-20 12 24 8-8 12 16 8-10 12-18 12 24 8-10 12 16 10-22 12 20 8-8 12-16 12 22 8-10 12 12h12v14z'/%3E%3C/svg%3E") repeat-x left bottom/240px 100%}
+#approche::before{top:-70px;height:71px;background:color-mix(in srgb,var(--pine) 38%,var(--forest-bg));-webkit-mask-position:-110px bottom;mask-position:-110px bottom;-webkit-mask-size:300px 100%;mask-size:300px 100%}
+#approche::after{top:-46px;height:47px;background:var(--forest-bg)}
 .scene{padding-block:clamp(3rem,7vw,5rem)}
 .scene-inner{display:grid;gap:2rem}
 .captions{display:grid;gap:.9rem}
