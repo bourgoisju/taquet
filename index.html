@@ -289,14 +289,42 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .book:target{animation:flash 1.8s ease-out}
 @keyframes flash{0%,40%{background:color-mix(in srgb,var(--ochre) 24%,transparent)}100%{background:transparent}}
 
-/* où trouver */
-.where-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:1rem}
-.where-list a{display:block;padding:1rem 1.1rem;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink);background:var(--surface)}
-.where-list a:hover{border-color:var(--pine)}
-.where-list strong{display:block;font-size:1rem}
-.where-list span{font-size:.86rem;color:var(--muted)}
-.press{margin-top:2.5rem;padding:1.6rem;border-left:3px solid var(--plum);background:var(--surface);max-width:70ch}
+/* dernier chapitre : poursuivre la lecture */
+.finale .sec-head{margin-inline:auto;text-align:center;justify-items:center}
+.paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:1.4rem}
+.path{--c:var(--plum);position:relative;display:flex;flex-direction:column;gap:.85rem;padding:1.6rem 1.5rem 1.6rem 1.8rem;background:var(--surface);border:1px solid var(--line);border-radius:6px 16px 16px 6px;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
+.path:hover{transform:translateY(-4px);box-shadow:0 18px 32px -22px rgba(30,20,10,.45)}
+.path::before{content:"";position:absolute;left:-1px;top:-1px;bottom:-1px;width:8px;border-radius:6px 0 0 6px;background:var(--c)}
+.path.invite{--c:var(--pine)}
+.path.follow{--c:var(--ochre)}
+.ico{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:color-mix(in srgb,var(--c) 14%,transparent);color:var(--c)}
+.ico svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.path h3{font-size:1.45rem}
+.path>p{margin:0;color:var(--muted);font-size:.97rem}
+.shops{list-style:none;margin:0;padding:0}
+.shops a{display:flex;align-items:center;justify-content:space-between;gap:.8rem;min-height:52px;padding:.55rem 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}
+.shops li:last-child a{border-bottom:0}
+.shops a::after{content:"→";color:var(--muted);transition:transform .2s,color .2s}
+.shops a:hover::after{transform:translateX(4px);color:var(--plum)}
+.shops strong{display:block;font-size:1rem}
+.shops small{display:block;font-size:.84rem;color:var(--muted)}
+.path>.tip{font-size:.88rem;font-style:italic}
+.tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem}
+.tags li{font-size:.8rem;font-weight:700;padding:.25rem .7rem;border-radius:999px;background:color-mix(in srgb,var(--pine) 12%,transparent);color:var(--pine)}
+.path .btn{margin-top:auto;align-self:flex-start;min-height:44px;display:inline-flex;align-items:center}
+.invite .btn.primary{background:var(--pine);border-color:var(--pine);color:var(--page)}
+.press{padding:1rem 1.1rem;border-left:3px solid var(--plum);background:var(--paper);border-radius:0 8px 8px 0;font-size:.95rem}
 .press p{margin:.4rem 0 0}
+.closing-book{position:relative;width:132px;height:86px;margin:clamp(3rem,6vw,4.5rem) auto 0;perspective:700px}
+.closing-book::before{content:"";position:absolute;inset:6px -6px -6px;border-radius:8px;background:var(--book-cover)}
+.cb-l,.cb-r{position:absolute;top:0;bottom:0;width:50%}
+.cb-l{left:0;background:var(--page);border-radius:6px 2px 2px 6px;box-shadow:inset -10px 0 12px -10px rgba(0,0,0,.25)}
+.cb-r{right:0;transform-origin:0 50%;transform-style:preserve-3d;transition:transform 1.1s cubic-bezier(.6,.05,.25,1)}
+.cb-r::before,.cb-r::after{content:"";position:absolute;inset:0;backface-visibility:hidden}
+.cb-r::before{background:var(--page);border-radius:2px 6px 6px 2px;box-shadow:inset 10px 0 12px -10px rgba(0,0,0,.25)}
+.cb-r::after{transform:rotateY(180deg);border-radius:6px 2px 2px 6px;background:linear-gradient(90deg,transparent 0 60%,var(--ribbon) 60% 72%,transparent 72%),var(--book-cover)}
+.closing-book.shut .cb-r{transform:rotateY(-180deg)}
+.fin{margin:1.6rem 0 0;text-align:center;font-family:var(--display);font-size:1.4rem;color:var(--muted)}
 
 footer{border-top:1px solid var(--line);padding-block:2rem;color:var(--muted);font-size:.86rem}
 footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
@@ -610,24 +638,50 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
     </div>
   </section>
 
-  <section id="acheter">
+  <section id="acheter" class="finale" aria-labelledby="finale-titre">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">Librairies et éditeurs</p>
-        <h2>Où trouver les livres</h2>
-        <p>Disponibles en librairie, chez les éditeurs et en ligne.</p>
+        <p class="eyebrow">Dernier chapitre</p>
+        <h2 id="finale-titre">Poursuivre la lecture</h2>
+        <p>Les livres se trouvent en librairie, chez les éditeurs et en ligne. Et Annick aime aller à la rencontre de ses lecteurs.</p>
       </div>
-      <div class="where-list">
-        <a href="https://www.amazon.fr/Annick-Taquet-Assoignons/e/B0BDLT8W25" target="_blank" rel="noopener"><strong>Amazon</strong><span>Page auteur</span></a>
-        <a href="https://www.mollat.com/Recherche/Auteur/0-11986365/taquet-assoignons-annick" target="_blank" rel="noopener"><strong>Librairie Mollat</strong><span>Librairie indépendante, Bordeaux</span></a>
-        <a href="https://www.souffledor.fr/" target="_blank" rel="noopener"><strong>Le Souffle d'Or</strong><span>Éditeur, papier et ebook</span></a>
-        <a href="https://www.editions-maia.com/livre/jai-mal-je-vieillis/" target="_blank" rel="noopener"><strong>Éditions Maïa</strong><span>J'ai mal… je vieillis ?</span></a>
-        <a href="https://www.facebook.com/people/Annick-Taquet-Assoignons/100064306082022/" target="_blank" rel="noopener"><strong>Facebook</strong><span>Actualités et dédicaces</span></a>
+      <div class="paths">
+        <article class="path">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 8h14l-1 12H6zM9 8V6.5a3 3 0 0 1 6 0V8"/></svg></span>
+          <h3>Acheter les livres</h3>
+          <ul class="shops">
+            <li><a href="https://www.mollat.com/Recherche/Auteur/0-11986365/taquet-assoignons-annick" target="_blank" rel="noopener"><span><strong>Librairie Mollat</strong><small>Librairie indépendante, Bordeaux</small></span></a></li>
+            <li><a href="https://www.souffledor.fr/" target="_blank" rel="noopener"><span><strong>Le Souffle d'Or</strong><small>Éditeur, papier et ebook</small></span></a></li>
+            <li><a href="https://www.editions-maia.com/livre/jai-mal-je-vieillis/" target="_blank" rel="noopener"><span><strong>Éditions Maïa</strong><small>J'ai mal… je vieillis ?</small></span></a></li>
+            <li><a href="https://www.amazon.fr/Annick-Taquet-Assoignons/e/B0BDLT8W25" target="_blank" rel="noopener"><span><strong>Amazon</strong><small>Page auteur, tous les titres</small></span></a></li>
+          </ul>
+          <p class="tip">Votre libraire peut aussi commander n'importe quel titre.</p>
+        </article>
+        <article class="path invite">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 5h16v11H9.5L5 20v-4H4z"/></svg></span>
+          <h3>Inviter Annick</h3>
+          <p>Pour un salon du livre, une séance de dédicaces, une intervention auprès d'étudiants infirmiers ou une rencontre sur l'épuisement des soignants et des proches aidants.</p>
+          <ul class="tags">
+            <li>Salons et dédicaces</li>
+            <li>Formation des soignants</li>
+            <li>Rencontres</li>
+            <li>Région PACA</li>
+          </ul>
+          <a class="btn primary" href="https://www.facebook.com/people/Annick-Taquet-Assoignons/100064306082022/" target="_blank" rel="noopener">Lui écrire sur Facebook →</a>
+        </article>
+        <article class="path follow">
+          <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 20.5a2 2 0 0 0 4 0"/></svg></span>
+          <h3>Suivre ses actualités</h3>
+          <p>Prochaines dédicaces, nouveaux livres et rencontres sont annoncés sur sa page.</p>
+          <div class="press">
+            <p class="eyebrow">Dans la presse</p>
+            <p>En janvier 2023, la RTBF a consacré un article à ses conseils pour sortir du « syndrome du sauveur ». <a href="https://www.rtbf.be/article/sortir-du-syndrome-du-sauveur-les-conseils-pour-prendre-soin-des-autres-sans-sepuiser-11130920" target="_blank" rel="noopener">Lire l'article</a></p>
+          </div>
+          <a class="btn" href="https://www.facebook.com/people/Annick-Taquet-Assoignons/100064306082022/" target="_blank" rel="noopener">Sa page Facebook →</a>
+        </article>
       </div>
-      <div class="press">
-        <p class="eyebrow">Dans la presse</p>
-        <p>En janvier 2023, la RTBF a consacré un article à ses conseils pour sortir du « syndrome du sauveur ». <a href="https://www.rtbf.be/article/sortir-du-syndrome-du-sauveur-les-conseils-pour-prendre-soin-des-autres-sans-sepuiser-11130920" target="_blank" rel="noopener">Lire l'article</a></p>
-      </div>
+      <div class="closing-book" aria-hidden="true"><span class="cb-l"></span><span class="cb-r"></span></div>
+      <p class="fin">Merci de votre lecture.</p>
     </div>
   </section>
 </main>
@@ -790,6 +844,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
   };
   inputs.forEach(i => i.addEventListener('input', draw));
   draw();
+
+  // Fin de la page : le petit livre se referme quand on l'atteint
+  const closing = document.querySelector('.closing-book');
+  new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) setTimeout(() => closing.classList.add('shut'), 300);
+  }), { threshold: 1 }).observe(closing);
 })();
 </script>
 </body>
