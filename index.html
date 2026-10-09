@@ -207,6 +207,9 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .kid a.pic{transition:transform .25s cubic-bezier(.2,.7,.2,1),rotate .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s}
 .kid .why{margin:0;font-size:.95rem;color:var(--muted);line-height:1.5}
 .buy{justify-self:start;margin-top:.2rem;padding:.55rem 1.05rem;border-radius:999px;background:var(--plum);color:var(--surface);font-weight:700;font-size:.9rem;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;transition:transform .15s,background .15s}
+.all-books{margin:2.4rem 0 0;text-align:center}
+.all-books a{display:inline-flex;align-items:center;gap:.5rem;min-height:48px;padding:.6rem 1.4rem;border:1.5px solid var(--plum);border-radius:999px;color:var(--plum);font-weight:700;text-decoration:none;background:color-mix(in srgb,var(--surface) 60%,transparent);transition:background .2s,color .2s,transform .2s}
+.all-books a:hover{background:var(--plum);color:var(--surface);transform:translateY(-1px)}
 .buy:hover{transform:translateY(-1px);background:color-mix(in srgb,var(--plum) 85%,var(--ink))}
 .filters{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:-.6rem 0 2rem}
 .filters[hidden]{display:none}
@@ -514,6 +517,7 @@ footer a:hover{color:var(--plum)}
           <a class="buy" href="https://www.amazon.fr/dp/B0CTL9XKZK" target="_blank" rel="noopener" aria-label="Acheter « Ma maman est malade. C'est de ma faute ? », 8 €, sur Amazon (nouvel onglet)">Acheter · 8 €</a>
         </article>
       </div>
+      <p class="all-books"><a href="https://www.amazon.fr/stores/author/B0BDLT8W25" target="_blank" rel="noopener">Voir tous ses livres sur sa page auteur Amazon <span aria-hidden="true">→</span></a></p>
     </div>
   </section>
 
