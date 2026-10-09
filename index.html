@@ -47,6 +47,8 @@ nav .brand{font-family:var(--display);font-size:1.15rem;color:var(--ink);text-de
 nav ul{display:flex;gap:1.2rem;list-style:none;margin:0;padding:0;flex-wrap:wrap;font-size:.92rem}
 nav ul a{color:var(--muted);text-decoration:none}
 nav ul a:hover{color:var(--ink)}
+nav ul a[aria-current="location"]{color:var(--ink);text-decoration:underline 2px var(--plum);text-underline-offset:7px}
+.tabbar{display:none}
 
 /* hero */
 .hero-wrap{overflow:clip;background:radial-gradient(ellipse 70% 60% at 12% 0%,var(--glow),transparent 70%),linear-gradient(180deg,var(--sky),var(--paper));padding-block:clamp(2rem,5vw,3.5rem) clamp(4.5rem,8vw,6rem)}
@@ -267,7 +269,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
   .ribbon{display:none}
   .hero .pg-r{padding-left:clamp(1.4rem,3.6vw,3rem)}
   .shelf{height:170px}
-  .obook>.title-page{min-height:0;padding-block:4.2rem 5.4rem}
+  .obook>.title-page{min-height:0;padding-block:3.2rem 4.4rem}
+  .title-page h1{font-size:2.35rem}
+  .hero .role{font-size:1.02rem;margin-top:1rem}
+  .hero-wrap{padding-top:1.2rem}
+  .claim{font-size:1.9rem}
   .obook>.pg-r{animation-name:rise}
   .art{width:62px}
   .pines{bottom:14px}
@@ -284,6 +290,19 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
   .sliders input{grid-column:1/-1;grid-row:2}
   .sliders output{grid-row:1;grid-column:3}
   .book{grid-template-columns:92px minmax(0,1fr)}
+  /* menu en bas d'écran : le menu du haut ne garde que le nom */
+  nav:not(.tabbar) ul{display:none}
+  nav:not(.tabbar) .wrap{padding-block:.7rem}
+  [id]{scroll-margin-top:64px}
+  body{padding-bottom:calc(60px + env(safe-area-inset-bottom,0px))}
+  .tabbar{display:block;position:fixed;top:auto;left:0;right:0;bottom:0;z-index:6;border-bottom:0;border-top:1px solid var(--line);background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(10px);padding-bottom:env(safe-area-inset-bottom,0px)}
+  .tabbar ul{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;flex-wrap:nowrap;font-size:.72rem}
+  .tabbar a{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:60px;font-weight:700;color:var(--muted);letter-spacing:.01em;text-decoration:none}
+  .tabbar svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s cubic-bezier(.2,.7,.2,1)}
+  .tabbar a[aria-current="location"]{color:var(--plum)}
+  .tabbar a[aria-current="location"] svg{transform:translateY(-2px)}
+  .tabbar a[aria-current="location"]::before{content:"";position:absolute;top:-1px;left:28%;right:28%;height:3px;border-radius:0 0 3px 3px;background:var(--plum)}
+  .scrolly .scene{top:50px;min-height:calc(100svh - 110px)}
 }
 </style>
 </head>
@@ -300,6 +319,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
       <li><a href="#acheter">Où trouver les livres</a></li>
     </ul>
   </div>
+</nav>
+
+<nav class="tabbar" aria-label="Navigation mobile">
+  <ul>
+    <li><a href="#jeunesse"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 14c1 1.6 2.2 2.3 3.5 2.3s2.5-.7 3.5-2.3M9 9.8h.01M15 9.8h.01"/></svg>Enfants</a></li>
+    <li><a href="#approche"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 17H5zM12 17v4"/></svg>Approche</a></li>
+    <li><a href="#livres"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5c3-1 6-1 9 1 3-2 6-2 9-1V19c-3-1-6-1-9 1-3-2-6-2-9-1zM12 6.5V20"/></svg>Ouvrages</a></li>
+    <li><a href="#parcours"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="18" r="2.2"/><path d="M8 7.5c5 1 9 2 9 5s-10 1-10 4 4 2.6 8.8 1.8"/></svg>Parcours</a></li>
+    <li><a href="#acheter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6zM9 8V6.5a3 3 0 0 1 6 0V8"/></svg>Acheter</a></li>
+  </ul>
 </nav>
 
 <main id="top">
@@ -587,6 +616,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
     addEventListener('scroll', () => { if (!heroQueued) { heroQueued = true; requestAnimationFrame(heroScroll); } }, { passive: true });
     heroScroll();
   }
+
+  // Menus : la section en cours de lecture est mise en évidence
+  const navLinks = [...document.querySelectorAll('nav ul a[href^="#"]')];
+  const mark = id => navLinks.forEach(a => {
+    if (a.getAttribute('href') === '#' + id) a.setAttribute('aria-current', 'location');
+    else a.removeAttribute('aria-current');
+  });
+  const spy = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) mark(e.target === hero ? '' : e.target.id);
+  }), { rootMargin: '-45% 0px -50% 0px' });
+  spy.observe(hero);
+  ['jeunesse', 'approche', 'livres', 'parcours', 'acheter'].forEach(id => spy.observe(document.getElementById(id)));
 
   // Scène de la forêt : les arbres tombent puis repoussent au fil du défilement
   const sec = document.getElementById('approche');
