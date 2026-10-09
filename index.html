@@ -227,6 +227,11 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 /* parcours */
 .cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(2rem,5vw,4.5rem)}
 .bio p{margin:0 0 1rem;max-width:58ch}
+.portrait{position:relative;width:min(280px,78%);margin:0 0 2.2rem;padding:12px 12px 0;background:#fffdf8;border-radius:3px;box-shadow:0 22px 34px -22px rgba(30,20,10,.5),0 2px 6px rgba(30,20,10,.08);rotate:-2.5deg;transition:rotate .4s cubic-bezier(.2,.7,.2,1),transform .4s cubic-bezier(.2,.7,.2,1)}
+.portrait:hover{rotate:0deg;transform:translateY(-4px)}
+.portrait::before{content:"";position:absolute;top:-12px;left:50%;width:92px;height:26px;translate:-50% 0;rotate:3deg;background:color-mix(in srgb,var(--ochre) 38%,transparent);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.portrait img{display:block;width:100%;height:auto;aspect-ratio:640/634;object-fit:cover;border-radius:2px}
+.portrait figcaption{padding:.7rem 0 .8rem;text-align:center;font-family:var(--display);font-size:1.05rem;color:#3a3530}
 .timeline{list-style:none;margin:0;padding:0;border-left:2px solid var(--line)}
 .timeline li{position:relative;padding:0 0 1.6rem 1.6rem}
 .timeline li::before{content:"";position:absolute;left:-7px;top:.45rem;width:12px;height:12px;border-radius:50%;background:var(--paper);border:2px solid var(--pine)}
@@ -624,6 +629,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
   <section id="parcours">
     <div class="wrap cols">
       <div class="bio">
+        <figure class="portrait"><img src="img/annick-taquet-assoignons.jpg" width="640" height="634" alt="Portrait d'Annick Taquet-Assoignons, souriante, avec des lunettes" loading="lazy" decoding="async"><figcaption>Annick Taquet-Assoignons</figcaption></figure>
         <div class="sec-head"><p class="eyebrow">Biographie</p><h2>Parcours</h2></div>
         <p>Née en Belgique, Annick Taquet-Assoignons est psychologue clinicienne. Elle a consacré une grande partie de sa carrière à l'accompagnement en cancérologie, puis aux personnes âgées et aux équipes soignantes.</p>
         <p>Elle exerce aujourd'hui en cabinet et enseigne la psychologie, notamment auprès des futurs infirmiers. Elle participe régulièrement à des salons et rencontres littéraires, en particulier en région PACA.</p>
