@@ -121,7 +121,11 @@ nav ul a:hover{color:var(--ink)}
 .title-page h1 .w{display:block;color:var(--ink);animation:rise .8s cubic-bezier(.2,.7,.2,1) .45s backwards}
 .title-page h1 .w+.w{color:var(--pine);animation-delay:.6s}
 .title-page h1::after{animation:widen .6s cubic-bezier(.2,.7,.2,1) .95s backwards}
-.ribbon{animation:ribbon .7s cubic-bezier(.2,.7,.2,1) .8s backwards}
+.ribbon{transform-origin:50% 0;translate:0 calc(var(--p,0) * 34px + var(--tug,0px));pointer-events:auto;cursor:grab;transition:translate .5s cubic-bezier(.2,.7,.2,1);animation:ribbon .7s cubic-bezier(.2,.7,.2,1) .8s backwards,ribbonSway 7s ease-in-out 1.6s infinite}
+.ribbon::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(255,255,255,.5) 50%,transparent) no-repeat 0 -80%/100% 35%;animation:ribbonSheen 6s ease-in-out 2.2s infinite}
+.ribbon:hover{--tug:10px}
+@keyframes ribbonSway{0%,100%{rotate:0deg}30%{rotate:1.3deg}70%{rotate:-.8deg}}
+@keyframes ribbonSheen{0%{background-position:0 -80%}35%,100%{background-position:0 180%}}
 .claim{font-family:var(--display);font-size:clamp(2rem,3.7vw,3.2rem);line-height:1.04;margin:.9rem 0 0;letter-spacing:-.01em}
 .claim .ln{display:block}
 .claim .ln+.ln{color:var(--plum)}
