@@ -113,6 +113,16 @@ nav ul a:hover{color:var(--ink)}
 .arch img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 35%}
 /* couvertures qui flottent, avec un léger décalage selon la souris (profondeur --d) */
 .fc{position:absolute;width:clamp(72px,9.5vw,116px);height:auto;border-radius:2px 5px 5px 2px;background:#fff;box-shadow:inset 3px 0 0 rgba(0,0,0,.12),0 14px 24px -12px rgba(30,20,10,.5);transform:translate(calc(var(--mx,0) * var(--d,10px)),calc(var(--my,0) * var(--d,10px))) rotate(var(--r,0deg));transition:transform .6s cubic-bezier(.2,.7,.2,1);animation:coverIn .8s cubic-bezier(.2,.7,.2,1) var(--in,.6s) backwards,float 7s ease-in-out var(--fl,0s) infinite}
+.fc{display:block;cursor:pointer;z-index:1}
+.fc img{display:block;width:100%;height:auto;border-radius:inherit}
+/* survol : la couverture se redresse, grossit, passe devant ; reflet qui glisse ; étiquette titre et prix */
+.fc{transition:transform .6s cubic-bezier(.2,.7,.2,1),scale .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s,opacity .35s,filter .35s}
+.fc::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%) no-repeat 120% 0/250% 100%;opacity:0;transition:background-position .9s ease,opacity .3s}
+.fc::before{content:attr(data-title);position:absolute;left:50%;top:calc(100% + 10px);translate:-50% 6px;white-space:nowrap;font-size:.78rem;font-weight:700;padding:.32rem .75rem;border-radius:999px;background:var(--ink);color:var(--paper);box-shadow:0 8px 16px -8px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .25s,translate .25s}
+.fc:hover{--r:0deg;scale:1.16;z-index:6;box-shadow:inset 3px 0 0 rgba(0,0,0,.12),0 30px 40px -16px rgba(30,20,10,.6);animation-play-state:running,paused}
+.fc:hover::after{opacity:1;background-position:-20% 0}
+.fc:hover::before{opacity:1;translate:-50% 0}
+.hero-visual:has(.fc:hover) .fc:not(:hover){opacity:.55;filter:saturate(.6)}
 .fc1{left:1%;top:11%;--r:-10deg;--d:22px;--in:.55s;--fl:-1s}
 .fc2{left:-2%;bottom:15%;--r:7deg;--d:14px;--in:.7s;--fl:-3s}
 .fc3{right:1%;top:3%;--r:9deg;--d:18px;--in:.62s;--fl:-2s}
@@ -387,11 +397,11 @@ footer a:hover{color:var(--plum)}
     <div class="hero-visual">
       <span class="halo" aria-hidden="true"></span>
       <figure class="arch"><img src="img/annick-taquet-assoignons.jpg" width="640" height="634" alt="Portrait d'Annick Taquet-Assoignons, souriante, avec des lunettes" fetchpriority="high" decoding="async"></figure>
-      <img class="fc fc1" src="img/dragounet-semeur-joie.jpg" width="320" height="480" alt="" aria-hidden="true" decoding="async">
-      <img class="fc fc2" src="img/plume-miracle-pluie.jpg" width="320" height="480" alt="" aria-hidden="true" decoding="async">
-      <img class="fc fc3" src="img/prendre-soin-sans-epuiser.jpg" width="308" height="480" alt="" aria-hidden="true" decoding="async">
-      <img class="fc fc4" src="img/prendre-soin-parents.jpg" width="308" height="480" alt="" aria-hidden="true" decoding="async">
-      <img class="fc fc5" src="img/juju-petit-frere.jpg" width="320" height="480" alt="" aria-hidden="true" decoding="async">
+      <a class="fc fc1" href="https://www.amazon.fr/dp/B0HBCX53VS" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="Dragounet · 9 €"><img src="img/dragounet-semeur-joie.jpg" width="320" height="480" alt="" decoding="async"></a>
+      <a class="fc fc2" href="https://www.amazon.fr/dp/B0HBCW1V2J" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="Plume et le miracle de la pluie · 9 €"><img src="img/plume-miracle-pluie.jpg" width="320" height="480" alt="" decoding="async"></a>
+      <a class="fc fc3" href="https://www.amazon.fr/dp/2840588374" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="Je prends soin des autres… · 14 €"><img src="img/prendre-soin-sans-epuiser.jpg" width="308" height="480" alt="" decoding="async"></a>
+      <a class="fc fc4" href="https://www.amazon.fr/dp/B0D7QYWHRW" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="Prendre soin de mes parents… · 14 €"><img src="img/prendre-soin-parents.jpg" width="308" height="480" alt="" decoding="async"></a>
+      <a class="fc fc5" href="https://www.amazon.fr/dp/B0DCHQX856" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="Juju a un petit frère · 8 €"><img src="img/juju-petit-frere.jpg" width="320" height="480" alt="" decoding="async"></a>
     </div>
    </div>
   </header>
