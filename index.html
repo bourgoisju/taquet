@@ -162,10 +162,10 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .kids-band .eyebrow{color:var(--plum)}
 .kids{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:2.2rem 1.6rem}
 .kid{display:grid;gap:.6rem;align-content:start;min-width:0}
-.kid a.pic{display:grid;place-items:center;aspect-ratio:1/1;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;transition:transform .2s}
+.kid a.pic{display:block;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;transition:transform .2s}
 .kid a.pic:hover{transform:translateY(-4px) rotate(-1deg)}
 .kid a.pic{min-width:0;overflow:hidden}
-.kid a.pic img{width:100%;height:100%;object-fit:contain;border-radius:3px}
+.kid a.pic img{display:block;width:100%;height:auto;border-radius:3px}
 .kid h3{font-size:1.2rem}
 .kid .meta{margin:0}
 .kid a.pic{rotate:-1.5deg;box-shadow:0 10px 22px -16px rgba(0,0,0,.45)}
