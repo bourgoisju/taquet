@@ -298,6 +298,11 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 /* rappel du prochain salon dans l'en-tête */
 .next-salon{display:inline-flex;align-items:center;gap:.55rem;margin-top:1.1rem;padding:.45rem .95rem .45rem .7rem;border-radius:999px;background:color-mix(in srgb,var(--surface) 85%,transparent);border:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:.88rem;box-shadow:0 8px 18px -12px rgba(30,20,10,.35);transition:transform .2s,border-color .2s;animation:rise .8s cubic-bezier(.2,.7,.2,1) .8s backwards}
 .next-salon[hidden]{display:none}
+.hero-links{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.1rem}
+.hero-links .next-salon{margin-top:0}
+.hero-insta{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem .95rem .45rem .75rem;border-radius:999px;background:color-mix(in srgb,var(--surface) 85%,transparent);border:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:.88rem;box-shadow:0 8px 18px -12px rgba(30,20,10,.35);transition:transform .2s,border-color .2s;animation:rise .8s cubic-bezier(.2,.7,.2,1) .9s backwards}
+.hero-insta:hover{transform:translateY(-1px);border-color:var(--plum)}
+.hero-insta svg{width:18px;height:18px;fill:none;stroke:var(--plum);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .next-salon:hover{transform:translateY(-1px);border-color:var(--plum)}
 .ns-txt b{font-weight:700}
 .ns-dot{width:9px;height:9px;border-radius:50%;background:var(--ribbon);box-shadow:0 0 0 0 color-mix(in srgb,var(--ribbon) 60%,transparent);animation:pulse 2.2s ease-out infinite}
@@ -337,8 +342,6 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .path .invite-acts .btn{margin-top:0;gap:.5rem}
 .mail-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .invite .fb-btn{border-color:var(--pine);color:var(--pine)}
-.mail-addr{margin:-.2rem 0 0;font-size:.86rem;color:var(--muted)}
-.mail-addr[hidden]{display:none}
 .press{padding:1rem 1.1rem;border-left:3px solid var(--plum);background:var(--paper);border-radius:0 8px 8px 0;font-size:.95rem}
 .press p{margin:.4rem 0 0}
 .closing-book{position:relative;width:132px;height:86px;margin:clamp(3rem,6vw,4.5rem) auto 0;perspective:700px}
@@ -434,7 +437,10 @@ footer a:hover{color:var(--plum)}
         <a class="btn btn-adult" href="#approche">Pour vous qui prenez soin des autres →</a>
       </div>
       <p class="proof ln">11 livres · 3 éditeurs · Citée par la RTBF</p>
-      <a class="next-salon" href="#salons" hidden><span class="ns-dot" aria-hidden="true"></span><span class="ns-txt"></span><span aria-hidden="true">→</span></a>
+      <div class="hero-links">
+        <a class="next-salon" href="#salons" hidden><span class="ns-dot" aria-hidden="true"></span><span class="ns-txt"></span><span aria-hidden="true">→</span></a>
+        <a class="hero-insta" href="https://www.instagram.com/annicktaquetassoignons/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17 7h.01"/></svg>Suivre sur Instagram</a>
+      </div>
     </div>
     <div class="hero-visual">
       <span class="halo" aria-hidden="true"></span>
@@ -678,7 +684,6 @@ footer a:hover{color:var(--plum)}
             <a class="btn primary mail-btn" href="https://www.facebook.com/taquetannick/" target="_blank" rel="noopener" data-u="taquetannick" data-d="hotmail.com"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>Lui écrire un e-mail</a>
             <a class="btn fb-btn" href="https://www.facebook.com/taquetannick/" target="_blank" rel="noopener">Sur Facebook →</a>
           </div>
-          <p class="mail-addr" hidden></p>
         </article>
         <article class="path follow">
           <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4zM10 20.5a2 2 0 0 0 4 0"/></svg></span>
@@ -892,9 +897,6 @@ footer a:hover{color:var(--plum)}
     const body = 'Bonjour Madame Taquet-Assoignons,\n\nJe vous écris au sujet de :\n- l\'événement : \n- la date et le lieu : \n- le public attendu : \n\nBien cordialement,\n';
     const mailto = 'mailto:' + addr + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     document.querySelectorAll("a[data-u][data-d]").forEach(a => { a.href = mailto; a.removeAttribute("target"); a.removeAttribute("rel"); });
-    const shown = document.querySelector('.mail-addr');
-    shown.textContent = addr;
-    shown.hidden = false;
   }
 
   // Fin de la page : le petit livre se referme quand on l'atteint
