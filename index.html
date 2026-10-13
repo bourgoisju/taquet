@@ -274,6 +274,41 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .book:target{animation:flash 1.8s ease-out}
 @keyframes flash{0%,40%{background:color-mix(in srgb,var(--ochre) 24%,transparent)}100%{background:transparent}}
 
+/* prochains salons : liste alimentée par salons.js */
+.salons{max-width:900px;margin:0 auto 2.6rem}
+.salons>.eyebrow{text-align:center;margin:0 0 1rem}
+.salon-list{list-style:none;margin:0;padding:0;display:grid;gap:1rem}
+.salon{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1.4rem;align-items:center;padding:1.3rem 1.5rem 1.3rem 1.7rem;background:var(--surface);border:1px solid var(--line);border-radius:6px 16px 16px 6px;box-shadow:0 18px 30px -24px rgba(30,20,10,.45)}
+.salon::before{content:"";position:absolute;left:-1px;top:-1px;bottom:-1px;width:8px;border-radius:6px 0 0 6px;background:var(--plum)}
+.sdate{display:grid;justify-items:center;width:84px;padding:.65rem 0 .7rem;border-radius:12px;background:var(--plum);color:var(--page);line-height:1}
+.sday{font-family:var(--display);font-size:2.4rem}
+.smon{margin-top:.25rem;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.syear{margin-top:.25rem;font-size:.74rem;opacity:.85}
+.sinfo h3{font-size:1.35rem;margin:0 0 .35rem}
+.sinfo p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.5}
+.sinfo .swhen{color:var(--ink);font-weight:500;margin-bottom:.25rem}
+.sfree{display:inline-block;margin-left:.4rem;padding:.08rem .55rem;border-radius:999px;font-size:.76rem;font-weight:700;background:color-mix(in srgb,var(--pine) 14%,transparent);color:var(--pine)}
+.sacts{display:grid;gap:.5rem}
+.sacts .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.5rem 1rem;font-size:.88rem;white-space:nowrap}
+.sacts .sics{background:var(--plum);border-color:var(--plum);color:var(--page)}
+.salon.is-next .sdate{box-shadow:0 0 0 4px color-mix(in srgb,var(--plum) 22%,transparent)}
+.salons-empty{text-align:center;color:var(--muted);margin:0}
+.salons-empty[hidden]{display:none}
+.salons-more{text-align:center;color:var(--muted);font-size:.9rem;margin:1rem 0 0}
+/* rappel du prochain salon dans l'en-tête */
+.next-salon{display:inline-flex;align-items:center;gap:.55rem;margin-top:1.1rem;padding:.45rem .95rem .45rem .7rem;border-radius:999px;background:color-mix(in srgb,var(--surface) 85%,transparent);border:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:.88rem;box-shadow:0 8px 18px -12px rgba(30,20,10,.35);transition:transform .2s,border-color .2s;animation:rise .8s cubic-bezier(.2,.7,.2,1) .8s backwards}
+.next-salon[hidden]{display:none}
+.next-salon:hover{transform:translateY(-1px);border-color:var(--plum)}
+.ns-txt b{font-weight:700}
+.ns-dot{width:9px;height:9px;border-radius:50%;background:var(--ribbon);box-shadow:0 0 0 0 color-mix(in srgb,var(--ribbon) 60%,transparent);animation:pulse 2.2s ease-out infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
+@media (max-width:760px){
+  .salon{grid-template-columns:auto minmax(0,1fr);gap:1rem;padding:1.1rem 1.1rem 1.1rem 1.4rem}
+  .sdate{width:70px}
+  .sday{font-size:2rem}
+  .sacts{grid-column:1/-1;display:flex;flex-wrap:wrap}
+  .sacts .btn{flex:1 1 auto}
+}
 /* dernier chapitre : poursuivre la lecture */
 .finale .sec-head{margin-inline:auto;text-align:center;justify-items:center}
 .paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:1.4rem}
@@ -393,6 +428,7 @@ footer a:hover{color:var(--plum)}
         <a class="btn btn-adult" href="#approche">Pour vous qui prenez soin des autres →</a>
       </div>
       <p class="proof ln">11 livres · 3 éditeurs · Citée par la RTBF</p>
+      <a class="next-salon" href="#salons" hidden><span class="ns-dot" aria-hidden="true"></span><span class="ns-txt"></span><span aria-hidden="true">→</span></a>
     </div>
     <div class="hero-visual">
       <span class="halo" aria-hidden="true"></span>
@@ -602,6 +638,13 @@ footer a:hover{color:var(--plum)}
         <h2 id="finale-titre">Poursuivre la lecture</h2>
         <p>Les livres se trouvent en librairie, chez les éditeurs et en ligne. Et Annick aime aller à la rencontre de ses lecteurs.</p>
       </div>
+      <div class="salons" id="salons">
+        <p class="eyebrow">Prochains salons et dédicaces</p>
+        <!-- La liste est remplie à partir du fichier salons.js -->
+        <ul class="salon-list"></ul>
+        <p class="salons-empty" hidden>Les prochaines dates seront bientôt annoncées.</p>
+        <p class="salons-more">Toutes les dates sont aussi annoncées sur sa page <a href="https://www.facebook.com/taquetannick/" target="_blank" rel="noopener">Facebook</a> et sur <a href="https://www.instagram.com/annicktaquetassoignons/" target="_blank" rel="noopener">Instagram</a>.</p>
+      </div>
       <div class="paths">
         <article class="path">
           <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 8h14l-1 12H6zM9 8V6.5a3 3 0 0 1 6 0V8"/></svg></span>
@@ -652,6 +695,7 @@ footer a:hover{color:var(--plum)}
     <span>Psychologue clinicienne · Autrice · <a href="https://www.instagram.com/annicktaquetassoignons/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/taquetannick/" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.amazon.fr/stores/author/B0BDLT8W25" target="_blank" rel="noopener">Amazon</a></span>
   </div>
 </footer>
+<script src="salons.js"></script>
 <script>
 (() => {
   // En-tête : les couvertures suivent la souris avec de la profondeur, puis l'ensemble recule au défilement
@@ -781,6 +825,53 @@ footer a:hover{color:var(--plum)}
   vid.addEventListener('timeupdate', () => { if (vid.currentTime >= END) finish(); });
   vid.addEventListener('ended', finish);
   vend.querySelector('.vreplay').addEventListener('click', () => { vend.hidden = true; vid.currentTime = 0; vid.controls = true; vid.play(); });
+
+  // Prochains salons : construits à partir de salons.js ; les salons passés sont retirés
+  (() => {
+    const list = document.querySelector('.salon-list');
+    const empty = document.querySelector('.salons-empty');
+    const pill = document.querySelector('.next-salon');
+    const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const salons = (window.SALONS || [])
+      .map(s => ({ ...s, d: new Date(s.date + 'T00:00:00') }))
+      .filter(s => !isNaN(s.d) && s.d >= today)
+      .sort((a, b) => a.d - b.d);
+    if (!salons.length) { empty.hidden = false; return; }
+    const day = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    const mon = new Intl.DateTimeFormat('fr-FR', { month: 'short' });
+    const hm = t => t ? t.replace(':', ' h ').replace(/ h 00$/, ' h') : '';
+    const ics = s => {
+      const d = s.date.replace(/-/g, '');
+      const t = x => (x || '').replace(':', '') + '00';
+      const body = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Annick Taquet-Assoignons//Salons//FR', 'BEGIN:VEVENT',
+        'UID:' + d + '-' + s.nom.replace(/\W+/g, '').slice(0, 20) + '@annick-taquet-assoignons',
+        s.debut ? 'DTSTART:' + d + 'T' + t(s.debut) : 'DTSTART;VALUE=DATE:' + d,
+        s.fin ? 'DTEND:' + d + 'T' + t(s.fin) : '',
+        'SUMMARY:Annick Taquet-Assoignons · ' + s.nom,
+        'LOCATION:' + (s.lieu + ', ' + s.adresse).replace(/,/g, '\\,'),
+        'END:VEVENT', 'END:VCALENDAR'].filter(Boolean).join('\r\n');
+      return 'data:text/calendar;charset=utf-8,' + encodeURIComponent(body);
+    };
+    list.innerHTML = salons.map((s, i) => {
+      const when = day.format(s.d).replace(/^./, c => c.toUpperCase()) + (s.debut ? ' · ' + hm(s.debut) + (s.fin ? ' – ' + hm(s.fin) : '') : '');
+      const maps = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(s.lieu + ', ' + s.adresse);
+      return '<li class="salon' + (i === 0 ? ' is-next' : '') + '">' +
+        '<div class="sdate" aria-hidden="true"><span class="sday">' + s.d.getDate() + '</span><span class="smon">' + esc(mon.format(s.d)) + '</span><span class="syear">' + s.d.getFullYear() + '</span></div>' +
+        '<div class="sinfo"><h3>' + esc(s.nom) + '</h3>' +
+        '<p class="swhen">' + esc(when) + (s.gratuit ? ' <span class="sfree">Entrée gratuite</span>' : '') + '</p>' +
+        '<p>' + esc(s.lieu) + '<br>' + esc(s.adresse) + '</p></div>' +
+        '<div class="sacts">' +
+        '<a class="btn sics" href="' + ics(s) + '" download="salon-' + s.date + '.ics">Ajouter à mon agenda</a>' +
+        '<a class="btn" href="' + maps + '" target="_blank" rel="noopener">Itinéraire</a>' +
+        (s.lien ? '<a class="btn" href="' + esc(s.lien) + '" target="_blank" rel="noopener">Programme</a>' : '') +
+        '</div></li>';
+    }).join('');
+    const n = salons[0];
+    const ville = (n.adresse.match(/\d{4,5}\s+([^,(]+)/) || [])[1];
+    pill.querySelector('.ns-txt').innerHTML = 'Prochaine dédicace : <b>' + n.d.getDate() + ' ' + esc(mon.format(n.d)) + '</b>' + (ville ? ' · ' + esc(ville.trim()) : '');
+    pill.hidden = false;
+  })();
 
   // Fin de la page : le petit livre se referme quand on l'atteint
   const closing = document.querySelector('.closing-book');
