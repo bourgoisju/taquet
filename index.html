@@ -153,6 +153,9 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .book h3{font-size:1.32rem}
 .meta{font-size:.84rem;color:var(--muted);margin:.35rem 0 .6rem;font-variant-numeric:tabular-nums}
 .book p{margin:0;font-size:.97rem}
+.bs-badge{display:inline-flex;align-items:center;gap:.35rem;margin:0 0 .45rem;padding:.22rem .7rem;border-radius:999px;background:var(--ochre);color:var(--page);font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.bestseller .cover{position:relative}
+.bestseller .cover::after{content:"Best-seller";position:absolute;top:14px;right:-32px;width:116px;rotate:45deg;padding:.2rem 0;text-align:center;background:var(--ochre);color:#fff;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 2px 4px rgba(0,0,0,.25)}
 .book .links{margin-top:.6rem;font-size:.88rem;display:flex;gap:1rem;flex-wrap:wrap}
 
 
@@ -447,7 +450,7 @@ footer a:hover{color:var(--plum)}
       <figure class="arch"><img src="img/annick-taquet-assoignons.jpg" width="640" height="634" alt="Portrait d'Annick Taquet-Assoignons, souriante, avec des lunettes" fetchpriority="high" decoding="async"></figure>
       <a class="fc fc1" href="https://www.amazon.fr/dp/B0HBCX53VS" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="Dragounet · 9 €"><img src="img/dragounet-semeur-joie.jpg" width="320" height="480" alt="" decoding="async"></a>
       <a class="fc fc2" href="https://www.amazon.fr/dp/B0HBCW1V2J" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="Plume et le miracle de la pluie · 9 €"><img src="img/plume-miracle-pluie.jpg" width="320" height="480" alt="" decoding="async"></a>
-      <a class="fc fc3" href="https://www.amazon.fr/dp/2840588374" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="Je prends soin des autres… · 14 €"><img src="img/prendre-soin-sans-epuiser.jpg" width="308" height="480" alt="" decoding="async"></a>
+      <a class="fc fc3" href="https://www.amazon.fr/dp/2840588374" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="★ Best-seller · Je prends soin des autres… · 14 €"><img src="img/prendre-soin-sans-epuiser.jpg" width="308" height="480" alt="" decoding="async"></a>
       <a class="fc fc4" href="https://www.amazon.fr/dp/B0D7QYWHRW" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="Prendre soin de mes parents… · 14 €"><img src="img/prendre-soin-parents.jpg" width="308" height="480" alt="" decoding="async"></a>
       <a class="fc fc5" href="https://www.amazon.fr/dp/B0DCHQX856" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="Juju a un petit frère · 8 €"><img src="img/juju-petit-frere.jpg" width="320" height="480" alt="" decoding="async"></a>
     </div>
@@ -589,9 +592,10 @@ footer a:hover{color:var(--plum)}
           </div>
         </article>
 
-        <article class="book" id="livre-epuisement">
+        <article class="book bestseller" id="livre-epuisement">
           <a class="cover photo" href="https://www.amazon.fr/dp/2840588374" target="_blank" rel="noopener"><img src="img/prendre-soin-sans-epuiser.jpg" width="308" height="480" decoding="async" alt="Couverture de « Je prends soin des autres sans m'épuiser »" loading="lazy"></a>
           <div>
+            <span class="bs-badge"><span aria-hidden="true">★</span> Son best-seller</span>
             <h3>Je prends soin des autres sans m'épuiser</h3>
             <p class="meta">Le Souffle d'Or · coll. Chrysalide · octobre 2022 · 152 p. · 14 €</p>
             <p>Pour les soignants, les proches aidants et les personnes naturellement tournées vers les autres. Le « syndrome du sauveur », la fatigue de compassion, et des exercices pour continuer à aider sans s'y perdre.</p>
