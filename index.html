@@ -703,7 +703,7 @@ footer a:hover{color:var(--plum)}
 <footer>
   <div class="wrap">
     <span>© Annick Taquet-Assoignons</span>
-    <span>Psychologue clinicienne · Autrice · <a href="https://www.instagram.com/annicktaquetassoignons/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/taquetannick/" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.amazon.fr/stores/author/B0BDLT8W25" target="_blank" rel="noopener">Amazon</a></span>
+    <span>Psychologue clinicienne · Autrice · <a href="https://www.instagram.com/annicktaquetassoignons/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/taquetannick/" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.amazon.fr/stores/author/B0BDLT8W25" target="_blank" rel="noopener">Amazon</a> · <a class="mail-link" href="#acheter" data-u="taquetannick" data-d="hotmail.com">E-mail</a></span>
   </div>
 </footer>
 <script src="salons.js"></script>
@@ -890,9 +890,8 @@ footer a:hover{color:var(--plum)}
     const addr = mailBtn.dataset.u + '@' + mailBtn.dataset.d;
     const subject = 'Invitation : salon, dédicace ou intervention';
     const body = 'Bonjour Madame Taquet-Assoignons,\n\nJe vous écris au sujet de :\n- l\'événement : \n- la date et le lieu : \n- le public attendu : \n\nBien cordialement,\n';
-    mailBtn.href = 'mailto:' + addr + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-    mailBtn.removeAttribute('target');
-    mailBtn.removeAttribute('rel');
+    const mailto = 'mailto:' + addr + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    document.querySelectorAll("a[data-u][data-d]").forEach(a => { a.href = mailto; a.removeAttribute("target"); a.removeAttribute("rel"); });
     const shown = document.querySelector('.mail-addr');
     shown.textContent = addr;
     shown.hidden = false;
