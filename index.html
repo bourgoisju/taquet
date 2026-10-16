@@ -249,6 +249,7 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .scrolly .captions{grid-template-areas:"c";align-items:end;min-height:2.4em}
 .scrolly .cap{grid-area:c;opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s cubic-bezier(.2,.7,.2,1)}
 .scrolly .cap.on{opacity:1;transform:none}
+.scrolly:not(.ready) .cap,.scrolly:not(.ready) .tree i{transition:none}
 .scrolly .scene-foot{display:flex}
 
 /* vidéo : texte à gauche, vidéo verticale dans un cadre de téléphone à droite */
@@ -268,6 +269,18 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .vend{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:.8rem;padding:1.5rem;text-align:center;background:rgba(255,253,246,.95);color:#1d302c}
 .vend[hidden]{display:none}
 .vend-title{margin:0 0 .4rem;font-family:var(--display);font-size:1.4rem}
+.vend-cover{width:84px;height:auto;border-radius:2px 5px 5px 2px;box-shadow:inset 3px 0 0 rgba(0,0,0,.12),0 12px 22px -10px rgba(0,0,0,.45);margin-bottom:.3rem}
+/* liens vers le best-seller dans la scène de la forêt et le bloc vidéo */
+.book-tag,.vbook{display:inline-flex;align-items:center;gap:.85rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 24px -18px rgba(30,20,10,.45);transition:transform .25s cubic-bezier(.2,.7,.2,1),border-color .25s}
+.book-tag:hover,.vbook:hover{transform:translateY(-2px);border-color:var(--ochre)}
+.book-tag{justify-self:start;padding:.45rem 1rem .45rem .5rem}
+.book-tag img{width:34px;height:auto;border-radius:2px 4px 4px 2px;box-shadow:0 4px 8px -4px rgba(0,0,0,.4)}
+.book-tag small,.vbook small{display:block;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ochre)}
+.book-tag strong{display:block;font-family:var(--display);font-weight:400;font-size:1.05rem;line-height:1.2}
+.vbook{padding:.7rem 1.2rem .7rem .7rem;max-width:30rem}
+.vbook img{width:62px;height:auto;flex:none;border-radius:2px 5px 5px 2px;box-shadow:inset 3px 0 0 rgba(0,0,0,.12),0 10px 18px -10px rgba(0,0,0,.45)}
+.vbook strong{display:block;font-family:var(--display);font-weight:400;font-size:1.25rem;line-height:1.2;margin:.2rem 0 .3rem}
+.vbook em{font-style:normal;font-weight:700;font-size:.9rem;color:var(--plum)}
 .vend .btn{min-height:46px}
 .vend .vreplay{background:transparent;border-color:#1d302c;color:#1d302c;font:inherit;font-weight:700;cursor:pointer}
 .book:target{animation:flash 1.8s ease-out}
@@ -526,7 +539,7 @@ footer a:hover{color:var(--plum)}
     <div class="track">
       <div class="scene">
         <div class="wrap scene-inner">
-          <p class="eyebrow" id="foret-titre">Ce qu'elle transmet · La forêt intérieure</p>
+          <a class="book-tag" href="#livre-epuisement"><img src="img/prendre-soin-sans-epuiser.jpg" width="308" height="480" alt="" loading="lazy" decoding="async"><span><small id="foret-titre">★ Tiré de son best-seller · La forêt intérieure</small><strong>Je prends soin des autres sans m'épuiser</strong></span></a>
           <div class="captions">
             <p class="cap">Chacun porte une forêt en soi.</p>
             <p class="cap">Aider, c'est parfois <em>couper un arbre</em> pour l'offrir.</p>
@@ -544,18 +557,19 @@ footer a:hover{color:var(--plum)}
 
     <div class="wrap vblock">
       <div class="vtext">
-        <p class="eyebrow">En vidéo · 1 minute</p>
+        <p class="eyebrow">En vidéo · Les idées clés de son best-seller</p>
         <h2>Pourquoi aider les autres vous épuise</h2>
-        <p>Le syndrome du sauveur, la part que l'on se garde dans le « camembert » de son énergie, la peur d'être rejeté ou de décevoir, la fatigue de compassion… et pourquoi apprendre à dire non permet de continuer à aider.</p>
+        <p>En une minute, l'essentiel de son livre : le syndrome du sauveur, la part que l'on se garde dans le « camembert » de son énergie, la peur d'être rejeté ou de décevoir, la fatigue de compassion… et pourquoi apprendre à dire non permet de continuer à aider.</p>
         <p class="vquote">Prendre soin de soi n'a rien d'égoïste.</p>
-        <a class="btn primary" href="#livre-epuisement">Lire « Je prends soin des autres sans m'épuiser » →</a>
+        <a class="vbook" href="#livre-epuisement"><img src="img/prendre-soin-sans-epuiser.jpg" width="308" height="480" alt="" loading="lazy" decoding="async"><span><small>★ Son best-seller · Le Souffle d'Or · 14 €</small><strong>Je prends soin des autres sans m'épuiser</strong><em>Découvrir le livre →</em></span></a>
       </div>
       <figure class="vframe">
         <video id="vid" src="video/pourquoi-aider-les-autres-vous-epuise.mp4" poster="img/video-poster.jpg" width="720" height="1280" preload="none" playsinline aria-label="Vidéo sous-titrée : pourquoi aider les autres vous épuise, environ une minute"></video>
         <button class="vplay" type="button" aria-label="Lire la vidéo, environ une minute, avec le son"><span class="vbtn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="vlen">1 min · avec le son</span></button>
         <div class="vend" hidden>
+          <img class="vend-cover" src="img/prendre-soin-sans-epuiser.jpg" width="308" height="480" alt="" loading="lazy" decoding="async">
           <p class="vend-title">Pour aller plus loin</p>
-          <a class="btn primary" href="#livre-epuisement">Le livre →</a>
+          <a class="btn primary" href="#livre-epuisement">Découvrir le livre →</a>
           <button class="btn vreplay" type="button">Revoir la vidéo</button>
         </div>
       </figure>
@@ -811,6 +825,8 @@ footer a:hover{color:var(--plum)}
     addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
     addEventListener('resize', update);
     update();
+    // on n'active les fondus qu'après le premier calcul, pour éviter de voir toutes les phrases au chargement
+    requestAnimationFrame(() => requestAnimationFrame(() => sec.classList.add('ready')));
   }
 
   // Filtres des albums par situation
