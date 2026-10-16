@@ -5,10 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Annick Taquet-Assoignons</title>
 <meta name="description" content="Annick Taquet-Assoignons, psychologue clinicienne et autrice. Livres sur les soignants, les proches aidants et l'avancée en âge.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Karla:wght@400;500;700&display=swap">
+<link rel="preload" href="fonts/gloock-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/karla-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+/* polices hébergées sur le site (jeu latin, couvre tout le français) */
+@font-face{font-family:"Gloock";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/gloock-latin.woff2) format("woff2")}
+@font-face{font-family:"Karla";font-style:normal;font-weight:200 800;font-display:swap;src:url(fonts/karla-latin.woff2) format("woff2")}
 /* Layout: colonne de lecture étroite, bibliothèque de couvertures en grille, parcours en frise verticale */
 :root{
   --paper:#eaf2f7; --surface:#ffffff; --ink:#1d302c; --muted:#56665f; --line:#cdd6d0;
