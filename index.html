@@ -7,7 +7,7 @@
 <meta name="description" content="Annick Taquet-Assoignons, psychologue clinicienne et autrice. Livres sur les soignants, les proches aidants et l'avancée en âge.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Karla:wght@400;500;700&display=swap">
 <style>
 /* Layout: colonne de lecture étroite, bibliothèque de couvertures en grille, parcours en frise verticale */
 :root{
@@ -31,7 +31,7 @@
   --sky:#17232b; --page:#222a28; --page-shade:#131817; --page-edge:#2c3633; --book-cover:#5a3550; --ribbon:#e0707e;
   --tint-a:#221e14; --tint-b:#16231c; --tint-c:#1b1c2a; --tint-d:#261d18; --forest-bg:#14211b; color-scheme:dark}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-tap-highlight-color:rgba(123,74,104,.15)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.06rem;line-height:1.65}
 a{color:var(--pine);text-underline-offset:3px}
@@ -405,6 +405,18 @@ footer a:hover{color:var(--plum)}
   .tabbar a[aria-current="location"] svg{transform:translateY(-2px)}
   .tabbar a[aria-current="location"]::before{content:"";position:absolute;top:-1px;left:28%;right:28%;height:3px;border-radius:0 0 3px 3px;background:var(--plum)}
   .scrolly .scene{top:64px;min-height:calc(100svh - 124px)}
+  /* mobile : forêt plus courte à faire défiler, cibles tactiles de 44 px, textes lisibles */
+  .scrolly .track{height:240vh}
+  .next-salon,.hero-insta{min-height:44px}
+  .book .links{gap:.2rem 1.2rem}
+  .book .links a{display:inline-flex;align-items:center;min-height:44px}
+  footer .wrap{flex-direction:column;align-items:flex-start;gap:.4rem}
+  footer span a{display:inline-flex;align-items:center;min-height:44px;padding:0 .15rem}
+  .brand-txt small{font-size:.7rem}
+  .book-tag small,.vbook small{font-size:.74rem}
+  .age,.bs-badge{font-size:.8rem}
+  .syear{font-size:.8rem}
+  .tabbar ul{font-size:.76rem}
 }
 </style>
 </head>
@@ -460,11 +472,11 @@ footer a:hover{color:var(--plum)}
     <div class="hero-visual">
       <span class="halo" aria-hidden="true"></span>
       <figure class="arch"><img src="img/annick-taquet-assoignons.jpg" width="640" height="634" alt="Portrait d'Annick Taquet-Assoignons, souriante, avec des lunettes" fetchpriority="high" decoding="async"></figure>
-      <a class="fc fc1" href="https://www.amazon.fr/dp/B0HBCX53VS" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="Dragounet · 9 €"><img src="img/dragounet-semeur-joie.jpg" width="320" height="480" alt="" decoding="async"></a>
-      <a class="fc fc2" href="https://www.amazon.fr/dp/B0HBCW1V2J" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="Plume et le miracle de la pluie · 9 €"><img src="img/plume-miracle-pluie.jpg" width="320" height="480" alt="" decoding="async"></a>
-      <a class="fc fc3" href="https://www.amazon.fr/dp/2840588374" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="★ Best-seller · Je prends soin des autres… · 14 €"><img src="img/prendre-soin-sans-epuiser.jpg" width="308" height="480" alt="" decoding="async"></a>
-      <a class="fc fc4" href="https://www.amazon.fr/dp/B0D7QYWHRW" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="Prendre soin de mes parents… · 14 €"><img src="img/prendre-soin-parents.jpg" width="308" height="480" alt="" decoding="async"></a>
-      <a class="fc fc5" href="https://www.amazon.fr/dp/B0DCHQX856" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="Juju a un petit frère · 8 €"><img src="img/juju-petit-frere.jpg" width="320" height="480" alt="" decoding="async"></a>
+      <a class="fc fc1" href="https://www.amazon.fr/dp/B0HBCX53VS" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="Dragounet · 9 €"><img src="img/dragounet-semeur-joie.jpg" width="320" height="480" alt="" loading="lazy" decoding="async"></a>
+      <a class="fc fc2" href="https://www.amazon.fr/dp/B0HBCW1V2J" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="Plume et le miracle de la pluie · 9 €"><img src="img/plume-miracle-pluie.jpg" width="320" height="480" alt="" loading="lazy" decoding="async"></a>
+      <a class="fc fc3" href="https://www.amazon.fr/dp/2840588374" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="★ Best-seller · Je prends soin des autres… · 14 €"><img src="img/prendre-soin-sans-epuiser.jpg" width="308" height="480" alt="" loading="lazy" decoding="async"></a>
+      <a class="fc fc4" href="https://www.amazon.fr/dp/B0D7QYWHRW" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="Prendre soin de mes parents… · 14 €"><img src="img/prendre-soin-parents.jpg" width="308" height="480" alt="" loading="lazy" decoding="async"></a>
+      <a class="fc fc5" href="https://www.amazon.fr/dp/B0DCHQX856" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" data-title="Juju a un petit frère · 8 €"><img src="img/juju-petit-frere.jpg" width="320" height="480" alt="" loading="lazy" decoding="async"></a>
     </div>
    </div>
   </header>
@@ -564,7 +576,7 @@ footer a:hover{color:var(--plum)}
         <a class="vbook" href="#livre-epuisement"><img src="img/prendre-soin-sans-epuiser.jpg" width="308" height="480" alt="" loading="lazy" decoding="async"><span><small>★ Son best-seller · Le Souffle d'Or · 14 €</small><strong>Je prends soin des autres sans m'épuiser</strong><em>Découvrir le livre →</em></span></a>
       </div>
       <figure class="vframe">
-        <video id="vid" src="video/pourquoi-aider-les-autres-vous-epuise.mp4" poster="img/video-poster.jpg" width="720" height="1280" preload="none" playsinline aria-label="Vidéo sous-titrée : pourquoi aider les autres vous épuise, environ une minute"></video>
+        <video id="vid" src="video/pourquoi-aider-les-autres-vous-epuise.mp4" data-poster="img/video-poster.jpg" width="720" height="1280" preload="none" playsinline aria-label="Vidéo sous-titrée : pourquoi aider les autres vous épuise, environ une minute"></video>
         <button class="vplay" type="button" aria-label="Lire la vidéo, environ une minute, avec le son"><span class="vbtn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="vlen">1 min · avec le son</span></button>
         <div class="vend" hidden>
           <img class="vend-cover" src="img/prendre-soin-sans-epuiser.jpg" width="308" height="480" alt="" loading="lazy" decoding="async">
@@ -857,6 +869,9 @@ footer a:hover{color:var(--plum)}
   const vplay = document.querySelector('.vplay');
   const vend = document.querySelector('.vend');
   const END = 70.8;
+  // l'image d'aperçu n'est chargée qu'à l'approche du bloc vidéo (économise ~85 Ko à l'ouverture)
+  const posterIO = new IntersectionObserver(entries => { if (entries.some(e => e.isIntersecting)) { vid.poster = vid.dataset.poster; posterIO.disconnect(); } }, { rootMargin: '800px 0px' });
+  posterIO.observe(vid);
   const finish = () => { vid.pause(); vid.controls = false; vend.hidden = false; };
   vplay.addEventListener('click', () => { vplay.hidden = true; vend.hidden = true; vid.controls = true; vid.play(); });
   vid.addEventListener('timeupdate', () => { if (vid.currentTime >= END) finish(); });
