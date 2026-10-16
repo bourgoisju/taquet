@@ -345,6 +345,9 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .path .invite-acts .btn{margin-top:0;gap:.5rem}
 .mail-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .invite .fb-btn{border-color:var(--pine);color:var(--pine)}
+.invite .wa-btn{background:#0f7b6c;border-color:#0f7b6c;color:#fff}
+.invite .wa-btn:hover{background:#0b6458}
+.wa-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .press{padding:1rem 1.1rem;border-left:3px solid var(--plum);background:var(--paper);border-radius:0 8px 8px 0;font-size:.95rem}
 .press p{margin:.4rem 0 0}
 .closing-book{position:relative;width:132px;height:86px;margin:clamp(3rem,6vw,4.5rem) auto 0;perspective:700px}
@@ -688,6 +691,7 @@ footer a:hover{color:var(--plum)}
           <div class="invite-acts">
             <!-- adresse reconstituée par le script pour la cacher aux robots de spam -->
             <a class="btn primary mail-btn" href="https://www.facebook.com/taquetannick/" target="_blank" rel="noopener" data-u="taquetannick" data-d="hotmail.com"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>Lui écrire un e-mail</a>
+            <a class="btn wa-btn" href="#acheter" data-wa1="336889" data-wa2="03480"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 19.5l1.1-3.9A8 8 0 1 1 8.6 18.6z"/><path d="M9.2 8.6c.2-.5.5-.5.8-.5h.5c.2 0 .4.1.5.4l.6 1.5c.1.2 0 .4-.1.6l-.5.6c.6 1.1 1.5 2 2.6 2.6l.6-.5c.2-.1.4-.2.6-.1l1.5.6c.3.1.4.3.4.5v.5c0 .3 0 .6-.5.8-.6.3-1.6.4-3-.3a8.6 8.6 0 0 1-3.6-3.6c-.7-1.4-.6-2.4-.4-3z"/></svg>WhatsApp</a>
             <a class="btn fb-btn" href="https://www.facebook.com/taquetannick/" target="_blank" rel="noopener">Sur Facebook →</a>
           </div>
         </article>
@@ -714,7 +718,7 @@ footer a:hover{color:var(--plum)}
 <footer>
   <div class="wrap">
     <span>© Annick Taquet-Assoignons</span>
-    <span>Psychologue clinicienne · Autrice · <a href="https://www.instagram.com/annicktaquetassoignons/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/taquetannick/" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.amazon.fr/stores/author/B0BDLT8W25" target="_blank" rel="noopener">Amazon</a> · <a class="mail-link" href="#acheter" data-u="taquetannick" data-d="hotmail.com">E-mail</a></span>
+    <span>Psychologue clinicienne · Autrice · <a href="https://www.instagram.com/annicktaquetassoignons/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/taquetannick/" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.amazon.fr/stores/author/B0BDLT8W25" target="_blank" rel="noopener">Amazon</a> · <a class="mail-link" href="#acheter" data-u="taquetannick" data-d="hotmail.com">E-mail</a> · <a class="wa-link" href="#acheter" data-wa1="336889" data-wa2="03480">WhatsApp</a></span>
   </div>
 </footer>
 <script src="salons.js"></script>
@@ -904,6 +908,14 @@ footer a:hover{color:var(--plum)}
     const mailto = 'mailto:' + addr + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     document.querySelectorAll("a[data-u][data-d]").forEach(a => { a.href = mailto; a.removeAttribute("target"); a.removeAttribute("rel"); });
   }
+
+  // WhatsApp : numéro reconstitué ici pour le cacher aux robots, premier message pré-rempli
+  const waText = 'Bonjour Madame Taquet-Assoignons, je vous contacte depuis votre site au sujet de : ';
+  document.querySelectorAll('a[data-wa1][data-wa2]').forEach(a => {
+    a.href = 'https://wa.me/' + a.dataset.wa1 + a.dataset.wa2 + '?text=' + encodeURIComponent(waText);
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
 
   // Fin de la page : le petit livre se referme quand on l'atteint
   const closing = document.querySelector('.closing-book');
