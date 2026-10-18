@@ -42,7 +42,7 @@ window.SALONS = [
     intervention: "Parfois, le cœur dit « stop »…",
     lieu: "Salle de conférence du CHRSM, site Sambre",
     adresse: "Rue Chère Voie 75, 5060 Auvelais (Belgique)",
-    public: "Réservée aux psychologues, sur inscription auprès de la Fédération wallonne des soins palliatifs",
+    public: "",
     gratuit: false,
     lien: ""
   },
