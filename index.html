@@ -325,6 +325,12 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .sacts .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.5rem 1rem;font-size:.88rem;white-space:nowrap}
 .sacts .sics{background:var(--plum);border-color:var(--plum);color:var(--page)}
 .salon.is-next .sdate{box-shadow:0 0 0 4px color-mix(in srgb,var(--plum) 22%,transparent)}
+.salon.is-conf::before,.salon.is-conf .sdate{background:var(--pine)}
+.salon.is-conf.is-next .sdate{box-shadow:0 0 0 4px color-mix(in srgb,var(--pine) 22%,transparent)}
+.stype{display:inline-block;margin-bottom:.35rem;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--plum)}
+.salon.is-conf .stype{color:var(--pine)}
+.sinfo .stalk{color:var(--ink);margin-bottom:.3rem}
+.sinfo .spublic{margin-top:.35rem;font-size:.86rem;font-style:italic}
 .salons-empty{text-align:center;color:var(--muted);margin:0}
 .salons-empty[hidden]{display:none}
 .salons-more{text-align:center;color:var(--muted);font-size:.9rem;margin:1rem 0 0}
@@ -717,7 +723,7 @@ footer a:hover{color:var(--plum)}
         <p>Les livres se trouvent en librairie, chez les éditeurs et en ligne. Et Annick aime aller à la rencontre de ses lecteurs.</p>
       </div>
       <div class="salons" id="salons">
-        <p class="eyebrow">Prochains salons et dédicaces</p>
+        <p class="eyebrow">Prochains rendez-vous : salons, dédicaces et conférences</p>
         <!-- La liste est remplie à partir du fichier salons.js -->
         <ul class="salon-list"></ul>
         <p class="salons-empty" hidden>Les prochaines dates seront bientôt annoncées.</p>
@@ -943,11 +949,14 @@ footer a:hover{color:var(--plum)}
     list.innerHTML = salons.map((s, i) => {
       const when = day.format(s.d).replace(/^./, c => c.toUpperCase()) + (s.debut ? ' · ' + hm(s.debut) + (s.fin ? ' – ' + hm(s.fin) : '') : '');
       const maps = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(s.lieu + ', ' + s.adresse);
-      return '<li class="salon' + (i === 0 ? ' is-next' : '') + '">' +
+      const conf = s.type === 'conference';
+      return '<li class="salon' + (conf ? ' is-conf' : '') + (i === 0 ? ' is-next' : '') + '">' +
         '<div class="sdate" aria-hidden="true"><span class="sday">' + s.d.getDate() + '</span><span class="smon">' + esc(mon.format(s.d)) + '</span><span class="syear">' + s.d.getFullYear() + '</span></div>' +
-        '<div class="sinfo"><h3>' + esc(s.nom) + '</h3>' +
+        '<div class="sinfo"><span class="stype">' + (conf ? 'Conférence' : 'Salon et dédicaces') + '</span><h3>' + esc(s.nom) + '</h3>' +
+        (s.intervention ? '<p class="stalk">Son intervention : <b>« ' + esc(s.intervention) + ' »</b></p>' : '') +
         '<p class="swhen">' + esc(when) + (s.gratuit ? ' <span class="sfree">Entrée gratuite</span>' : '') + '</p>' +
-        '<p>' + esc(s.lieu) + '<br>' + esc(s.adresse) + '</p></div>' +
+        '<p>' + esc(s.lieu) + '<br>' + esc(s.adresse) + '</p>' +
+        (s.public ? '<p class="spublic">' + esc(s.public) + '</p>' : '') + '</div>' +
         '<div class="sacts">' +
         '<a class="btn sics" href="' + ics(s) + '" download="salon-' + s.date + '.ics">Ajouter à mon agenda</a>' +
         '<a class="btn" href="' + maps + '" target="_blank" rel="noopener">Itinéraire</a>' +
@@ -956,7 +965,7 @@ footer a:hover{color:var(--plum)}
     }).join('');
     const n = salons[0];
     const ville = (n.adresse.match(/\d{4,5}\s+([^,(]+)/) || [])[1];
-    pill.querySelector('.ns-txt').innerHTML = 'Prochaine dédicace : <b>' + n.d.getDate() + ' ' + esc(mon.format(n.d)) + '</b>' + (ville ? ' · ' + esc(ville.trim()) : '');
+    pill.querySelector('.ns-txt').innerHTML = (n.type === 'conference' ? 'Prochaine conférence' : 'Prochaine dédicace') + ' : <b>' + n.d.getDate() + ' ' + esc(mon.format(n.d)) + '</b>' + (ville ? ' · ' + esc(ville.trim()) : '');
     pill.hidden = false;
   })();
 
