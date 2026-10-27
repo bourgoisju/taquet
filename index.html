@@ -101,6 +101,8 @@ nav ul a:hover{color:var(--ink)}
 .hero-cta .btn-kid:hover{background:color-mix(in srgb,var(--plum) 86%,var(--ink))}
 .hero-cta .btn-adult{border-color:var(--pine);color:var(--pine)}
 .hero-cta .btn-adult:hover{background:var(--pine);color:var(--page)}
+.hero-cta .btn-self{border-color:var(--ink);color:var(--ink)}
+.hero-cta .btn-self:hover{background:var(--ink);color:var(--paper)}
 .hero2 .proof{margin-top:1.5rem}
 .ln{animation:rise .8s cubic-bezier(.2,.7,.2,1) var(--d,.2s) backwards}
 .h-name.ln{--d:.1s}
@@ -185,6 +187,13 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .all-books a{display:inline-flex;align-items:center;gap:.5rem;min-height:48px;padding:.6rem 1.4rem;border:1.5px solid var(--plum);border-radius:999px;color:var(--plum);font-weight:700;text-decoration:none;background:color-mix(in srgb,var(--surface) 60%,transparent);transition:background .2s,color .2s,transform .2s}
 .all-books a:hover{background:var(--plum);color:var(--surface);transform:translateY(-1px)}
 .buy:hover{transform:translateY(-1px);background:color-mix(in srgb,var(--plum) 85%,var(--ink))}
+/* onglets des ouvrages : pour soi / pour les aidants */
+.book-tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin:-.8rem 0 2rem}
+.book-tabs button{font:inherit;font-size:.92rem;font-weight:700;min-height:46px;padding:.5rem 1.1rem;border-radius:999px;border:1.5px solid var(--pine);background:transparent;color:var(--pine);cursor:pointer;transition:background .15s,color .15s}
+.book-tabs button:hover{background:color-mix(in srgb,var(--pine) 10%,transparent)}
+.book-tabs button[aria-selected="true"]{background:var(--pine);color:var(--page)}
+.book.off{display:none}
+.book.in{animation:pop .35s cubic-bezier(.2,.7,.2,1)}
 .filters{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:-.6rem 0 2rem}
 .filters[hidden]{display:none}
 .filters button{font:inherit;font-size:.9rem;font-weight:700;min-height:44px;padding:.4rem 1rem;border-radius:999px;border:1.5px solid var(--plum);background:transparent;color:var(--plum);cursor:pointer;transition:background .15s,color .15s}
@@ -490,7 +499,8 @@ footer a:hover{color:var(--plum)}
       <p class="role role-2 ln">Deux collections pour aider les enfants à grandir, et une collection de développement personnel et de bien-être, pour mieux se connaître et améliorer sa qualité de vie.</p>
       <div class="hero-cta ln">
         <a class="btn btn-kid" href="#jeunesse">Pour un enfant →</a>
-        <a class="btn btn-adult" href="#livres">Pour vous qui prenez soin des autres →</a>
+        <a class="btn btn-adult" href="#livres" data-tab="aidants">Pour vous qui prenez soin des autres →</a>
+        <a class="btn btn-self" href="#livres" data-tab="tous">Pour prendre soin de vous →</a>
       </div>
       <p class="proof ln">11 livres · 3 éditeurs · Citée par la RTBF</p>
       <div class="hero-links">
@@ -583,6 +593,10 @@ footer a:hover{color:var(--plum)}
         <h2>Ouvrages et guides</h2>
         <p>Une collection de bien-être pour mieux se connaître et améliorer sa qualité de vie personnelle. Cinq ouvrages pour les adultes, présentés du plus récent au plus ancien, publiés chez Seli Arslan, Le Souffle d'Or et les Éditions Maïa.</p>
       </div>
+      <div class="book-tabs" role="tablist" aria-label="Choisir pour qui">
+        <button type="button" role="tab" data-tab="tous" aria-selected="true">Pour prendre soin de vous</button>
+        <button type="button" role="tab" data-tab="aidants" aria-selected="false">Pour vous qui prenez soin des autres</button>
+      </div>
       <div class="books">
 
         <article class="book">
@@ -616,7 +630,7 @@ footer a:hover{color:var(--plum)}
           </div>
         </article>
 
-        <article class="book">
+        <article class="book" data-aud="soi">
           <a class="cover photo" href="https://www.amazon.fr/dp/237916648X" target="_blank" rel="noopener"><img src="img/j-ai-mal-je-vieillis.jpg" width="301" height="480" decoding="async" alt="Couverture de « J'ai mal… je vieillis ? »" loading="lazy"></a>
           <div>
             <h3>J'ai mal… je vieillis ?</h3>
@@ -988,6 +1002,22 @@ footer a:hover{color:var(--plum)}
     a.target = '_blank';
     a.rel = 'noopener';
   });
+
+  // Onglets des ouvrages : « Pour prendre soin de vous » (tous) / « Pour vous qui prenez soin des autres » (sans les livres marqués data-aud="soi")
+  const bookTabs = [...document.querySelectorAll('.book-tabs [data-tab]')];
+  const adultBooks = [...document.querySelectorAll('#livres .book')];
+  const setBookTab = tab => {
+    bookTabs.forEach(b => b.setAttribute('aria-selected', b.dataset.tab === tab));
+    adultBooks.forEach(k => {
+      const on = tab === 'tous' || k.dataset.aud !== 'soi';
+      k.classList.toggle('off', !on);
+      k.classList.remove('in');
+      if (on) { void k.offsetWidth; k.classList.add('in'); }
+    });
+  };
+  bookTabs.forEach(b => b.addEventListener('click', () => setBookTab(b.dataset.tab)));
+  // les boutons de l'en-tête ouvrent directement le bon onglet
+  document.querySelectorAll('.hero-cta [data-tab]').forEach(a => a.addEventListener('click', () => setBookTab(a.dataset.tab)));
 
   // Fin de la page : le petit livre se referme quand on l'atteint
   const closing = document.querySelector('.closing-book');
