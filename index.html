@@ -245,6 +245,9 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 @keyframes sigDraw{to{stroke-dashoffset:0}}
 @keyframes sigFill{to{fill-opacity:1}}
 .bio-title{font-size:clamp(1.5rem,2.6vw,1.9rem);margin:0 0 1rem}
+.training-list li{padding-bottom:1.1rem}
+.training-list .what{line-height:1.45}
+.training-list li::before{top:.3rem}
 @media (max-width:760px){
   .letter-wrap{grid-template-columns:minmax(0,1fr);justify-items:center}
   .letter-wrap .portrait{width:200px}
@@ -711,14 +714,18 @@ footer a:hover{color:var(--plum)}
           <p>Elle apporte son expertise et ses connaissances dans des secteurs variés : <abbr title="Établissements d'hébergement pour personnes âgées dépendantes">EHPAD</abbr>, <abbr title="Instituts médico-éducatifs">IME</abbr>, <abbr title="Établissements et services d'aide par le travail">ESAT</abbr>, <abbr title="Soins de suite et de réadaptation">SSR</abbr>, cliniques…</p>
           <p>Depuis 2018, elle prolonge sa passion de la transmission par l'écriture de livres pour les adultes et pour les enfants. Elle va volontiers à la rencontre de ses lecteurs, dans les salons et rencontres littéraires.</p>
         </div>
-        <ol class="timeline">
-          <li><span class="when">Bruxelles</span><span class="what">Hôpital Erasme</span><span class="where">Unité de chirurgie neuropédiatrique</span></li>
-          <li><span class="when">Bruxelles</span><span class="what">Institut Jules Bordet</span><span class="where">Psychologue en cancérologie</span></li>
-          <li><span class="when">2005</span><span class="what">Réseau Oncazur, Nice</span><span class="where">Psychologue coordinatrice : soins de support en cancérologie, création d'un poste de psychologue à l'hôpital</span></li>
-          <li><span class="when">Jusqu'à sa retraite</span><span class="what">Cabinet libéral et enseignement</span><span class="where">Cours dans plusieurs IFSI et IFAS de la région PACA</span></li>
-          <li><span class="when">Belgique · France · Suisse</span><span class="what">Conférences et groupes de parole</span><span class="where">Pour les soignants, les patients et leurs proches ; interventions en EHPAD, IME, ESAT, SSR et cliniques</span></li>
-          <li><span class="when">Depuis 2018</span><span class="what">L'écriture</span><span class="where">Livres pour les adultes et pour les enfants, salons et rencontres littéraires</span></li>
-        </ol>
+        <div class="training">
+          <h3 class="bio-title">Formation</h3>
+          <ul class="timeline training-list">
+            <li><span class="what">Master en psychologie clinique</span></li>
+            <li><span class="what">Formation en psycho-oncologie et à l'accompagnement en fin de vie</span></li>
+            <li><span class="what">Formations à l'approche systémique</span></li>
+            <li><span class="what">Formations à la prise en charge de l'entourage des personnes malades</span></li>
+            <li><span class="what">Formations à la souffrance des équipes soignantes</span></li>
+            <li><span class="what">Formation à la conduite des bilans de compétences</span></li>
+            <li><span class="what">Formation à la prévention et à la gestion des conflits interpersonnels au sein des équipes soignantes</span></li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
