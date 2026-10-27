@@ -11,6 +11,7 @@
 /* polices hébergées sur le site (jeu latin, couvre tout le français) */
 @font-face{font-family:"Gloock";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/gloock-latin.woff2) format("woff2")}
 @font-face{font-family:"Karla";font-style:normal;font-weight:200 800;font-display:swap;src:url(fonts/karla-latin.woff2) format("woff2")}
+@font-face{font-family:"Great Vibes";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/greatvibes-latin.woff2) format("woff2")}
 /* Layout: colonne de lecture étroite, bibliothèque de couvertures en grille, parcours en frise verticale */
 :root{
   --paper:#eaf2f7; --surface:#ffffff; --ink:#1d302c; --muted:#56665f; --line:#cdd6d0;
@@ -221,6 +222,33 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .portrait::before{content:"";position:absolute;top:-12px;left:50%;width:92px;height:26px;translate:-50% 0;rotate:3deg;background:color-mix(in srgb,var(--ochre) 38%,transparent);box-shadow:0 1px 2px rgba(0,0,0,.08)}
 .portrait img{display:block;width:100%;height:auto;aspect-ratio:640/634;object-fit:cover;border-radius:2px}
 .portrait figcaption{padding:.7rem 0 .8rem;text-align:center;font-family:var(--display);font-size:1.05rem;color:#3a3530}
+/* qui suis-je : lettre aux lecteurs et signature manuscrite qui s'écrit */
+.qui-head{margin-inline:auto;text-align:center;justify-items:center}
+.letter-wrap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(2rem,5vw,4rem);align-items:center;max-width:1000px;margin:0 auto clamp(3.5rem,7vw,5rem)}
+.letter-wrap .portrait{width:clamp(200px,24vw,270px);margin:0}
+.letter{position:relative;padding:clamp(1.8rem,4vw,2.8rem) clamp(1.6rem,4vw,3rem) clamp(1rem,2.5vw,1.6rem);background:var(--page);border-radius:4px 16px 16px 4px;border-left:4px solid var(--plum);box-shadow:0 26px 44px -30px rgba(30,20,10,.5),0 0 0 1px var(--line)}
+.letter p{margin:0 0 1rem;font-family:var(--display);font-size:clamp(1.12rem,1.7vw,1.32rem);line-height:1.55;color:var(--ink)}
+.letter .letter-salut{color:var(--plum)}
+.letter .letter-end{margin-bottom:.2rem}
+.signature{display:block;width:min(100%,470px);height:auto;margin-left:auto;overflow:visible}
+.signature text{font-family:"Great Vibes","Brush Script MT",cursive;font-size:74px;fill:var(--plum);stroke:var(--plum);stroke-width:.7}
+.signature .swash{fill:none;stroke:var(--plum);stroke-width:2;stroke-linecap:round;opacity:.7}
+/* animation : le texte se trace de gauche à droite, puis l'encre remplit les lettres, puis le trait final */
+.sig-anim{clip-path:inset(0 100% 0 0)}
+.sig-anim text{fill-opacity:0;stroke-dasharray:900;stroke-dashoffset:900}
+.sig-anim .swash{stroke-dasharray:700;stroke-dashoffset:700}
+.sig-anim.write{animation:sigReveal 3s cubic-bezier(.45,.05,.4,1) forwards}
+.sig-anim.write text{animation:sigDraw 3s cubic-bezier(.45,.05,.4,1) forwards,sigFill 1s ease 2.4s forwards}
+.sig-anim.write .swash{animation:sigDraw .9s ease-out 3s forwards}
+@keyframes sigReveal{to{clip-path:inset(0 0 0 0)}}
+@keyframes sigDraw{to{stroke-dashoffset:0}}
+@keyframes sigFill{to{fill-opacity:1}}
+.bio-title{font-size:clamp(1.5rem,2.6vw,1.9rem);margin:0 0 1rem}
+@media (max-width:760px){
+  .letter-wrap{grid-template-columns:minmax(0,1fr);justify-items:center}
+  .letter-wrap .portrait{width:200px}
+  .letter{width:100%}
+}
 .timeline{list-style:none;margin:0;padding:0;border-left:2px solid var(--line)}
 .timeline li{position:relative;padding:0 0 1.6rem 1.6rem}
 .timeline li::before{content:"";position:absolute;left:-7px;top:.45rem;width:12px;height:12px;border-radius:50%;background:var(--paper);border:2px solid var(--pine)}
@@ -438,7 +466,7 @@ footer a:hover{color:var(--plum)}
         <li><a href="#jeunesse">Livres enfants</a></li>
         <li><a href="#livres">Ouvrages</a></li>
         <li><a href="#approche">Son best-seller</a></li>
-        <li><a href="#parcours">Parcours</a></li>
+        <li><a href="#parcours">Qui suis-je ?</a></li>
         <li><a class="nav-cta" href="#acheter"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 8h14l-1 12H6zM9 8V6.5a3 3 0 0 1 6 0V8"/></svg><span class="long">Où trouver les livres</span><span class="short">Acheter</span></a></li>
       </ul>
       <span class="ink" aria-hidden="true"></span>
@@ -452,7 +480,7 @@ footer a:hover{color:var(--plum)}
     <li><a href="#jeunesse"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 14c1 1.6 2.2 2.3 3.5 2.3s2.5-.7 3.5-2.3M9 9.8h.01M15 9.8h.01"/></svg>Enfants</a></li>
     <li><a href="#livres"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5c3-1 6-1 9 1 3-2 6-2 9-1V19c-3-1-6-1-9 1-3-2-6-2-9-1zM12 6.5V20"/></svg>Ouvrages</a></li>
     <li><a href="#approche"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg>Best-seller</a></li>
-    <li><a href="#parcours"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="18" r="2.2"/><path d="M8 7.5c5 1 9 2 9 5s-10 1-10 4 4 2.6 8.8 1.8"/></svg>Parcours</a></li>
+    <li><a href="#parcours"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="18" r="2.2"/><path d="M8 7.5c5 1 9 2 9 5s-10 1-10 4 4 2.6 8.8 1.8"/></svg>Qui suis-je</a></li>
     <li><a href="#acheter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6zM9 8V6.5a3 3 0 0 1 6 0V8"/></svg>Acheter</a></li>
   </ul>
 </nav>
@@ -659,23 +687,35 @@ footer a:hover{color:var(--plum)}
     </div>
   </section>
 
-  <section id="parcours">
-    <div class="wrap cols">
-      <div class="bio">
+  <section id="parcours" aria-labelledby="qui-titre">
+    <div class="wrap">
+      <div class="sec-head qui-head"><p class="eyebrow">Biographie</p><h2 id="qui-titre">Qui suis-je ?</h2></div>
+      <div class="letter-wrap">
         <figure class="portrait"><img src="img/annick-taquet-assoignons.jpg" width="640" height="634" alt="Portrait d'Annick Taquet-Assoignons, souriante, avec des lunettes" loading="lazy" decoding="async"><figcaption>Annick Taquet-Assoignons</figcaption></figure>
-        <div class="sec-head"><p class="eyebrow">Biographie</p><h2>Parcours</h2></div>
-        <p>Née en Belgique, Annick Taquet-Assoignons est psychologue clinicienne. Elle a consacré une grande partie de sa carrière à l'accompagnement en cancérologie, puis aux personnes âgées et aux équipes soignantes.</p>
-        <p>Pendant de nombreuses années, elle a aussi enseigné la psychologie aux futurs infirmiers. Aujourd'hui retraitée, elle reste proche de ces futurs soignants : elle siège régulièrement dans les jurys du diplôme d'État d'infirmier.</p>
-        <p>Elle consacre désormais l'essentiel de son temps à l'écriture et va volontiers à la rencontre de ses lecteurs, dans les salons et rencontres littéraires.</p>
+        <article class="letter">
+          <p class="letter-salut">À vous, chers lecteurs,</p>
+          <p>Je tiens à vous adresser mes plus sincères remerciements. Un auteur n'existe vraiment qu'à travers les yeux de ceux qui le lisent.</p>
+          <p>Merci du fond du cœur pour votre soutien indéfectible, vos précieux retours et cette fidélité qui m'accompagne au quotidien.</p>
+          <p class="letter-end">Merci d'être là.</p>
+          <svg class="signature" viewBox="0 0 800 130" role="img" aria-label="Signature : Annick Taquet-Assoignons"><text x="8" y="92">Annick Taquet-Assoignons</text><path class="swash" d="M190 114c150-15 390-17 590-6"/></svg>
+        </article>
       </div>
-      <ol class="timeline">
-        <li><span class="when">Bruxelles</span><span class="what">Institut Jules Bordet</span><span class="where">Psychologue en cancérologie, membre fondatrice de la commission des bénévoles</span></li>
-        <li><span class="when">2005</span><span class="what">Réseau Oncazur, Nice</span><span class="where">Participe à la création du réseau de cancérologie</span></li>
-        <li><span class="when">Jusqu'en 2012</span><span class="what">Hôpitaux de la région</span><span class="where">Services d'oncologie et psychologie du personnel</span></li>
-        <li><span class="when">Jusqu'en 2021</span><span class="what">Maison de retraite</span><span class="where">Psychologue auprès des résidents et des équipes</span></li>
-        <li><span class="when">De nombreuses années</span><span class="what">Formation des futurs infirmiers</span><span class="where">Enseignement de la psychologie</span></li>
-        <li><span class="when">Aujourd'hui</span><span class="what">Une retraite active</span><span class="where">Écriture, jurys du diplôme d'État d'infirmier, salons du livre</span></li>
-      </ol>
+      <div class="cols bio-cols">
+        <div class="bio">
+          <h3 class="bio-title">Mon parcours</h3>
+          <p>Née en Belgique, Annick Taquet-Assoignons est psychologue clinicienne. Elle a consacré une grande partie de sa carrière à l'accompagnement en cancérologie, puis aux personnes âgées et aux équipes soignantes.</p>
+          <p>Pendant de nombreuses années, elle a aussi enseigné la psychologie aux futurs infirmiers. Aujourd'hui retraitée, elle reste proche de ces futurs soignants : elle siège régulièrement dans les jurys du diplôme d'État d'infirmier.</p>
+          <p>Elle consacre désormais l'essentiel de son temps à l'écriture et va volontiers à la rencontre de ses lecteurs, dans les salons et rencontres littéraires.</p>
+        </div>
+        <ol class="timeline">
+          <li><span class="when">Bruxelles</span><span class="what">Institut Jules Bordet</span><span class="where">Psychologue en cancérologie, membre fondatrice de la commission des bénévoles</span></li>
+          <li><span class="when">2005</span><span class="what">Réseau Oncazur, Nice</span><span class="where">Participe à la création du réseau de cancérologie</span></li>
+          <li><span class="when">Jusqu'en 2012</span><span class="what">Hôpitaux de la région</span><span class="where">Services d'oncologie et psychologie du personnel</span></li>
+          <li><span class="when">Jusqu'en 2021</span><span class="what">Maison de retraite</span><span class="where">Psychologue auprès des résidents et des équipes</span></li>
+          <li><span class="when">De nombreuses années</span><span class="what">Formation des futurs infirmiers</span><span class="where">Enseignement de la psychologie</span></li>
+          <li><span class="when">Aujourd'hui</span><span class="what">Une retraite active</span><span class="where">Écriture, jurys du diplôme d'État d'infirmier, salons du livre</span></li>
+        </ol>
+      </div>
     </div>
   </section>
 
@@ -952,6 +992,22 @@ footer a:hover{color:var(--plum)}
   bookTabs.forEach(b => b.addEventListener('click', () => setBookTab(b.dataset.tab)));
   // les boutons de l'en-tête ouvrent directement le bon onglet
   document.querySelectorAll('.hero-cta [data-tab]').forEach(a => a.addEventListener('click', () => setBookTab(a.dataset.tab)));
+
+  // Signature : elle s'écrit quand la lettre arrive à l'écran (directement visible si l'appareil demande moins d'animations)
+  const sig = document.querySelector('.signature');
+  if (sig && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    sig.classList.add('sig-anim');
+    const startSig = () => document.fonts.load('74px "Great Vibes"').catch(() => {}).then(() => sig.classList.add('write'));
+    const letter = sig.closest('.letter');
+    let sigStarted = false;
+    const checkSig = () => {
+      if (sigStarted) return;
+      const r = letter.getBoundingClientRect();
+      if (r.top < innerHeight * .75 && r.bottom > 0) { sigStarted = true; removeEventListener('scroll', checkSig); startSig(); }
+    };
+    addEventListener('scroll', checkSig, { passive: true });
+    checkSig();
+  }
 
   // Fin de la page : le petit livre se referme quand on l'atteint
   const closing = document.querySelector('.closing-book');
