@@ -265,24 +265,7 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .scrolly:not(.ready) .cap,.scrolly:not(.ready) .tree i{transition:none}
 .scrolly .scene-foot{display:flex}
 
-/* vidéo : texte à gauche, vidéo verticale dans un cadre de téléphone à droite */
-.vblock{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(2rem,5vw,4.5rem);align-items:center;padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
-.vtext h2{font-size:clamp(1.9rem,3.8vw,2.7rem);margin:.4rem 0 .9rem}
-.vtext>p{color:var(--muted);max-width:46ch;margin:0}
-.vtext .vquote{font-family:var(--display);font-size:clamp(1.25rem,2vw,1.5rem);line-height:1.3;color:var(--plum);margin:1.4rem 0 1.8rem;padding-left:1rem;border-left:3px solid var(--plum)}
-.vtext .btn{min-height:48px;display:inline-flex;align-items:center}
-.vframe{position:relative;margin:0;justify-self:center;width:min(320px,78vw);aspect-ratio:9/16;border-radius:30px;overflow:hidden;background:#111;border:9px solid #1c1c1c;box-shadow:0 34px 54px -30px rgba(30,20,10,.6),0 0 0 1px rgba(0,0,0,.2)}
-.vframe video{display:block;width:100%;height:100%;object-fit:cover;background:#111}
-.vplay{position:absolute;inset:0;display:grid;place-items:center;border:0;padding:0;cursor:pointer;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.45));font:inherit;color:#fff}
-.vplay[hidden]{display:none}
-.vbtn{display:grid;place-items:center;width:78px;height:78px;border-radius:50%;background:rgba(255,253,246,.94);box-shadow:0 12px 30px rgba(0,0,0,.35);transition:transform .25s cubic-bezier(.2,.7,.2,1)}
-.vbtn svg{width:34px;height:34px;fill:var(--plum);margin-left:4px}
-.vplay:hover .vbtn,.vplay:focus-visible .vbtn{transform:scale(1.08)}
-.vlen{position:absolute;bottom:22px;left:50%;translate:-50% 0;white-space:nowrap;font-size:.82rem;font-weight:700;padding:.35rem .8rem;border-radius:999px;background:rgba(0,0,0,.55)}
-.vend{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:.8rem;padding:1.5rem;text-align:center;background:rgba(255,253,246,.95);color:#1d302c}
-.vend[hidden]{display:none}
-.vend-title{margin:0 0 .4rem;font-family:var(--display);font-size:1.4rem}
-/* zoom sur le best-seller : introduction, puis étapes numérotées (forêt, vidéo) */
+/* zoom sur le best-seller : introduction, puis la forêt intérieure */
 .bs-intro{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(1.5rem,4vw,3rem);align-items:center;padding-block:clamp(3rem,6vw,4.5rem) .5rem}
 .bs-cover img{display:block;width:clamp(120px,15vw,180px);height:auto;border-radius:2px 6px 6px 2px;rotate:-3deg;box-shadow:inset 4px 0 0 rgba(0,0,0,.12),0 26px 40px -20px rgba(30,20,10,.55);transition:rotate .3s cubic-bezier(.2,.7,.2,1)}
 .bs-cover:hover img{rotate:0deg}
@@ -295,25 +278,12 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .bs-acts .btn{display:inline-flex;align-items:center;min-height:46px}
 .step{display:flex;align-items:center;gap:.7rem;margin:0;font-family:var(--display);font-size:clamp(1.2rem,2vw,1.45rem);color:var(--ink)}
 .step small{font-family:var(--body);font-size:.92rem;color:var(--muted)}
-.step-n{display:grid;place-items:center;flex:none;width:38px;height:38px;border-radius:50%;background:var(--pine);color:var(--page);font-family:var(--body);font-size:1rem;font-weight:700}
-.vtext .step{margin-bottom:.6rem}
 .book .links .bs-more{font-weight:700;color:var(--pine)}
 @media (max-width:760px){
   .bs-intro{grid-template-columns:minmax(0,1fr);gap:1.2rem}
   .bs-cover img{width:120px}
   .bs-acts .btn{flex:1 1 auto;justify-content:center}
 }
-.vend-cover{width:84px;height:auto;border-radius:2px 5px 5px 2px;box-shadow:inset 3px 0 0 rgba(0,0,0,.12),0 12px 22px -10px rgba(0,0,0,.45);margin-bottom:.3rem}
-/* liens vers le best-seller dans la scène de la forêt et le bloc vidéo */
-.vbook{display:inline-flex;align-items:center;gap:.85rem;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 24px -18px rgba(30,20,10,.45);transition:transform .25s cubic-bezier(.2,.7,.2,1),border-color .25s}
-.vbook:hover{transform:translateY(-2px);border-color:var(--ochre)}
-.vbook small{display:block;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ochre)}
-.vbook{padding:.7rem 1.2rem .7rem .7rem;max-width:30rem}
-.vbook img{width:62px;height:auto;flex:none;border-radius:2px 5px 5px 2px;box-shadow:inset 3px 0 0 rgba(0,0,0,.12),0 10px 18px -10px rgba(0,0,0,.45)}
-.vbook strong{display:block;font-family:var(--display);font-weight:400;font-size:1.25rem;line-height:1.2;margin:.2rem 0 .3rem}
-.vbook em{font-style:normal;font-weight:700;font-size:.9rem;color:var(--plum)}
-.vend .btn{min-height:46px}
-.vend .vreplay{background:transparent;border-color:#1d302c;color:#1d302c;font:inherit;font-weight:700;cursor:pointer}
 .book:target{animation:flash 1.8s ease-out}
 @keyframes flash{0%,40%{background:color-mix(in srgb,var(--ochre) 24%,transparent)}100%{background:transparent}}
 
@@ -422,7 +392,6 @@ footer a:hover{color:var(--plum)}
   .hero-cta .btn{flex:1 1 100%;justify-content:center}
   .hero-visual{max-width:330px}
   .cols{grid-template-columns:minmax(0,1fr)}
-  .vblock{grid-template-columns:minmax(0,1fr)}
   .kids{display:flex;gap:1.2rem;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(-1 * clamp(16px,4vw,40px));padding:.6rem clamp(16px,4vw,40px) 1.2rem;scroll-padding-inline:clamp(16px,4vw,40px);scrollbar-width:thin}
   .kid{flex:0 0 72%;scroll-snap-align:start}
   .filters{flex-wrap:nowrap;overflow-x:auto;margin-inline:calc(-1 * clamp(16px,4vw,40px));padding-inline:clamp(16px,4vw,40px);scrollbar-width:none}
@@ -450,7 +419,6 @@ footer a:hover{color:var(--plum)}
   footer .wrap{flex-direction:column;align-items:flex-start;gap:.4rem}
   footer span a{display:inline-flex;align-items:center;min-height:44px;padding:0 .15rem}
   .brand-txt small{font-size:.7rem}
-  .vbook small{font-size:.74rem}
   .age,.bs-badge{font-size:.8rem}
   .syear{font-size:.8rem}
   .tabbar ul{font-size:.76rem}
@@ -663,7 +631,7 @@ footer a:hover{color:var(--plum)}
         <h2 id="bs-titre">Je prends soin des autres sans m'épuiser</h2>
         <p class="bs-meta">Le Souffle d'Or · coll. Chrysalide · 2022 · 152 pages</p>
         <p>Son livre le plus lu s'adresse aux soignants, aux proches aidants et à toutes celles et ceux qui sont naturellement tournés vers les autres. Il aide à repérer le « syndrome du sauveur » et la fatigue de compassion, pour continuer à aider sans s'y perdre.</p>
-        <p class="bs-lead">Pour vous en donner un avant-goût, voici deux idées tirées du livre : l'image de la forêt intérieure, puis une courte vidéo.</p>
+        <p class="bs-lead">Pour vous en donner un avant-goût, voici une image tirée du livre : la forêt intérieure.</p>
         <div class="bs-acts">
           <a class="btn primary" href="https://www.souffledor.fr/livres-de-developpement-personnel/6380-je-prends-soin-des-autres-sans-m-epuiser-9782840588399.html" target="_blank" rel="noopener">Commander le livre · 14 €</a>
           <a class="btn" href="https://www.amazon.fr/dp/2840588374" target="_blank" rel="noopener">Sur Amazon</a>
@@ -674,7 +642,7 @@ footer a:hover{color:var(--plum)}
     <div class="track">
       <div class="scene">
         <div class="wrap scene-inner">
-          <p class="step"><span class="step-n" aria-hidden="true">1</span>La forêt intérieure <small>· une image clé du livre</small></p>
+          <p class="step">La forêt intérieure <small>· une image clé du livre</small></p>
           <div class="captions">
             <p class="cap">Chacun porte une forêt en soi.</p>
             <p class="cap">Aider, c'est parfois <em>couper un arbre</em> pour l'offrir.</p>
@@ -688,26 +656,6 @@ footer a:hover{color:var(--plum)}
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="wrap vblock">
-      <div class="vtext">
-        <p class="step"><span class="step-n" aria-hidden="true">2</span>En vidéo <small>· 1 minute</small></p>
-        <h2>Pourquoi aider les autres vous épuise</h2>
-        <p>En une minute, l'essentiel de son livre : le syndrome du sauveur, la part que l'on se garde dans le « camembert » de son énergie, la peur d'être rejeté ou de décevoir, la fatigue de compassion… et pourquoi apprendre à dire non permet de continuer à aider.</p>
-        <p class="vquote">Prendre soin de soi n'a rien d'égoïste.</p>
-        <a class="vbook" href="https://www.souffledor.fr/livres-de-developpement-personnel/6380-je-prends-soin-des-autres-sans-m-epuiser-9782840588399.html" target="_blank" rel="noopener"><img src="img/prendre-soin-sans-epuiser.jpg" width="308" height="480" alt="" loading="lazy" decoding="async"><span><small>★ Son best-seller · Le Souffle d'Or · 14 €</small><strong>Je prends soin des autres sans m'épuiser</strong><em>Commander le livre →</em></span></a>
-      </div>
-      <figure class="vframe">
-        <video id="vid" src="video/pourquoi-aider-les-autres-vous-epuise.mp4" data-poster="img/video-poster.jpg" width="720" height="1280" preload="none" playsinline aria-label="Vidéo sous-titrée : pourquoi aider les autres vous épuise, environ une minute"></video>
-        <button class="vplay" type="button" aria-label="Lire la vidéo, environ une minute, avec le son"><span class="vbtn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="vlen">1 min · avec le son</span></button>
-        <div class="vend" hidden>
-          <img class="vend-cover" src="img/prendre-soin-sans-epuiser.jpg" width="308" height="480" alt="" loading="lazy" decoding="async">
-          <p class="vend-title">Pour aller plus loin</p>
-          <a class="btn primary" href="https://www.souffledor.fr/livres-de-developpement-personnel/6380-je-prends-soin-des-autres-sans-m-epuiser-9782840588399.html" target="_blank" rel="noopener">Commander le livre →</a>
-          <button class="btn vreplay" type="button">Revoir la vidéo</button>
-        </div>
-      </figure>
     </div>
   </section>
 
@@ -920,20 +868,6 @@ footer a:hover{color:var(--plum)}
     showCount(n);
     document.querySelector('.kids').scrollLeft = 0;
   });
-
-  // Vidéo : lecture au clic, arrêt avant le générique de fin, puis invitation vers le livre
-  const vid = document.getElementById('vid');
-  const vplay = document.querySelector('.vplay');
-  const vend = document.querySelector('.vend');
-  const END = 70.8;
-  // l'image d'aperçu n'est chargée qu'à l'approche du bloc vidéo (économise ~85 Ko à l'ouverture)
-  const posterIO = new IntersectionObserver(entries => { if (entries.some(e => e.isIntersecting)) { vid.poster = vid.dataset.poster; posterIO.disconnect(); } }, { rootMargin: '800px 0px' });
-  posterIO.observe(vid);
-  const finish = () => { vid.pause(); vid.controls = false; vend.hidden = false; };
-  vplay.addEventListener('click', () => { vplay.hidden = true; vend.hidden = true; vid.controls = true; vid.play(); });
-  vid.addEventListener('timeupdate', () => { if (vid.currentTime >= END) finish(); });
-  vid.addEventListener('ended', finish);
-  vend.querySelector('.vreplay').addEventListener('click', () => { vend.hidden = true; vid.currentTime = 0; vid.controls = true; vid.play(); });
 
   // Prochains salons : construits à partir de salons.js ; les salons passés sont retirés
   (() => {
