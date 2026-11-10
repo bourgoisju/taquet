@@ -21,5 +21,10 @@ window.PHOTOS = {
     { src: "img/rencontres/dedicace-salon-livre.jpg", alt: "Annick, souriante, dédicace un livre dans un salon du livre" }
   ],
   conferences: [
+    { src: "img/rencontres/conference-ecran.jpg", alt: "Annick Taquet-Assoignons donne une conférence sur l'aide aux parents en perte d'autonomie", pos: "30% 50%" },
+    { src: "img/rencontres/conference-public.jpg", alt: "Annick en conférence devant une salle comble", pos: "0% 50%" },
+    { src: "img/rencontres/conference-micro.jpg", alt: "Annick, souriante, micro à la main avant sa conférence", pos: "50% 25%" },
+    { src: "img/rencontres/conference-amphitheatre.jpg", alt: "Annick au pupitre d'un amphithéâtre, devant le triangle de Karpman projeté", pos: "82% 50%" },
+    { src: "img/rencontres/conference-estrade.jpg", alt: "Annick en conférence sur l'estrade, à côté de l'écran de projection", pos: "22% 50%" }
   ]
 };
