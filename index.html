@@ -445,9 +445,9 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .closing-book.shut .cb-r{transform:rotateY(-180deg)}
 .fin{max-width:760px;margin:1.8rem auto 0;text-align:center;font-family:"Great Vibes","Brush Script MT",cursive;font-size:clamp(2rem,4.2vw,2.8rem);line-height:1.25;color:var(--plum)}
 /* la phrase s'écrit mot après mot, comme à la plume */
-.fin-anim .w{display:inline-block;clip-path:inset(-40% 100% -40% -15%)}
-.fin-anim.fin-go .w{animation:finWrite var(--d) cubic-bezier(.45,.05,.4,1) var(--t) forwards}
-@keyframes finWrite{to{clip-path:inset(-40% -15% -40% -15%)}}
+.fin-anim .w{display:inline-block;padding:.3em .25em;margin:-.3em -.25em;-webkit-mask-image:linear-gradient(90deg,#000 40%,transparent 48%);mask-image:linear-gradient(90deg,#000 40%,transparent 48%);-webkit-mask-size:250% 100%;mask-size:250% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:100% 0;mask-position:100% 0}
+.fin-anim.fin-go .w{animation:finWrite var(--d) linear var(--t) forwards}
+@keyframes finWrite{to{-webkit-mask-position:0 0;mask-position:0 0}}
 
 footer{border-top:1px solid var(--line);padding-block:2rem;color:var(--muted);font-size:.86rem}
 footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
@@ -1107,24 +1107,30 @@ footer a:hover{color:var(--plum)}
     checkSig();
   }
 
-  // Phrase de fin écrite à la main : chaque mot se trace à son tour quand on arrive en bas de la page
+  // Phrase de fin écrite à la main : une plume invisible parcourt la phrase à vitesse régulière,
+  // avec une encre qui apparaît en fondu et de petites respirations entre les mots
   const fin = document.querySelector('.fin');
   if (fin && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    let t = 0;
-    fin.innerHTML = fin.textContent.split(' ').map(w => {
-      const d = Math.max(.25, w.length * .07);
-      const s = '<span class="w" style="--t:' + t.toFixed(2) + 's;--d:' + d.toFixed(2) + 's">' + w.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</span>';
-      t += d + .05;
-      return s;
-    }).join(' ');
+    fin.innerHTML = fin.textContent.split(' ').map(w => '<span class="w">' + w.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</span>').join(' ');
     fin.classList.add('fin-anim');
+    const write = () => {
+      const speed = 330; // pixels par seconde
+      let t = 0;
+      fin.querySelectorAll('.w').forEach(w => {
+        const d = Math.max(.18, w.offsetWidth / speed);
+        w.style.setProperty('--t', t.toFixed(2) + 's');
+        w.style.setProperty('--d', d.toFixed(2) + 's');
+        t += d * .8 + (/[:,]$/.test(w.textContent) ? .3 : .04);
+      });
+      fin.classList.add('fin-go');
+    };
     let finStarted = false;
     const checkFin = () => {
       if (finStarted) return;
       const r = fin.getBoundingClientRect();
       if (r.top < innerHeight * .9 && r.bottom > 0) {
         finStarted = true; removeEventListener('scroll', checkFin);
-        document.fonts.load('40px "Great Vibes"').catch(() => {}).then(() => fin.classList.add('fin-go'));
+        document.fonts.load('40px "Great Vibes"').catch(() => {}).then(() => requestAnimationFrame(write));
       }
     };
     addEventListener('scroll', checkFin, { passive: true });
