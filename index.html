@@ -322,7 +322,7 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 @keyframes flash{0%,40%{background:color-mix(in srgb,var(--ochre) 24%,transparent)}100%{background:transparent}}
 
 /* prochains salons : liste alimentée par salons.js */
-.salons{max-width:900px;margin:0 auto 2.6rem}
+.salons{max-width:1080px;margin:0 auto 2.6rem}
 .salons>.eyebrow{text-align:center;margin:0 0 1rem}
 .salon-list{list-style:none;margin:0;padding:0;display:grid;gap:1rem}
 .salon{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1.4rem;align-items:center;padding:1.3rem 1.5rem 1.3rem 1.7rem;background:var(--surface);border:1px solid var(--line);border-radius:6px 16px 16px 6px;box-shadow:0 18px 30px -24px rgba(30,20,10,.45)}
@@ -332,6 +332,18 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .smon{margin-top:.25rem;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
 .syear{margin-top:.25rem;font-size:.74rem;opacity:.85}
 .sinfo h3{font-size:1.35rem;margin:0 0 .35rem}
+.sinfo h4{font-family:var(--display);font-weight:400;font-size:1.25rem;line-height:1.15;margin:0 0 .35rem;text-wrap:balance}
+/* deux colonnes : salons et dédicaces / conférences */
+.salon-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.6rem;align-items:start}
+.salon-col-title{display:flex;align-items:center;gap:.6rem;font-size:clamp(1.3rem,2.2vw,1.55rem);margin:0 0 1rem}
+.salon-col-title::before{content:"";width:12px;height:12px;border-radius:50%;background:var(--plum);flex:none}
+.is-conf-col .salon-col-title::before{background:var(--pine)}
+.salon-cols .salon{grid-template-columns:auto minmax(0,1fr);gap:1rem 1.2rem;padding:1.2rem 1.2rem 1.2rem 1.5rem}
+.salon-cols .sdate{width:76px}
+.salon-cols .sday{font-size:2rem}
+.salon-cols .sacts{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:.5rem}
+.salon-cols .sacts .btn{flex:1 1 auto}
+.salon-cols .salons-empty{text-align:left;padding:1.2rem 1.4rem;border:1px dashed var(--line);border-radius:12px}
 .sinfo p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.5}
 .sinfo .swhen{color:var(--ink);font-weight:500;margin-bottom:.25rem}
 .sfree{display:inline-block;margin-left:.4rem;padding:.08rem .55rem;border-radius:999px;font-size:.76rem;font-weight:700;background:color-mix(in srgb,var(--pine) 14%,transparent);color:var(--pine)}
@@ -362,6 +374,7 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 @keyframes pulse{70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
 @media (max-width:760px){
   .salon{grid-template-columns:auto minmax(0,1fr);gap:1rem;padding:1.1rem 1.1rem 1.1rem 1.4rem}
+  .salon-cols{grid-template-columns:minmax(0,1fr)}
   .sdate{width:70px}
   .sday{font-size:2rem}
   .sacts{grid-column:1/-1;display:flex;flex-wrap:wrap}
@@ -741,10 +754,20 @@ footer a:hover{color:var(--plum)}
         <p>Les livres se trouvent en librairie, chez les éditeurs et en ligne. Et Annick aime aller à la rencontre de ses lecteurs.</p>
       </div>
       <div class="salons" id="salons">
-        <p class="eyebrow">Prochains rendez-vous : salons, dédicaces et conférences</p>
+        <p class="eyebrow">Prochains rendez-vous</p>
         <!-- La liste est remplie à partir du fichier salons.js -->
-        <ul class="salon-list"></ul>
-        <p class="salons-empty" hidden>Les prochaines dates seront bientôt annoncées.</p>
+        <div class="salon-cols">
+          <div class="salon-col" data-type="salon">
+            <h3 class="salon-col-title">Salons et dédicaces</h3>
+            <ul class="salon-list"></ul>
+            <p class="salons-empty" hidden>Les prochaines dates seront bientôt annoncées.</p>
+          </div>
+          <div class="salon-col is-conf-col" data-type="conference">
+            <h3 class="salon-col-title">Conférences</h3>
+            <ul class="salon-list"></ul>
+            <p class="salons-empty" hidden>Les prochaines dates seront bientôt annoncées.</p>
+          </div>
+        </div>
         <p class="salons-more">Toutes les dates sont aussi annoncées sur sa page <a href="https://www.facebook.com/taquetannick/" target="_blank" rel="noopener">Facebook</a> et sur <a href="https://www.instagram.com/annicktaquetassoignons/" target="_blank" rel="noopener">Instagram</a>.</p>
       </div>
       <div class="paths">
@@ -923,53 +946,76 @@ footer a:hover{color:var(--plum)}
     document.querySelector('.kids').scrollLeft = 0;
   });
 
-  // Prochains salons : construits à partir de salons.js ; les salons passés sont retirés
+  // Prochains rendez-vous : construits à partir de salons.js, en deux colonnes (salons / conférences) ; les dates passées sont retirées
   (() => {
-    const list = document.querySelector('.salon-list');
-    const empty = document.querySelector('.salons-empty');
     const pill = document.querySelector('.next-salon');
     const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
     const today = new Date(); today.setHours(0, 0, 0, 0);
-    const salons = (window.SALONS || [])
-      .map(s => ({ ...s, d: new Date(s.date + 'T00:00:00') }))
-      .filter(s => !isNaN(s.d) && s.d >= today)
+    const all = (window.SALONS || [])
+      .map(s => ({ ...s, d: new Date(s.date + 'T00:00:00'), f: new Date((s.dateFin || s.date) + 'T00:00:00') }))
+      .filter(s => !isNaN(s.d) && !isNaN(s.f) && s.f >= today)
       .sort((a, b) => a.d - b.d);
-    if (!salons.length) { empty.hidden = false; return; }
-    const day = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-    const mon = new Intl.DateTimeFormat('fr-FR', { month: 'short' });
-    const hm = t => t ? t.replace(':', ' h ').replace(/ h 00$/, ' h') : '';
+    const fmt = o => new Intl.DateTimeFormat('fr-FR', o);
+    const dayFull = fmt({ weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    const dayNum = fmt({ weekday: 'long', day: 'numeric' });
+    const monYear = fmt({ month: 'long', year: 'numeric' });
+    const monShort = fmt({ month: 'short' });
+    const nbDays = s => Math.round((s.f - s.d) / 864e5) + 1;
+    const cap = t => t.replace(/^./, c => c.toUpperCase());
+    const hm = t => t ? t.replace(/^0(?=[0-9])/, '').replace(':', ' h ').replace(/ h 00$/, ' h') : '';
+    const when = s => {
+      let w;
+      if (nbDays(s) > 1) {
+        const debut = s.d.getMonth() === s.f.getMonth() ? dayNum.format(s.d) : dayNum.format(s.d) + ' ' + fmt({ month: 'long' }).format(s.d);
+        w = cap(debut) + (nbDays(s) === 2 ? ' et ' : ' au ') + dayNum.format(s.f) + ' ' + monYear.format(s.f);
+      } else w = cap(dayFull.format(s.d));
+      return w + (s.debut ? ' · ' + hm(s.debut) + (s.fin ? ' – ' + hm(s.fin) : '') : '');
+    };
     const ics = s => {
       const d = s.date.replace(/-/g, '');
       const t = x => (x || '').replace(':', '') + '00';
-      const body = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Annick Taquet-Assoignons//Salons//FR', 'BEGIN:VEVENT',
+      const n = nbDays(s);
+      const end = new Date(s.f); end.setDate(end.getDate() + 1);
+      const endDate = end.getFullYear() + String(end.getMonth() + 1).padStart(2, '0') + String(end.getDate()).padStart(2, '0');
+      const lines = s.debut
+        ? ['DTSTART:' + d + 'T' + t(s.debut), s.fin ? 'DTEND:' + d + 'T' + t(s.fin) : '', n > 1 ? 'RRULE:FREQ=DAILY;COUNT=' + n : '']
+        : ['DTSTART;VALUE=DATE:' + d, 'DTEND;VALUE=DATE:' + endDate];
+      const body = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Annick Taquet-Assoignons//Rendez-vous//FR', 'BEGIN:VEVENT',
         'UID:' + d + '-' + s.nom.replace(/\W+/g, '').slice(0, 20) + '@annick-taquet-assoignons',
-        s.debut ? 'DTSTART:' + d + 'T' + t(s.debut) : 'DTSTART;VALUE=DATE:' + d,
-        s.fin ? 'DTEND:' + d + 'T' + t(s.fin) : '',
+        ...lines,
         'SUMMARY:Annick Taquet-Assoignons · ' + s.nom,
         'LOCATION:' + (s.lieu + ', ' + s.adresse).replace(/,/g, '\\,'),
         'END:VEVENT', 'END:VCALENDAR'].filter(Boolean).join('\r\n');
       return 'data:text/calendar;charset=utf-8,' + encodeURIComponent(body);
     };
-    list.innerHTML = salons.map((s, i) => {
-      const when = day.format(s.d).replace(/^./, c => c.toUpperCase()) + (s.debut ? ' · ' + hm(s.debut) + (s.fin ? ' – ' + hm(s.fin) : '') : '');
-      const maps = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(s.lieu + ', ' + s.adresse);
+    const card = s => {
       const conf = s.type === 'conference';
-      return '<li class="salon' + (conf ? ' is-conf' : '') + (i === 0 ? ' is-next' : '') + '">' +
-        '<div class="sdate" aria-hidden="true"><span class="sday">' + s.d.getDate() + '</span><span class="smon">' + esc(mon.format(s.d)) + '</span><span class="syear">' + s.d.getFullYear() + '</span></div>' +
-        '<div class="sinfo"><span class="stype">' + (conf ? 'Conférence' : 'Salon et dédicaces') + '</span><h3>' + esc(s.nom) + '</h3>' +
+      const multi = nbDays(s) > 1;
+      const maps = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(s.lieu + ', ' + s.adresse);
+      return '<li class="salon' + (conf ? ' is-conf' : '') + (s === all[0] ? ' is-next' : '') + '">' +
+        '<div class="sdate" aria-hidden="true"><span class="sday">' + s.d.getDate() + (multi ? '–' + s.f.getDate() : '') + '</span><span class="smon">' + esc(monShort.format(s.f)) + '</span><span class="syear">' + s.f.getFullYear() + '</span></div>' +
+        '<div class="sinfo"><h4>' + esc(s.nom) + '</h4>' +
         (s.intervention ? '<p class="stalk">Son intervention : <b>« ' + esc(s.intervention) + ' »</b></p>' : '') +
-        '<p class="swhen">' + esc(when) + (s.gratuit ? ' <span class="sfree">Entrée gratuite</span>' : '') + '</p>' +
+        '<p class="swhen">' + esc(when(s)) + (s.gratuit ? ' <span class="sfree">Entrée gratuite</span>' : '') + '</p>' +
         '<p>' + esc(s.lieu) + '<br>' + esc(s.adresse) + '</p>' +
         (s.public ? '<p class="spublic">' + esc(s.public) + '</p>' : '') + '</div>' +
         '<div class="sacts">' +
-        '<a class="btn sics" href="' + ics(s) + '" download="salon-' + s.date + '.ics">Ajouter à mon agenda</a>' +
+        '<a class="btn sics" href="' + ics(s) + '" download="rendez-vous-' + s.date + '.ics">Ajouter à mon agenda</a>' +
         '<a class="btn" href="' + maps + '" target="_blank" rel="noopener">Itinéraire</a>' +
         (s.lien ? '<a class="btn" href="' + esc(s.lien) + '" target="_blank" rel="noopener">Programme</a>' : '') +
         '</div></li>';
-    }).join('');
-    const n = salons[0];
+    };
+    document.querySelectorAll('.salon-col').forEach(col => {
+      const type = col.dataset.type;
+      const items = all.filter(s => (s.type === 'conference' ? 'conference' : 'salon') === type);
+      col.querySelector('.salon-list').innerHTML = items.map(card).join('');
+      col.querySelector('.salons-empty').hidden = items.length > 0;
+    });
+    if (!all.length) return;
+    const n = all[0];
     const ville = (n.adresse.match(/\d{4,5}\s+([^,(]+)/) || [])[1];
-    pill.querySelector('.ns-txt').innerHTML = (n.type === 'conference' ? 'Prochaine conférence' : 'Prochaine dédicace') + ' : <b>' + n.d.getDate() + ' ' + esc(mon.format(n.d)) + '</b>' + (ville ? ' · ' + esc(ville.trim()) : '');
+    const jours = nbDays(n) > 1 ? n.d.getDate() + '–' + n.f.getDate() : n.d.getDate();
+    pill.querySelector('.ns-txt').innerHTML = (n.type === 'conference' ? 'Prochaine conférence' : 'Prochaine dédicace') + ' : <b>' + jours + ' ' + esc(monShort.format(n.f)) + '</b>' + (ville ? ' · ' + esc(ville.trim()) : '');
     pill.hidden = false;
   })();
 

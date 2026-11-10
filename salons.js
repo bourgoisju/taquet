@@ -6,6 +6,7 @@
 
   - type         : "salon" (salon du livre, dédicaces) ou "conference"
   - date         : le jour, au format AAAA-MM-JJ (ex. "2026-11-07")
+  - dateFin      : pour un événement sur plusieurs jours, le dernier jour (sinon "")
   - debut        : heure de début, au format HH:MM (ex. "10:00")
   - fin          : heure de fin, au format HH:MM (ex. "18:00")
   - nom          : le nom de l'événement
@@ -17,9 +18,23 @@
   - lien         : le site de l'événement (ou "" s'il n'y en a pas)
 
   L'ordre n'a pas d'importance : le site trie par date.
-  Un rendez-vous passé disparaît tout seul le lendemain.
+  Un rendez-vous passé disparaît tout seul le lendemain (de son dernier jour).
 */
 window.SALONS = [
+  {
+    type: "salon",
+    date: "2027-02-06",
+    dateFin: "2027-02-07",
+    debut: "10:00",
+    fin: "18:00",
+    nom: "Salon littéraire Sleip'livre",
+    intervention: "",
+    lieu: "Hall 1 André Malherbe",
+    adresse: "Avenue de la Croix-Rouge 4, 4500 Huy (Belgique)",
+    public: "",
+    gratuit: true,
+    lien: ""
+  },
   {
     type: "salon",
     date: "2026-11-07",
