@@ -448,8 +448,8 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .fin-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .fin .fw{display:inline-block;height:1.5em;vertical-align:-.42em;margin:0 -.3em;overflow:visible;clip-path:inset(0 100% 0 0)}
 .fin .fw text{font-family:"Great Vibes","Brush Script MT",cursive;font-size:100px;fill:currentColor;fill-opacity:0;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
-.fin.fin-go .fw{animation:finReveal var(--d) cubic-bezier(.35,.05,.55,.95) var(--t) forwards}
-.fin.fin-go .fw text{animation:finDraw var(--d) cubic-bezier(.35,.05,.55,.95) var(--t) forwards,finInk .9s ease calc(var(--t) + var(--d) * .55) forwards}
+.fin.fin-go .fw{animation:finReveal var(--d) linear var(--t) forwards}
+.fin.fin-go .fw text{animation:finDraw var(--d) linear var(--t) forwards,finInk .9s ease calc(var(--t) + var(--d) * .55) forwards}
 @keyframes finReveal{to{clip-path:inset(0 0 0 0)}}
 @keyframes finDraw{to{stroke-dashoffset:0}}
 @keyframes finInk{to{fill-opacity:1;stroke-width:.6}}
@@ -1126,10 +1126,11 @@ footer a:hover{color:var(--plum)}
       let t = 0;
       const words = phrase.split(' ').map(w => {
         const width = Math.ceil(ctx.measureText(w).width) + pad * 2;
-        const d = Math.max(.35, (width - pad * 2) / 100 / speed);
+        const d = width / 100 / speed; // la plume balaie aussi les marges du mot
+        const marge = pad * 2 / 100 / speed;
         const svg = '<svg class="fw" aria-hidden="true" viewBox="0 0 ' + width + ' 150" style="width:' + (width / 100).toFixed(3) + 'em;--t:' + t.toFixed(2) + 's;--d:' + d.toFixed(2) + 's;--len:' + (w.length * 420) + '">' +
           '<text x="' + pad + '" y="105">' + w.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</text></svg>';
-        t += d + (/[:,]$/.test(w) ? .45 : .12); // la plume se lève un instant entre deux mots
+        t += d - marge; // le mot suivant commence dès que le précédent est écrit : aucune pause
         return svg;
       });
       fin.innerHTML = '<span class="fin-sr">' + phrase.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</span>' + words.join(' ');
