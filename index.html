@@ -379,6 +379,30 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 }
 /* dernier chapitre : poursuivre la lecture */
 .finale .sec-head{margin-inline:auto;text-align:center;justify-items:center}
+/* photos qui défilent de chaque côté du texte : salons à gauche, conférences à droite (liste dans photos.js) */
+.finale-intro{display:grid;grid-template-columns:clamp(120px,13vw,160px) minmax(0,62ch) clamp(120px,13vw,160px);justify-content:center;align-items:center;gap:clamp(1.5rem,4vw,3.5rem);margin-bottom:2.2rem}
+.finale-intro .sec-head{margin-bottom:0}
+.photo-rail{display:grid;gap:.6rem;justify-items:center}
+.photo-rail[hidden]{display:grid;visibility:hidden}
+.rail-label{margin:0;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--plum)}
+.photo-rail[data-rail=conferences] .rail-label{color:var(--pine)}
+.rail-win{width:100%;height:clamp(300px,34vw,400px);overflow:hidden;-webkit-mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent)}
+.rail-track{display:flex;flex-direction:column;gap:12px;animation:railY var(--dur,30s) linear infinite}
+.photo-rail[data-rail=conferences] .rail-track{animation-direction:reverse}
+.photo-rail:hover .rail-track{animation-play-state:paused}
+.rail-track img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:10px;border:3px solid var(--surface);box-shadow:0 12px 22px -14px rgba(30,20,10,.55)}
+@keyframes railY{to{transform:translateY(calc(-50% - 6px))}}
+@keyframes railX{to{transform:translateX(calc(-50% - 6px))}}
+@media (max-width:900px){
+  .finale-intro{grid-template-columns:minmax(0,1fr);gap:1.2rem}
+  .finale-intro .sec-head{order:-1}
+  .photo-rail[hidden]{display:none}
+  .photo-rail{justify-items:stretch}
+  .rail-win{height:auto;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+  .rail-track{flex-direction:row;width:max-content;animation-name:railX}
+  .rail-track img{width:auto;height:120px}
+}
+@media (prefers-reduced-motion:reduce){.rail-track{animation:none}.rail-win{overflow:auto}}
 .paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:1.4rem}
 .path{--c:var(--plum);position:relative;display:flex;flex-direction:column;gap:.85rem;padding:1.6rem 1.5rem 1.6rem 1.8rem;background:var(--surface);border:1px solid var(--line);border-radius:6px 16px 16px 6px;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
 .path:hover{transform:translateY(-4px);box-shadow:0 18px 32px -22px rgba(30,20,10,.45)}
@@ -742,11 +766,15 @@ footer a:hover{color:var(--plum)}
 
   <section id="acheter" class="finale" aria-labelledby="finale-titre">
     <div class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow">Dernier chapitre</p>
-        <h2 id="finale-titre">Poursuivre la lecture</h2>
-        <p>Annick Taquet-Assoignons aime aller à la rencontre de ses lecteurs. Elle participe à de nombreux salons, dédicaces et conférences.</p>
-        <p>En effet, reconnue pour son expertise, elle vous propose des conférences ouvertes à tous. Chaque rencontre débute par une présentation captivante qui se prolonge par un échange riche avec son public. Libres de poser vos questions et de partager vos vécus, vous vivrez un moment chaleureux et inspirant.</p>
+      <div class="finale-intro">
+        <div class="photo-rail" data-rail="salons" hidden><p class="rail-label">Salons</p><div class="rail-win"><div class="rail-track"></div></div></div>
+        <div class="sec-head">
+          <p class="eyebrow">Dernier chapitre</p>
+          <h2 id="finale-titre">Poursuivre la lecture</h2>
+          <p>Annick Taquet-Assoignons aime aller à la rencontre de ses lecteurs. Elle participe à de nombreux salons, dédicaces et conférences.</p>
+          <p>En effet, reconnue pour son expertise, elle vous propose des conférences ouvertes à tous. Chaque rencontre débute par une présentation captivante qui se prolonge par un échange riche avec son public. Libres de poser vos questions et de partager vos vécus, vous vivrez un moment chaleureux et inspirant.</p>
+        </div>
+        <div class="photo-rail" data-rail="conferences" hidden><p class="rail-label">Conférences</p><div class="rail-win"><div class="rail-track"></div></div></div>
       </div>
       <div class="salons" id="salons">
         <p class="eyebrow">Prochains rendez-vous</p>
@@ -814,6 +842,7 @@ footer a:hover{color:var(--plum)}
   </div>
 </footer>
 <script src="salons.js"></script>
+<script src="photos.js"></script>
 <script>
 (() => {
   // En-tête : les couvertures suivent la souris avec de la profondeur, puis l'ensemble recule au défilement
@@ -935,6 +964,22 @@ footer a:hover{color:var(--plum)}
     document.querySelector('.kids').scrollLeft = 0;
   });
 
+  // Photos qui défilent (photos.js) : la liste est répétée pour remplir la colonne puis doublée pour une boucle sans à-coup
+  (() => {
+    const P = window.PHOTOS || {};
+    const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    document.querySelectorAll('.photo-rail').forEach(rail => {
+      const list = (P[rail.dataset.rail] || []).filter(p => p && p.src);
+      if (!list.length) return;
+      let base = list.slice();
+      while (base.length < 4) base = base.concat(list);
+      const img = (p, dup) => '<img src="' + esc(p.src) + '"' + (p.pos ? ' style="object-position:' + esc(p.pos) + '"' : '') + ' alt="' + (dup ? '' : esc(p.alt)) + '"' + (dup ? ' aria-hidden="true"' : '') + ' loading="lazy" decoding="async">';
+      const track = rail.querySelector('.rail-track');
+      track.innerHTML = base.map((p, i) => img(p, i >= list.length)).join('') + base.map(p => img(p, true)).join('');
+      track.style.setProperty('--dur', base.length * 6 + 's');
+      rail.hidden = false;
+    });
+  })();
   // Prochains rendez-vous : construits à partir de salons.js, en deux colonnes (salons / conférences) ; les dates passées sont retirées
   (() => {
     const pill = document.querySelector('.next-salon');
