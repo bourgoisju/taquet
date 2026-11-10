@@ -443,7 +443,11 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .cb-r::before{background:var(--page);border-radius:2px 6px 6px 2px;box-shadow:inset 10px 0 12px -10px rgba(0,0,0,.25)}
 .cb-r::after{transform:rotateY(180deg);border-radius:6px 2px 2px 6px;background:linear-gradient(90deg,transparent 0 60%,var(--ribbon) 60% 72%,transparent 72%),var(--book-cover)}
 .closing-book.shut .cb-r{transform:rotateY(-180deg)}
-.fin{margin:1.6rem 0 0;text-align:center;font-family:var(--display);font-size:1.4rem;color:var(--muted)}
+.fin{max-width:760px;margin:1.8rem auto 0;text-align:center;font-family:"Great Vibes","Brush Script MT",cursive;font-size:clamp(2rem,4.2vw,2.8rem);line-height:1.25;color:var(--plum)}
+/* la phrase s'écrit mot après mot, comme à la plume */
+.fin-anim .w{display:inline-block;clip-path:inset(-40% 100% -40% -15%)}
+.fin-anim.fin-go .w{animation:finWrite var(--d) cubic-bezier(.45,.05,.4,1) var(--t) forwards}
+@keyframes finWrite{to{clip-path:inset(-40% -15% -40% -15%)}}
 
 footer{border-top:1px solid var(--line);padding-block:2rem;color:var(--muted);font-size:.86rem}
 footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
@@ -1101,6 +1105,30 @@ footer a:hover{color:var(--plum)}
     };
     addEventListener('scroll', checkSig, { passive: true });
     checkSig();
+  }
+
+  // Phrase de fin écrite à la main : chaque mot se trace à son tour quand on arrive en bas de la page
+  const fin = document.querySelector('.fin');
+  if (fin && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let t = 0;
+    fin.innerHTML = fin.textContent.split(' ').map(w => {
+      const d = Math.max(.25, w.length * .07);
+      const s = '<span class="w" style="--t:' + t.toFixed(2) + 's;--d:' + d.toFixed(2) + 's">' + w.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</span>';
+      t += d + .05;
+      return s;
+    }).join(' ');
+    fin.classList.add('fin-anim');
+    let finStarted = false;
+    const checkFin = () => {
+      if (finStarted) return;
+      const r = fin.getBoundingClientRect();
+      if (r.top < innerHeight * .9 && r.bottom > 0) {
+        finStarted = true; removeEventListener('scroll', checkFin);
+        document.fonts.load('40px "Great Vibes"').catch(() => {}).then(() => fin.classList.add('fin-go'));
+      }
+    };
+    addEventListener('scroll', checkFin, { passive: true });
+    checkFin();
   }
 
   // Fin de la page : le petit livre se referme quand on l'atteint
