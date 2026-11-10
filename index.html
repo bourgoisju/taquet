@@ -444,10 +444,15 @@ section{padding-block:clamp(3rem,7vw,5rem);border-top:1px solid var(--line)}
 .cb-r::after{transform:rotateY(180deg);border-radius:6px 2px 2px 6px;background:linear-gradient(90deg,transparent 0 60%,var(--ribbon) 60% 72%,transparent 72%),var(--book-cover)}
 .closing-book.shut .cb-r{transform:rotateY(-180deg)}
 .fin{max-width:760px;margin:1.8rem auto 0;text-align:center;font-family:"Great Vibes","Brush Script MT",cursive;font-size:clamp(2rem,4.2vw,2.8rem);line-height:1.25;color:var(--plum)}
-/* la phrase s'écrit mot après mot, comme à la plume */
-.fin-anim .w{display:inline-block;padding:.3em .25em;margin:-.3em -.25em;-webkit-mask-image:linear-gradient(90deg,#000 40%,transparent 48%);mask-image:linear-gradient(90deg,#000 40%,transparent 48%);-webkit-mask-size:250% 100%;mask-size:250% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:100% 0;mask-position:100% 0}
-.fin-anim.fin-go .w{animation:finWrite var(--d) linear var(--t) forwards}
-@keyframes finWrite{to{-webkit-mask-position:0 0;mask-position:0 0}}
+/* la phrase s'écrit à la main : chaque mot est tracé au trait, puis l'encre remplit les lettres */
+.fin-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.fin .fw{display:inline-block;height:1.5em;vertical-align:-.42em;margin:0 -.3em;overflow:visible;clip-path:inset(0 100% 0 0)}
+.fin .fw text{font-family:"Great Vibes","Brush Script MT",cursive;font-size:100px;fill:currentColor;fill-opacity:0;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
+.fin.fin-go .fw{animation:finReveal var(--d) cubic-bezier(.35,.05,.55,.95) var(--t) forwards}
+.fin.fin-go .fw text{animation:finDraw var(--d) cubic-bezier(.35,.05,.55,.95) var(--t) forwards,finInk .9s ease calc(var(--t) + var(--d) * .55) forwards}
+@keyframes finReveal{to{clip-path:inset(0 0 0 0)}}
+@keyframes finDraw{to{stroke-dashoffset:0}}
+@keyframes finInk{to{fill-opacity:1;stroke-width:.6}}
 
 footer{border-top:1px solid var(--line);padding-block:2rem;color:var(--muted);font-size:.86rem}
 footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
@@ -1107,30 +1112,37 @@ footer a:hover{color:var(--plum)}
     checkSig();
   }
 
-  // Phrase de fin écrite à la main : une plume invisible parcourt la phrase à vitesse régulière,
-  // avec une encre qui apparaît en fondu et de petites respirations entre les mots
+  // Phrase de fin écrite à la main : chaque mot est tracé à la plume, lettre après lettre, puis l'encre le remplit.
+  // Chaque mot est un petit dessin (SVG) posé dans le texte, ce qui garde le retour à la ligne naturel sur mobile.
   const fin = document.querySelector('.fin');
   if (fin && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    fin.innerHTML = fin.textContent.split(' ').map(w => '<span class="w">' + w.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</span>').join(' ');
-    fin.classList.add('fin-anim');
-    const write = () => {
-      const speed = 330; // pixels par seconde
+    const phrase = fin.textContent;
+    const speed = 2.4;   // vitesse de la plume, en « tailles de lettre » par seconde : plus petit = plus lent
+    let built = false, started = false;
+    const build = () => {
+      const ctx = document.createElement('canvas').getContext('2d');
+      ctx.font = '100px "Great Vibes"';
+      const pad = 30; // marge pour les boucles et les jambages de l'écriture
       let t = 0;
-      fin.querySelectorAll('.w').forEach(w => {
-        const d = Math.max(.18, w.offsetWidth / speed);
-        w.style.setProperty('--t', t.toFixed(2) + 's');
-        w.style.setProperty('--d', d.toFixed(2) + 's');
-        t += d * .8 + (/[:,]$/.test(w.textContent) ? .3 : .04);
+      const words = phrase.split(' ').map(w => {
+        const width = Math.ceil(ctx.measureText(w).width) + pad * 2;
+        const d = Math.max(.35, (width - pad * 2) / 100 / speed);
+        const svg = '<svg class="fw" aria-hidden="true" viewBox="0 0 ' + width + ' 150" style="width:' + (width / 100).toFixed(3) + 'em;--t:' + t.toFixed(2) + 's;--d:' + d.toFixed(2) + 's;--len:' + (w.length * 420) + '">' +
+          '<text x="' + pad + '" y="105">' + w.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</text></svg>';
+        t += d + (/[:,]$/.test(w) ? .45 : .12); // la plume se lève un instant entre deux mots
+        return svg;
       });
-      fin.classList.add('fin-go');
+      fin.innerHTML = '<span class="fin-sr">' + phrase.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</span>' + words.join(' ');
+      built = true;
+      if (started) requestAnimationFrame(() => fin.classList.add('fin-go'));
     };
-    let finStarted = false;
+    document.fonts.load('100px "Great Vibes"').catch(() => {}).then(build);
     const checkFin = () => {
-      if (finStarted) return;
+      if (started) return;
       const r = fin.getBoundingClientRect();
-      if (r.top < innerHeight * .9 && r.bottom > 0) {
-        finStarted = true; removeEventListener('scroll', checkFin);
-        document.fonts.load('40px "Great Vibes"').catch(() => {}).then(() => requestAnimationFrame(write));
+      if (r.top < innerHeight * .85 && r.bottom > 0) {
+        started = true; removeEventListener('scroll', checkFin);
+        if (built) fin.classList.add('fin-go');
       }
     };
     addEventListener('scroll', checkFin, { passive: true });
